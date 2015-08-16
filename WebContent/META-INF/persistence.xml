@@ -4,7 +4,7 @@
         <persistence-unit name="livraria">
           <jta-data-source>livrariaDatabase</jta-data-source>
           <non-jta-data-source>livrariaDatabaseUnmanaged</non-jta-data-source>
-          <class>entity.Booke</class>
+          <class>entity.Book</class>
  
           <properties>
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
