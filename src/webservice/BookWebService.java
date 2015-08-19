@@ -10,6 +10,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import com.google.gson.Gson;
 
@@ -50,6 +51,19 @@ public class BookWebService {
 		Book b =  gson.fromJson(json, Book.class);
        bookDAO.addBook(b);
 	}
+	
+	@Path("/createform")
+	@GET
+	public void createBook(@QueryParam("id") String id,
+			@QueryParam("author") String author, 
+			@QueryParam("price") Float price,
+			@QueryParam("publisher") String publisher,
+			@QueryParam("title") String title)
+			throws Exception {
+		    Book b =  new Book(author, id, price, publisher, title); 
+            bookDAO.addBook(b);
+	}
+	
 	
 	}
 	
