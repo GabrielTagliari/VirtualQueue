@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"><title>Insert title here</title>
+</head>
+<body>
+
+<script src="../js/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="../js/jquery/jquery.dynatable.js" type="text/javascript"></script>
+<link href="../css/jquery.dynatable.css" rel="stylesheet" media="screen">
+<link href="../css/main.css" rel="stylesheet" media="screen">
+<link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+
+<div>
+<table id="my-table" class="table table-condensed">
+  <thead>
+    <th>Author</th>
+    <th>Id</th>
+    <th>Price</th>
+    <th>Publisher</th>
+    <th>Title</th>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+
+<script>
+$.ajax({
+  url: '/lojaUnasp/bookstore/book/list',
+  success: function(data){
+    $('#my-table').dynatable({
+      dataset: {
+        records: data
+      }
+    });
+  }
+});
+
+</script>
+
+
+</body>
+</html>
