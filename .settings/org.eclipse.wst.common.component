@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="lojaUnasp">
+    <wb-module deploy-name="VirtualQueue">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated"/>
-        <property name="java-output-path" value="/lojaUnasp/WebContent/WEB-INF/classes"/>
-        <property name="context-root" value="lojaUnasp"/>
+        <property name="java-output-path" value="/VirtualQueue/WebContent/WEB-INF/classes"/>
+        <property name="context-root" value="VirtualQueue"/>
     </wb-module>
 </project-modules>
