@@ -43,7 +43,18 @@ public class Produto {
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
-	
-	
-	
+	public Produto(int cod_produto, String nome, String descricao, String tipo, double preco) {
+		super();
+		this.cod_produto = cod_produto;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.tipo = tipo;
+		this.preco = preco;
+	}
+	@Override
+	public String toString() {
+		return "Produto [cod_produto=" + cod_produto + ", nome=" + nome + ", descricao=" + descricao + ", tipo=" + tipo
+				+ ", preco=" + preco + "]";
+	}
+		
 }

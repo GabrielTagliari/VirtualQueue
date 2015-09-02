@@ -6,11 +6,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-@ApplicationPath("/bookstore")
+@ApplicationPath("/VirtualQueue")
 public class ApplicationConfig extends Application {
 
 	    public Set<Class<?>> getClasses() {
-	        return new HashSet<Class<?>>(Arrays.asList(BookWebService.class));
+	        return new HashSet<Class<?>>(Arrays.asList(BookWebService.class, ProdutoWebService.class));
 	    }
 	
 
