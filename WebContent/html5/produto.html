@@ -15,11 +15,11 @@
 <div>
 <table id="my-table" class="table table-condensed">
   <thead>
-    <th>Author</th>
-    <th>Id</th>
-    <th>Price</th>
-    <th>Publisher</th>
-    <th>Title</th>
+    <th>Cod_produto</th>
+    <th>Descricao</th>
+    <th>Nome</th>
+    <th>Preco</th>
+    <th>Tipo</th>
   </thead>
   <tbody>
   </tbody>
@@ -28,7 +28,7 @@
 
 <script>
 $.ajax({
-  url: '/VirtualQueue/VirtualQueue/book/list',
+  url: '/VirtualQueue/VirtualQueue/produto/list',
   success: function(data){
     $('#my-table').dynatable({
       dataset: {

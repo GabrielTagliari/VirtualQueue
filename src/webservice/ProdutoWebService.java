@@ -62,8 +62,7 @@ public class ProdutoWebService {
 			@QueryParam("tipo") String tipo,
 			@QueryParam("preco") double preco)
 			throws Exception {
-		    System.out.println("Teste");
-			Produto b =  new Produto(cod_produto, nome, descricao, tipo, preco); 
+		 	Produto b =  new Produto(cod_produto, nome, descricao, tipo, preco); 
             produtoDAO.addProduto(b);
 	}
 	
