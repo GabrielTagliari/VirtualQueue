@@ -51,6 +51,13 @@ public class Produto {
 		this.tipo = tipo;
 		this.preco = preco;
 	}
+	
+	
+	
+	public Produto() {
+		super();
+	}
+	
 	@Override
 	public String toString() {
 		return "Produto [cod_produto=" + cod_produto + ", nome=" + nome + ", descricao=" + descricao + ", tipo=" + tipo

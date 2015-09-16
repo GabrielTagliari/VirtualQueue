@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-@ApplicationPath("/VirtualQueue")
+@ApplicationPath("/VQ")
 public class ApplicationConfig extends Application {
 
 	    public Set<Class<?>> getClasses() {

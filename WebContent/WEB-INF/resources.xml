@@ -3,6 +3,5 @@
     JdbcDriver  com.mysql.jdbc.Driver
     JdbcUrl jdbc:mysql://localhost/books
     UserName    root
-    Password    root
 </Resource>
 </resources>

@@ -21,14 +21,13 @@ import entity.Produto;
 
 
 
-@Path("/produto")
-@Produces("application/json")
+
 public class ProdutoWebService {
 
 	@EJB
 	private ProdutoDAO produtoDAO;
 
-	@Path("/list")
+	@Path("/produtolist")
 	@GET 	
 	public String getAllBooks() throws Exception{
 		List<Produto> books = produtoDAO.getProdutos();
@@ -45,7 +44,7 @@ public class ProdutoWebService {
 		return gson.toJson(b);
 	}*/
 	
-	@Path("/create")
+	@Path("/produtocreate")
 	@POST
 	@Consumes("application/json")
 	public void setBook(String json) throws Exception {
