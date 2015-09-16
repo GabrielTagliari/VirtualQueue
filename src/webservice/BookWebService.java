@@ -1,8 +1,6 @@
 package webservice;
 
-import java.util.LinkedList;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -11,13 +9,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-
 import com.google.gson.Gson;
-
 import dao.BookDAO;
 import entity.Book;
-
-
 
 @Path("/book")
 @Produces("application/json")
@@ -43,7 +37,7 @@ public class BookWebService {
 		return gson.toJson(b);
 	}
 	
-	@Path("/create")
+	@Path("/bookcreate")
 	@POST
 	@Consumes("application/json")
 	public void setBook(String json) throws Exception {

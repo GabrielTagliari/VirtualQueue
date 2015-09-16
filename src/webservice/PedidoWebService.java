@@ -6,17 +6,20 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import com.google.gson.Gson;
 import dao.PedidoDAO;
 import entity.Pedido;
 
+@Path("/pedido")
+@Produces("application/json")
 public class PedidoWebService {
 
 	@EJB
 	private PedidoDAO pedidoDAO;
 
-	@Path("/pedidolist")
+	@Path("/list")
 	@GET 	
 	public String getAllBooks() throws Exception{
 		List<Pedido> books = pedidoDAO.getProdutos();

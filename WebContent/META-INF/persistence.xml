@@ -5,8 +5,7 @@
           <jta-data-source>livrariaDatabase</jta-data-source>
           <non-jta-data-source>livrariaDatabaseUnmanaged</non-jta-data-source>
           <class>entity.Book</class>
-          <class>entity.Produto</class>
- 
+           			
           <properties>
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
           </properties>

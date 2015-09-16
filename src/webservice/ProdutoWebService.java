@@ -1,33 +1,25 @@
 package webservice;
 
-import java.util.LinkedList;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-
 import com.google.gson.Gson;
-
-import dao.BookDAO;
 import dao.ProdutoDAO;
-import entity.Book;
 import entity.Produto;
 
-
-
-
+@Path("/produto")
+@Produces("application/json")
 public class ProdutoWebService {
 
 	@EJB
 	private ProdutoDAO produtoDAO;
 
-	@Path("/produtolist")
+	@Path("/list")
 	@GET 	
 	public String getAllBooks() throws Exception{
 		List<Produto> books = produtoDAO.getProdutos();
@@ -35,15 +27,6 @@ public class ProdutoWebService {
 		return gson.toJson(books);
 	}
 
-	/*@Path("/list/{id}")
-	@GET
-	@Produces("application/json")
-	public String getBook(@PathParam("id") String id){
-		Produto b =  new Produto("deitel",  "1", 10,  "Alta Vista",  "Java how to program");
-		Gson gson = new Gson();
-		return gson.toJson(b);
-	}*/
-	
 	@Path("/produtocreate")
 	@POST
 	@Consumes("application/json")
