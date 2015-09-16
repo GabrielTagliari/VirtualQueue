@@ -10,52 +10,51 @@
     <body>
         <div class="container">
             <h3>Pedido</h3>
-            <form class="col-sm-5">
                 <div class="form-group">   
-                    <select class="form-control">
-                        <option>Big Mac 1</option>
-                        <option>Big Mac 2</option>
-                        <option>Big Mac 3</option>
-                        <option>Big Mac 4</option>
-                        <option>Big Mac 5</option>
-                        <option>Batata Frita</option>
-                        <option>Fanta Laranja</option>
-                        <option>Coca-Cola 500 ML</option>
-                        <option>Sprite</option>
-                        <option>Fanta Uva</option>
-                        <option>Suco Laranja</option>
-                        <option>Suco Uva</option>
-                        <option>Sorvete</option>
+                    <select class="form-control" id="myselect">
+                        <option value="Big Mac 1">Big Mac 1</option>
+                        <option value="Big Mac 2">Big Mac 2</option>
+                        <option value="Big Mac 3">Big Mac 3</option>
+                        <option value="Big Mac 4">Big Mac 4</option>
+                        <option value="Big Mac 5">Big Mac 5</option>
+                        <option value="Batata Frita">Batata Frita</option>
+                        <option value="Fanta Laranja">Fanta Laranja</option>
+                        <option value="Coca-Cola 500 ML">Coca-Cola 500 ML</option>
+                        <option value="Sprite">Sprite</option>
+                        <option value="Fanta Uva">Fanta Uva</option>
+                        <option value="Suco Laranja">Suco Laranja</option>
+                        <option value="Suco Uva">Suco Uva</option>
+                        <option value="Sorvete">Sorvete</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset">
-                        <input type="submit" class="btn btn-default" value="Adicionar" style="margin-top: 10px;">
+                        <input type="submit" class="btn btn-default" value="Adicionar" onclick="addProduto()" style="margin-top: 10px;">
                     </div>
                 </div>
-            </form>
-            <div class="tabela">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>1</th>
-                            <th>Big Mac</th>                           
-                            <th>R$ 10,00</th>
-                        </tr>
-                        <tr>
-                            <th>2</th>
-                            <th>Coca-Cola</th>                           
-                            <th>R$ 5,00</th>
-                        </tr>
-                        <tr>
-                            <th>3</th>
-                            <th>Batata</th>                           
-                            <th>R$ 5,00</th>
-                        </tr>
-                    </thead>                       
-                </table>                                      
+            
+            <div class="">
+                <table id="myTable" border="1" class="table stripped">
+                      <th>Código</th>
+                      <th>Nome</th>
+                      <th>Preço</th>
+                    </table>                                      
             </div>          
-            <label class="total">R$ 20,00</label>
+            <label class="total">TOTAL: R$ 20,00</label>
+            <label class="">Senha: 258</label>
         </div>
+
+        <script>
+            function addProduto() {
+                  var table = document.getElementById("myTable");
+                  var row = table.insertRow(1);
+                  var cell1 = row.insertCell(0);
+                  var cell2 = row.insertCell(1);
+                  var cell3 = row.insertCell(2);
+                  cell1.innerHTML = "1";
+                  cell2.innerHTML = document.getElementById("myselect").value;
+                  cell3.innerHTML = "R$ 10,00";
+            }
+        </script>
     </body>
 </html>
