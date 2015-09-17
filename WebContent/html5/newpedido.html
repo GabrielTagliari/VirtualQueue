@@ -81,7 +81,7 @@
 						success : function(data) {
 							var q = '<select name="idCombox2" id="idCombox2" class="select"> <option value="0"><-- Selecione o Produto --></option>';
 							for (i = 0; i < data.length; i++) {
-								q += '<option value=' + data[i] + '>'
+								q += '<option value=' + i + '>'
 										+ data[i].nome
 										+ '</option>';
 										alert(data[i]);
@@ -120,9 +120,9 @@
 			var cell1 = row.insertCell(0);
 			var cell2 = row.insertCell(1);
 			var cell3 = row.insertCell(2);
-			cell1.innerHTML = document.getElementById("idCombox2").value;
-			cell2.innerHTML = document.getElementById("idCombox2").value;
-			cell3.innerHTML = document.getElementById("idCombox2").value;
+			cell1.innerHTML = produtos[document.getElementById("idCombox2").value].cod_produto;
+			cell2.innerHTML = produtos[document.getElementById("idCombox2").value].nome;
+			cell3.innerHTML = produtos[document.getElementById("idCombox2").value].preco;
 		}
 
 		function fechar_pedido() {
