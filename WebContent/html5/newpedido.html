@@ -4,8 +4,7 @@
 <title>VirtualQueue</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="../js/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
 <script src="../js/jquery/jquery.serializejson.js"
 	type="text/javascript"></script>
@@ -14,11 +13,12 @@
 <body>
 	<div class="container">
 		<h3>Pedido</h3>
-		<div class="form-group"></div>
-		<div class="form-group" id="div1">
-			<select class="form-control" name="nomeCombox1" id="nomeCombox1">
-				<option value="Big Mac 1">Big Mac 1</option>
-			</select>
+		<div class="form-group">
+			<div class="form-group" id="div1">
+				<!-- <select class="form-control" name="nomeCombox1" id="nomeCombox1">
+					<option value="Big Mac 1">Big Mac 1</option>
+				</select> -->
+			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset">
@@ -52,8 +52,10 @@
 	<script>
 		var pedido = [];
 		var produtos = [];
+		
 		lista();
 		populaCombo();
+		
 		function lista() {
 			var gbWS = "http://localhost:8080/VirtualQueue/VQ/produto/list";
 			// faz chamda ao WS REST via ajax	
@@ -71,31 +73,26 @@
 		}
 
 		function populaCombo() {
-			$("#nomeCombox1")
-					.show(
-							function() {
-								var idCombox1 = $(this).val();
-								$
-										.ajax({
-											dataType : 'json',
-											url : "http://localhost:8080/VirtualQueue/VQ/produto/list",
-											data : {
-												idCombox1 : idCombox1
-											},
-											success : function(data) {
-												var q = '<select name="idCombox2" id="idCombox2" class="form-group"> <option value="0"><-- Selecione o Produto --></option>';
-												for (i = 0; i < data.length; i++) {
-													q += '<option value=' + data[i].idCombox2 + '>'
-															+ data[i].nome
-															+ '</option>';
-												}
-												q += '</select>';
-												$('#div1').html(q);
-											}
-										});
-							});
+			$(document).ready(function() {
+					$.ajax({
+						dataType : 'json',
+						url : "http://localhost:8080/VirtualQueue/VQ/produto/list",
+						data : produtos, //array produtos
+						success : function(data) {
+							var q = '<select name="idCombox2" id="idCombox2" class="select"> <option value="0"><-- Selecione o Produto --></option>';
+							for (i = 0; i < data.length; i++) {
+								q += '<option value=' + data[i] + '>'
+										+ data[i].nome
+										+ '</option>';
+										alert(data[i]);
+							}
+							q += '</select>';
+							$('#div1').html(q);
+							}
+					});
+			});
 		}
-
+		
 		function carregaProduto(data) {
 			alert(JSON.stringify(data));
 			produtos = data;
@@ -123,9 +120,9 @@
 			var cell1 = row.insertCell(0);
 			var cell2 = row.insertCell(1);
 			var cell3 = row.insertCell(2);
-			cell1.innerHTML = "1";
-			cell2.innerHTML = document.getElementById("nomeCombox1").value.nome;
-			cell3.innerHTML = "R$ 10,00";
+			cell1.innerHTML = document.getElementById("idCombox2").value;
+			cell2.innerHTML = document.getElementById("idCombox2").value;
+			cell3.innerHTML = document.getElementById("idCombox2").value;
 		}
 
 		function fechar_pedido() {
