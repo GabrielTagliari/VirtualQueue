@@ -79,7 +79,7 @@
 						url : "http://localhost:8080/VirtualQueue/VQ/produto/list",
 						data : produtos, //array produtos
 						success : function(data) {
-							var q = '<select name="idCombox2" id="idCombox2" class="select"> <option value="0"><-- Selecione o Produto --></option>';
+							var q = '<select name="idCombox2" id="idCombox2" class="form-control"> <option value="0"><-- Selecione o Produto --></option>';
 							for (i = 0; i < data.length; i++) {
 								q += '<option value=' + i + '>'
 										+ data[i].nome
