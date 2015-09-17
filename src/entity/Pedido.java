@@ -4,13 +4,15 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Pedido {
 	
 	@Id
 	private int id_pedido;
-	private List Produtos;
+	@ManyToMany
+	private List<Produto> Produtos;
 	private float valor;
 	private int senha;
 	
@@ -20,10 +22,10 @@ public class Pedido {
 	public void setId_pedido(int id_pedido) {
 		this.id_pedido = id_pedido;
 	}
-	public List getProdutos() {
+	public List<Produto> getProdutos() {
 		return Produtos;
 	}
-	public void setProdutos(List produtos) {
+	public void setProdutos(List<Produto> produtos) {
 		Produtos = produtos;
 	}
 	public float getValor() {
@@ -39,7 +41,7 @@ public class Pedido {
 		this.senha = senha;
 	}
 	
-	public Pedido(int id_pedido, List produtos, float valor, int senha) {
+	public Pedido(int id_pedido, List<Produto> produtos, float valor, int senha) {
 		super();
 		this.id_pedido = id_pedido;
 		Produtos = produtos;

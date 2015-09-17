@@ -6,6 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="../js/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <script src="../js/jquery/jquery.serializejson.js" type="text/javascript"></script>
+  
     </head>
     <body>
         <div class="container">
@@ -42,10 +45,57 @@
             </div>          
             <label class="total">TOTAL: R$ 20,00</label>
             <label class="">Senha: 258</label>
+            
+            <div class="form-group">
+                    <div class="col-sm-offset">
+                        <input type="submit" class="btn btn-default" value="Finalizar Pedido" onclick="fechar_pedido()" style="margin-top: 10px;">
+                    </div>
+                </div>
         </div>
 
         <script>
-            function addProduto() {
+              var pedido = [];
+              var produtos = [];
+              lista();
+              
+              function lista(){
+            	  var gbWS ="http://localhost:8080/VirtualQueue/VQ/produto/list";
+            		// faz chamda ao WS REST via ajax	
+            		  $.ajax({
+            			type: 'GET',
+            			url: gbWS,
+            			crossDomain: true,
+            			dataType: "json", 
+            			success: carregaProduto, // função de retorno do WS
+            			error: function(xhr, status, error) {
+            				  var err = eval("(" + xhr.responseText + ")");
+            				  alert(err.Message);
+            			}
+            		});            	  
+              } 
+              
+              function carregaProduto(data){
+            	  alert(JSON.stringify(data));
+            	  produtos = data;
+            	  // gerar Combo dos Produtos
+              }
+              
+              function addProduto() {
+            
+            	   /*private int cod_produto;
+            		private String nome;
+            		private String descricao;
+            		private String tipo;
+            		private double preco;*/
+            		 
+            	  var produto = new Object();
+            	  produto.cod_produto = "" ;
+            	  produto.nome = "";
+            	  produto.descricao = "" ;
+          		  produto.tipo = "" ;
+          		  produto.preco = "" ;
+                  pedido.push(produto);
+            		  
                   var table = document.getElementById("myTable");
                   var row = table.insertRow(1);
                   var cell1 = row.insertCell(0);
@@ -55,6 +105,27 @@
                   cell2.innerHTML = document.getElementById("myselect").value;
                   cell3.innerHTML = "R$ 10,00";
             }
+               
+               
+               function fechar_pedido(){
+            	   /*
+            	   $.ajax({
+            	        type: "POST",
+            	        url: "http://192.241.171.69:8080/Book/webresources/com.percivallucena.book.book/",
+            	        data: JSON.stringify(pedido),
+            	        contentType: "application/json; charset=utf-8",
+            	        dataType: "json",
+            	        processData: true,
+            	        success: function (vdata, status, jqXHR) {
+            	            alert("book has been added to wishlist");
+            	        },
+            	        error: function (xhr) {
+            	            alert("error" + xhr.responseText);
+            	        }
+            	    });
+            	   */
+            	   alert(pedido);
+               }
         </script>
     </body>
 </html>
