@@ -1,5 +1,6 @@
 package webservice;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -9,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import dao.PedidoDAO;
 import entity.Pedido;
 import entity.Produto;
@@ -32,9 +35,15 @@ public class PedidoWebService {
 	@POST
 	@Consumes("application/json")
 	public void setBook(String json) throws Exception {
+		System.out.println("Processando pedido...");
+		System.out.println(json);
 		Gson gson = new Gson();
-		Pedido b =  gson.fromJson(json, Pedido.class);
-		pedidoDAO.addPedido(b);
+		Type listType = new TypeToken<List<Produto>>() {}.getType();
+		List<Produto> lista =  gson.fromJson(json, listType);
+		System.out.println(lista.size() + lista.get(0).getNome());
+		Pedido p = new Pedido();
+		p.setProdutos(lista);
+		pedidoDAO.addPedido(p);
 	}
 
 	@Path("/createform")
