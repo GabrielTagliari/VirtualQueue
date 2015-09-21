@@ -12,18 +12,14 @@
 </head>
 <body>
 	<div class="container">
-		<h3>Pedido</h3>
+		<h2>Pedido</h2></br>
 		<div class="form-group">
-			<div class="form-group" id="div1">
-				<!-- <select class="form-control" name="nomeCombox1" id="nomeCombox1">
-					<option value="Big Mac 1">Big Mac 1</option>
-				</select> -->
-			</div>
+			<div class="form-group" id="div1"></div>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset">
 				<input type="submit" class="btn btn-default" value="Adicionar"
-					onclick="addProduto()" style="margin-top: 10px;">
+					onclick="addProduto();total_pedido();" style="margin-top: 10px;">
 			</div>
 		</div>
 
@@ -36,9 +32,10 @@
 				</tr>
 			</table>
 		</div>
-		<label class="total">TOTAL: R$ 20,00</label> <label class="">Senha:
-			258</label>
-
+		<div class="form-group" style="float:right;">
+			<h4><label class="col-rm-10" id="total">Total: R$0,00</label></h4>
+		</div>
+		 
 		<div class="form-group">
 			<div class="col-sm-offset">
 				<input type="submit" class="btn btn-default"
@@ -105,9 +102,9 @@
 			var cell2 = row.insertCell(1);
 			var cell3 = row.insertCell(2);
 			var selecionado = document.getElementById("idCombox2").value;
-			cell1.innerHTML = produtos[document.getElementById("idCombox2").value].cod_produto;
-			cell2.innerHTML = produtos[document.getElementById("idCombox2").value].nome;
-			cell3.innerHTML = "R$ "+produtos[document.getElementById("idCombox2").value].preco+",00";
+			cell1.innerHTML = produtos[selecionado].cod_produto;
+			cell2.innerHTML = produtos[selecionado].nome;
+			cell3.innerHTML = "R$ "+produtos[selecionado].preco+",00";
 			pedido.push(produtos[selecionado]);
 		}
 
@@ -130,6 +127,15 @@
 			 
 			//alert(JSON.stringify(pedido));
 		}
+		
+		function total_pedido(){
+			var soma = 0;
+			for (var int = 0; int < pedido.length; int++) {
+				soma += pedido[int].preco;
+			}
+			$("#total").html("TOTAL: R$ "+soma);
+		}
+		
 	</script>
 </body>
 </html>
