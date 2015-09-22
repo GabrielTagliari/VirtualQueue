@@ -8,7 +8,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+
 import com.google.gson.Gson;
+
 import dao.ProdutoDAO;
 import entity.Produto;
 
@@ -33,7 +35,7 @@ public class ProdutoWebService {
 	public void setBook(String json) throws Exception {
 		Gson gson = new Gson();
 		Produto b =  gson.fromJson(json, Produto.class);
-       produtoDAO.addProduto(b);
+		produtoDAO.addProduto(b);
 	}
 	
 	@Path("/createform")
@@ -47,9 +49,7 @@ public class ProdutoWebService {
 		 	Produto b =  new Produto(cod_produto, nome, descricao, tipo, preco); 
             produtoDAO.addProduto(b);
 	}
-	
-	
-	}
+}
 	
 	
 
