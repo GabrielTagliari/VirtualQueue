@@ -107,17 +107,19 @@
 				cell1.innerHTML = produtos[selecionado].cod_produto;
 				cell2.innerHTML = produtos[selecionado].nome;
 				cell3.innerHTML = "R$ "+produtos[selecionado].preco+",00";
-				cell4.innerHTML = "<a href='#' class='deleteLink'><img src='../img/x.png' onclick='removeProduto();' height='15' width='15'></a>";
+				cell4.innerHTML = "<a href='#' class='delete' value='"+selecionado+"'><img src='../img/x.png' onclick='removeProduto("+selecionado+");' height='15' width='15'></a>";
 				pedido.push(produtos[selecionado]);
 			}
 		}
 		
-		function removeProduto(){
+		function removeProduto(selecionado){
 			$(document).ready(function() {
-			    $("#myTable .deleteLink").on("click",function() {
+			    $("#myTable .delete").on("click",function() {
 			        var td = $(this).parent();
 			        var tr = td.parent();
 			        tr.remove();
+			        pedido.pop(produtos[selecionado]);
+			        alert(JSON.stringify(pedido));
 			    });
 			});
 		}
