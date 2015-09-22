@@ -12,14 +12,13 @@
 	<div class="container">
 		<h2>Pedido</h2><br>
 		<div class="form-group">
-			<div class="form-group" id="div1"></div>
+			<div class="form-group" id="combo"></div>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset">
 				<input type="submit" class="btn btn-default" value="Adicionar" onclick="addProduto();total_pedido();" style="margin-top: 10px;">
 			</div>
 		</div>
-
 		<div class="">
 			<table id="myTable" border="1" class="table stripped">
 				<tr>
@@ -34,12 +33,9 @@
 			<h4><label class="col-rm-10" id="senha">Senha: </label></h4>
 			<h4><label class="col-rm-10" id="clock">Data</label></h4>
 		</div>
-				 
 		<div class="form-group">
 			<div class="col-sm-offset">
-				<input type="submit" class="btn btn-default"
-					value="Finalizar Pedido" onclick="fechar_pedido()"
-					style="margin-top: 10px;">
+				<input type="submit" class="btn btn-default" value="Finalizar Pedido" onclick="fechar_pedido()"	style="margin-top: 10px;">
 			</div>
 		</div>
 	</div>
@@ -47,6 +43,7 @@
 		//Cria arrays de pedido e produtos
 		var pedido = [];
 		var produtos = [];
+		
 		//Chama as funções
 		lista();
 		populaCombo();
@@ -82,7 +79,7 @@
 										+ '</option>';
 							}
 							q += '</select>';
-							$('#div1').html(q);
+							$('#combo').html(q);
 							}
 					});
 			});
