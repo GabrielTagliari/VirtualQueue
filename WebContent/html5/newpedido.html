@@ -21,10 +21,11 @@
 		</div>
 		<div class="">
 			<table id="myTable" border="1" class="table stripped">
-				<tr>
+				<tr style="background-color:#F8F8F8;">
 					<th>Código</th>
 					<th>Nome</th>
 					<th>Preço</th>
+					<th>Remover</th>
 				</tr>
 			</table>
 		</div>
@@ -101,12 +102,24 @@
 				var cell1 = row.insertCell(0);
 				var cell2 = row.insertCell(1);
 				var cell3 = row.insertCell(2);
+				var cell4 = row.insertCell(3);
 				
 				cell1.innerHTML = produtos[selecionado].cod_produto;
 				cell2.innerHTML = produtos[selecionado].nome;
 				cell3.innerHTML = "R$ "+produtos[selecionado].preco+",00";
+				cell4.innerHTML = "<a href='#' class='deleteLink'><img src='../img/x.png' onclick='removeProduto();' height='15' width='15'></a>";
 				pedido.push(produtos[selecionado]);
 			}
+		}
+		
+		function removeProduto(){
+			$(document).ready(function() {
+			    $("#myTable .deleteLink").on("click",function() {
+			        var td = $(this).parent();
+			        var tr = td.parent();
+			        tr.remove();
+			    });
+			});
 		}
 
 		function fechar_pedido() {
