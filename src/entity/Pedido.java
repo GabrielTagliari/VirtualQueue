@@ -2,16 +2,18 @@ package entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Pedido {
 	
 	@Id
 	private int id_pedido;
-	@ManyToMany
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "entry")
 	private List<Produto> Produtos;
 	private float valor;
 	private int senha;

@@ -1,7 +1,7 @@
 <resources>
 <Resource id="TestDS" type="DataSource">
     JdbcDriver  com.mysql.jdbc.Driver
-    JdbcUrl jdbc:mysql://localhost/books
+    JdbcUrl jdbc:mysql://localhost/banco
     UserName    root
 </Resource>
 </resources>

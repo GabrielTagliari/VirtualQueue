@@ -3,6 +3,7 @@ package entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Produto {
@@ -13,6 +14,9 @@ public class Produto {
 	private String descricao;
 	private String tipo;
 	private float preco;
+	
+	@ManyToOne
+    protected Pedido entry;
 	
 	public int getCod_produto() {
 		return cod_produto;

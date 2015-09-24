@@ -32,29 +32,30 @@
 		<div class="form-group" style="float:right;">
 			<h4><label class="col-rm-10" id="total">Total: R$0,00</label></h4>
 			<h4><label class="col-rm-10" id="senha">Senha: </label></h4>
-			<h4><label class="col-rm-10" id="clock">Data</label></h4>
+			<h4><label class="col-rm-10" id="clock">Data: </label></h4>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset">
 				<input type="submit" class="btn btn-default" value="Finalizar Pedido" onclick="fechar_pedido()"	style="margin-top: 10px;">
 			</div>
 		</div>
+			<input type="submit" class="btn btn-default" value="Ver Dados Pedido" onclick="verifica_pedido()"	style="margin-top: 10px;">
 	</div>
 	<script>
 		//Cria arrays de pedido e produtos
 		var pedido = [];
 		var produtos = [];
-		
+
 		//Chama as funções
 		lista();
 		populaCombo();
 		gerar_senha();
 				
 		function lista() {
-			var gbWS = "http://localhost:8080/VirtualQueue/VQ/produto/list";
+			var list = "http://localhost:8080/VirtualQueue/VQ/produto/list";
 			$.ajax({
 				type : 'GET',
-				url : gbWS,
+				url : list,
 				crossDomain : true,
 				dataType : "json",
 				success : carregaProduto, // função de retorno dos produtos
@@ -107,21 +108,19 @@
 				cell1.innerHTML = produtos[selecionado].cod_produto;
 				cell2.innerHTML = produtos[selecionado].nome;
 				cell3.innerHTML = "R$ "+produtos[selecionado].preco+",00";
-				cell4.innerHTML = "<a href='#' class='delete' value='"+selecionado+"'><img src='../img/x.png' onclick='removeProduto("+selecionado+");' height='15' width='15'></a>";
-				pedido.push(produtos[selecionado]);
+				cell4.innerHTML = "<a href='#' class='delete' value='"+produtos[selecionado].cod_produto+"'><img src='../img/x.png' onclick='removeProduto("+selecionado+");total_pedido();' height='15' width='15'></a>";
+				pedido[selecionado] = produtos[selecionado];
 			}
 		}
 		
-		function removeProduto(selecionado){
-			$(document).ready(function() {
+		function removeProduto(remove){
 			    $("#myTable .delete").on("click",function() {
 			        var td = $(this).parent();
 			        var tr = td.parent();
 			        tr.remove();
-			        pedido.pop(produtos[selecionado]);
-			        alert(JSON.stringify(pedido));
 			    });
-			});
+			    /* pedido[remove] = null; */
+			    delete (pedido[remove]);
 		}
 
 		function fechar_pedido() {
@@ -174,6 +173,10 @@
 	$(document).ready(function(){
 	   setInterval('updateClock()', 1000);
 	});
+	
+	function verifica_pedido(){
+		alert(JSON.stringify(pedido));
+	}
 	</script>
 </body>
 </html>
