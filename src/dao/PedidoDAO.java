@@ -13,7 +13,7 @@ import entity.Pedido;
 
 @Stateless
 public class PedidoDAO {
-
+	
 	 @PersistenceContext(unitName = "livraria")
 	    private EntityManager entityManager;
 
@@ -25,8 +25,7 @@ public class PedidoDAO {
 	        entityManager.remove(books);
 	    }
 
-	    public List<Pedido> getProdutos() throws Exception {
-
+	    public List<Pedido> getPedido() throws Exception {
             CriteriaQuery<Pedido> cq = entityManager.getCriteriaBuilder().createQuery(Pedido.class);
             cq.select(cq.from(Pedido.class));
             return entityManager.createQuery(cq).getResultList();

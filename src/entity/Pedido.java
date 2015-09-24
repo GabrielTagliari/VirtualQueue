@@ -1,19 +1,19 @@
 package entity;
 
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Pedido {
 	
 	@Id
 	private int id_pedido;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "entry")
+	@ManyToMany
+	@JoinTable(name = "pedido_produto", joinColumns = @JoinColumn(name = "id_pedido"), inverseJoinColumns = @JoinColumn(name = "cod_produto"))
 	private List<Produto> Produtos;
 	private float valor;
 	private int senha;

@@ -26,7 +26,7 @@ public class PedidoWebService {
 	@Path("/list")
 	@GET 	
 	public String getAllBooks() throws Exception{
-		List<Pedido> books = pedidoDAO.getProdutos();
+		List<Pedido> books = pedidoDAO.getPedido();
 		Gson gson = new Gson();
 		return gson.toJson(books);
 	}
@@ -41,9 +41,9 @@ public class PedidoWebService {
 		Type listType = new TypeToken<List<Produto>>() {}.getType();
 		List<Produto> lista =  gson.fromJson(json, listType);
 		System.out.println(lista.size() + lista.get(0).getNome());
-		Pedido p = new Pedido();
+		/*Pedido p = new Pedido();
 		p.setProdutos(lista);
-		pedidoDAO.addPedido(p);
+		pedidoDAO.addPedido(p);*/
 	}
 
 	@Path("/createform")

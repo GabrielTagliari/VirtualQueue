@@ -1,9 +1,11 @@
 package entity;
 
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Produto {
@@ -15,8 +17,8 @@ public class Produto {
 	private String tipo;
 	private float preco;
 	
-	@ManyToOne
-    protected Pedido entry;
+	@ManyToMany(mappedBy="Produtos")
+	private List<Pedido> Pedido;
 	
 	public int getCod_produto() {
 		return cod_produto;
