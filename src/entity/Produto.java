@@ -17,8 +17,8 @@ public class Produto {
 	private String tipo;
 	private float preco;
 	
-	@ManyToMany(mappedBy="Produtos")
-	private List<Pedido> Pedido;
+	/*@ManyToMany(mappedBy="Produtos")
+	private List<Pedido> Pedido;*/
 	
 	public int getCod_produto() {
 		return cod_produto;

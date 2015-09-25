@@ -12,8 +12,8 @@ public class Pedido {
 	
 	@Id
 	private int id_pedido;
-	@ManyToMany
-	@JoinTable(name = "pedido_produto", joinColumns = @JoinColumn(name = "id_pedido"), inverseJoinColumns = @JoinColumn(name = "cod_produto"))
+	/*@ManyToMany
+	@JoinTable(name = "pedido_produto", joinColumns = @JoinColumn(name = "id_pedido"), inverseJoinColumns = @JoinColumn(name = "cod_produto"))*/
 	private List<Produto> Produtos;
 	private float valor;
 	private int senha;

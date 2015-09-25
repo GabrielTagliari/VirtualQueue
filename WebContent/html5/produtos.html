@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8"><title>Virtual Queue</title>
-<script src="../js/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
-<script src="../js/jquery/jquery.dynatable.js" type="text/javascript"></script>
-<link href="../css/jquery.dynatable.css" rel="stylesheet" media="screen">
-<link href="../css/main.css" rel="stylesheet" media="screen">
-<link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+<title>Virtual Queue</title>
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="../js/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+	<script src="../js/jquery/jquery.serializejson.js"	type="text/javascript"></script>
+	<script src="../js/jquery/jquery.dynatable.js" type="text/javascript"></script>
+	<link href="../css/jquery.dynatable.css" rel="stylesheet" media="screen">
+	<link href="../css/main.css" rel="stylesheet" media="screen">
+	<link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
+<div id="header"></div>
+<div class="container"></div>
 <div>
 <table id="my-table" class="table table-condensed">
   <thead>
@@ -34,6 +40,10 @@ $.ajax({
       }
     });
   }
+});
+
+$(document).ready(function(){
+	$("#header").load('menu.html');
 });
 </script>
 </body>
