@@ -1,7 +1,6 @@
 package dao;
 
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,7 +25,6 @@ public class ProdutoDAO {
 	    }
 
 	    public List<Produto> getProdutos() throws Exception {
-
             CriteriaQuery<Produto> cq = entityManager.getCriteriaBuilder().createQuery(Produto.class);
             cq.select(cq.from(Produto.class));
             return entityManager.createQuery(cq).getResultList();
