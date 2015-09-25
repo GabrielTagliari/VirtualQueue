@@ -11,35 +11,36 @@
     <body>
     	<div id="header"></div>
         <div class="container">
-            <form class="form-horizontal" action="../VQ/produto/createform" method="GET">
+        	<div><h2>Cadastro de Produtos</h2><br></div>
+         	<form class="form-horizontal" action="../VQ/produto/createform" method="GET">
                 <div class="form-group">
                     <label for="inputID" style="margin-top:6px;">Código</label>
                     <div class="col-sm-5">                        
-                        <input type="text" class="form-control" id="cod_produto" name="cod_produto" placeholder="Código aqui ...">
+                        <input type="text" class="form-control" id="cod_produto" name="cod_produto" placeholder="Código aqui ..." autofocus="autofocus" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputName" style="margin-top:6px;">Nome</label>
                     <div class="col-sm-5">                  
-                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do produto aqui ...">
+                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do produto aqui ..." required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputDescription" style="margin-top:6px;">Descrição do produto</label>
                     <div class="col-sm-5">                   
-                        <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descreva o produto aqui ..">
+                        <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descreva o produto aqui .." required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputCategory" style="margin-top:6px;">Categoria</label>
                     <div class="col-sm-5">                  
-                        <input type="text" class="form-control" id="tipo" name="tipo" placeholder="Categoria do seu produto ...">
+                        <input type="text" class="form-control" id="tipo" name="tipo" placeholder="Categoria do seu produto ..." required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPrice" style="margin-top:6px;">Valor</label>
                     <div class="col-sm-5">                    
-                        <input type="text" class="form-control" id="preco" name="preco" placeholder="Valor do produto ...">                        
+                        <input type="text" class="form-control" id="preco" name="preco" placeholder="Valor do produto ..." required>                        
                     </div>                   
                 </div>
                 <div class="form-group">

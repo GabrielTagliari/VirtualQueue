@@ -31,7 +31,7 @@
 				<tr>
 					<td></td>
 					<td></td>
-					<td><b>Total: </b></td>
+					<td align="right"><b>Total: </b></td>
 					<td id="total"><b>R$0,00</b></td>
 				</tr>
 			</table>
@@ -52,7 +52,7 @@
 		//Cria arrays de pedido e produtos
 		var pedido = [];
 		var produtos = [];
-		var soma = 0;
+		var total = 0;
 		
 		//Chama as funções
 		lista();
@@ -129,14 +129,14 @@
 			    });
 			    /* pedido[remove] = null; */
 			    delete (pedido[remove]);
-			    soma = soma - produtos[remove].preco;
-			    $("#total").html("R$ "+soma);
+			    total = total - produtos[remove].preco;
+			    $("#total").html("R$ "+total);
 		}
 		
 		function total_pedido(preco){
 			//Realiza a soma dos pedidos da tabela e atualiza o valor total do pedido
-			soma += produtos[preco].preco;
-			$("#total").html("R$ "+soma);
+			total += produtos[preco].preco;
+			$("#total").html("R$ "+total);
 		}
 		
 		function fechar_pedido() {
