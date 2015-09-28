@@ -21,7 +21,7 @@
 			</div>
 		</div>
 		<div class="">
-			<table id="myTable" border="1" class="table stripped">
+			<table id="myTable" border="1" class="table table-hover">
 				<tr style="background-color:#F8F8F8;">
 					<th>Código</th>
 					<th>Nome</th>
@@ -163,7 +163,7 @@
 			//alert(JSON.stringify(pedido));
 		}
 		
-				function gerar_senha(){
+		function gerar_senha(){
 			//Gera uma senha randomica automaticamente
 			var senha = Math.floor((Math.random() * 100)+1);
 			$("#senha").html("Senha: "+senha);
