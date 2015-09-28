@@ -26,9 +26,11 @@
 					<th>Código</th>
 					<th>Nome</th>
 					<th>Preço</th>
+					<th>Quantidade</th>
 					<th>Remover</th>
 				</tr>
 				<tr>
+					<td></td>
 					<td></td>
 					<td></td>
 					<td align="right"><b>Total: </b></td>
@@ -112,11 +114,13 @@
 				var cell2 = row.insertCell(1);
 				var cell3 = row.insertCell(2);
 				var cell4 = row.insertCell(3);
+				var cell5 = row.insertCell(4);
 				
 				cell1.innerHTML = produtos[selecionado].cod_produto;
 				cell2.innerHTML = produtos[selecionado].nome;
-				cell3.innerHTML = "R$ "+produtos[selecionado].preco+",00";
-				cell4.innerHTML = "<a href='#' class='delete' value='"+produtos[selecionado].cod_produto+"'><img src='../img/x.png' onclick='removeProduto("+selecionado+");"+total_pedido(selecionado)+";' height='15' width='15'></a>";
+				cell3.innerHTML = "R$ "+produtos[selecionado].preco;
+				cell4.innerHTML = "<input type='text' name='quantidade' id='quantidade' value='1' style='width:50px;'>";
+				cell5.innerHTML = "<a href='#' class='delete' value='"+produtos[selecionado].cod_produto+"'><img src='../img/x.png' onclick='removeProduto("+selecionado+");"+total_pedido(selecionado)+";' height='15' width='15'></a>";
 				pedido[selecionado] = produtos[selecionado];
 			}
 		}

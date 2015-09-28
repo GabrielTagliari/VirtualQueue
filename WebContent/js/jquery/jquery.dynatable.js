@@ -75,16 +75,16 @@
       paginationNextClass: 'dynatable-page-next',
       paginationActiveClass: 'dynatable-active-page',
       paginationDisabledClass: 'dynatable-disabled-page',
-      paginationPrev: 'Previous',
-      paginationNext: 'Next',
+      paginationPrev: 'Anterior',
+      paginationNext: 'Próxima',
       paginationGap: [1,2,2,1],
       searchTarget: null,
       searchPlacement: 'before',
       perPageTarget: null,
       perPagePlacement: 'before',
-      perPageText: 'Show: ',
-      recordCountText: 'Showing ',
-      processingText: 'Processing...'
+      perPageText: 'Resultados: ',
+      recordCountText: 'Mostrando ',
+      processingText: 'Processando...'
     },
     dataset: {
       ajax: false,
@@ -97,8 +97,8 @@
       queries: {},
       queryRecordCount: null,
       page: null,
-      perPageDefault: 10,
-      perPageOptions: [10,20,50,100],
+      perPageDefault: 5,
+      perPageOptions: [5,10,20,50,100],
       sorts: {},
       sortsKeys: null,
       sortTypes: {},
@@ -120,7 +120,7 @@
       page: 'page',
       perPage: 'perPage',
       offset: 'offset',
-      records: 'records',
+      records: 'resultados',
       record: null,
       queryRecordCount: 'queryRecordCount',
       totalRecordCount: 'totalRecordCount'
@@ -713,13 +713,13 @@
 
       if (recordsShown < recordsQueryCount && settings.features.paginate) {
         var bounds = obj.records.pageBounds();
-        text += "<span class='dynatable-record-bounds'>" + (bounds[0] + 1) + " to " + bounds[1] + "</span> of ";
+        text += "<span class='dynatable-record-bounds'>" + (bounds[0] + 1) + " a " + bounds[1] + "</span> de ";
       } else if (recordsShown === recordsQueryCount && settings.features.paginate) {
-        text += recordsShown + " of ";
+        text += recordsShown + " de ";
       }
       text += recordsQueryCount + " " + collection_name;
       if (recordsQueryCount < recordsTotal) {
-        text += " (filtered from " + recordsTotal + " total records)";
+        text += " (filtered from " + recordsTotal + " total resultados)";
       }
 
       return $('<span></span>', {
@@ -1209,7 +1209,7 @@
           $searchSpan = $('<span></span>', {
             id: 'dynatable-search-' + obj.element.id,
             'class': 'dynatable-search',
-            text: 'Search: '
+            text: 'Busca: '
           }).append($search);
 
       $search
@@ -1339,7 +1339,7 @@
             (pages + 1) - settings.inputs.paginationGap[3]
           ];
 
-      pageLinks += '<li><span>Pages: </span></li>';
+      pageLinks += '<li><span>Página: </span></li>';
 
       for (var i = 1; i <= pages; i++) {
         if ( (i > breaks[0] && i < breaks[1]) || (i > breaks[2] && i < breaks[3])) {
