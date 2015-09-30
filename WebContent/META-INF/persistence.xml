@@ -7,6 +7,8 @@
           <class>entity.Produto</class>
           <class>entity.Pedido</class>
           <class>entity.User</class>
+          <class>entity.PedidoProduto</class>
+          <class>entity.PedidoProdutoId</class>
            			
           <properties>
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
