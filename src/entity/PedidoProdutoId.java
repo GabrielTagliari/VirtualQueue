@@ -9,28 +9,27 @@ public class PedidoProdutoId implements Serializable {
     private int pedido;
     private int produto;
  
-    public int getPerson() {
-        return pedido;
-    }
- 
-    public void setPerson(int person) {
-        this.pedido = person;
-    }
- 
-    public int getDog() {
-        return produto;
-    }
- 
-    public void setDog(int dog) {
-        this.produto = dog;
-    }
- 
-    @Override
-    public int hashCode() {
-        return pedido + produto;
-    }
- 
-    @Override
+    public int getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(int pedido) {
+		this.pedido = pedido;
+	}
+
+	public int getProduto() {
+		return produto;
+	}
+
+	public void setProduto(int produto) {
+		this.produto = produto;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Override
     public boolean equals(Object obj) {
         if(obj instanceof PedidoProdutoId){
         	PedidoProdutoId PedidoProdutoId = (PedidoProdutoId) obj;
