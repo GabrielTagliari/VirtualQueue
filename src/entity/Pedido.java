@@ -3,15 +3,18 @@ package entity;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Pedido {
 	
 	@Id
 	private int id_pedido;
-	private List<Produto> Produtos;
 	private float valor;
 	private int senha;
+	
+	@OneToMany(mappedBy = "pedido")
+	private List<PedidoProduto> produtos;
 	
 	public int getId_pedido() {
 		return id_pedido;
@@ -19,14 +22,6 @@ public class Pedido {
 
 	public void setId_pedido(int id_pedido) {
 		this.id_pedido = id_pedido;
-	}
-
-	public List<Produto> getProdutos() {
-		return Produtos;
-	}
-
-	public void setProdutos(List<Produto> produtos) {
-		Produtos = produtos;
 	}
 
 	public float getValor() {
@@ -45,14 +40,22 @@ public class Pedido {
 		this.senha = senha;
 	}
 
-	public Pedido(int id_pedido, List<Produto> produtos, float valor, int senha) {
+	public List<PedidoProduto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<PedidoProduto> produtos) {
+		this.produtos = produtos;
+	}
+
+	public Pedido(int id_pedido, float valor, int senha, List<PedidoProduto> produtos) {
 		super();
 		this.id_pedido = id_pedido;
-		Produtos = produtos;
 		this.valor = valor;
 		this.senha = senha;
+		this.produtos = produtos;
 	}
-	
+
 	public Pedido() {
 		super();
 	}	
