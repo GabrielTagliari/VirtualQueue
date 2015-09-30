@@ -41,4 +41,17 @@ public class PedidoProduto {
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
+
+	public PedidoProduto(Pedido pedido, Produto produto, int quantidade) {
+		super();
+		this.pedido = pedido;
+		this.produto = produto;
+		this.quantidade = quantidade;
+	}
+
+	public PedidoProduto() {
+		super();
+	}
+	
+	
 }

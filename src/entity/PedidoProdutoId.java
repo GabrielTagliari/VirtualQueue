@@ -38,4 +38,11 @@ public class PedidoProdutoId implements Serializable {
  
         return false;
     }
+
+	public PedidoProdutoId(int pedido, int produto) {
+		super();
+		this.pedido = pedido;
+		this.produto = produto;
+	}
+	
 }

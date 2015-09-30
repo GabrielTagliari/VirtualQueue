@@ -12,6 +12,7 @@ import javax.ws.rs.QueryParam;
 import com.google.gson.Gson;
 
 import dao.ProdutoDAO;
+import entity.PedidoProduto;
 import entity.Produto;
 
 @Path("/produto")
@@ -44,9 +45,10 @@ public class ProdutoWebService {
 			@QueryParam("nome") String nome,
 			@QueryParam("descricao") String descricao,
 			@QueryParam("tipo") String tipo,
-			@QueryParam("preco") float preco)
+			@QueryParam("preco") float preco,
+			@QueryParam("pedidos") List<PedidoProduto> pedidos)
 			throws Exception {
-		 	Produto b =  new Produto(cod_produto, nome, descricao, tipo, preco); 
+		 	Produto b =  new Produto(cod_produto, nome, descricao, tipo, preco, pedidos); 
             produtoDAO.addProduto(b);
 	}
 }

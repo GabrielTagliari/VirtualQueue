@@ -14,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 
 import dao.PedidoDAO;
 import entity.Pedido;
+import entity.PedidoProduto;
 import entity.Produto;
 
 @Path("/pedido")
@@ -49,11 +50,11 @@ public class PedidoWebService {
 	@Path("/createform")
 	@GET
 	public void createProduto(@QueryParam("id_pedido") int id_pedido, 
-			@QueryParam("Produtos") List<Produto> Produtos,
+			@QueryParam("Produtos") List<PedidoProduto> Produtos,
 			@QueryParam("valor") float valor,
 			@QueryParam("senha") int senha)
 					throws Exception {
-		Pedido b =  new Pedido(id_pedido, Produtos, valor, senha); 
+		Pedido b =  new Pedido(id_pedido, valor, senha, Produtos); 
 		pedidoDAO.addPedido(b);
 	}
 }
