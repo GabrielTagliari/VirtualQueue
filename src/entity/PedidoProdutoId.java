@@ -28,7 +28,12 @@ public class PedidoProdutoId implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
+	
+	@Override
+    public int hashCode() {
+        return pedido + produto;
+    }
+	
 	@Override
     public boolean equals(Object obj) {
         if(obj instanceof PedidoProdutoId){
@@ -44,5 +49,11 @@ public class PedidoProdutoId implements Serializable {
 		this.pedido = pedido;
 		this.produto = produto;
 	}
+
+	public PedidoProdutoId() {
+		super();
+	}
+	
+	
 	
 }

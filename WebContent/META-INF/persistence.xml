@@ -4,11 +4,11 @@
         <persistence-unit name="livraria">
           <jta-data-source>livrariaDatabase</jta-data-source>
           <non-jta-data-source>livrariaDatabaseUnmanaged</non-jta-data-source>
-          <class>entity.Produto</class>
           <class>entity.Pedido</class>
+          <class>entity.Produto</class>
           <class>entity.User</class>
           <class>entity.PedidoProduto</class>
-          <class>entity.PedidoProdutoId</class>
+         <!--  <class>entity.PedidoProdutoId</class> -->
            			
           <properties>
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
