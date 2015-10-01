@@ -4,17 +4,21 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
+@NamedQuery(name="Produto.findAll", query="SELECT u FROM Produto u")
 public class Produto {
 	
 	@Id
-	private int cod_produto;
-	private String nome;
-	private String descricao;
-	private String tipo;
-	private float preco;
+	@Expose private int cod_produto;
+	@Expose private String nome;
+	@Expose private String descricao;
+	@Expose private String tipo;
+	@Expose private float preco;
 	
 	@OneToMany(mappedBy = "produto")
 	private List<PedidoProduto> pedidos;
@@ -96,7 +100,6 @@ public class Produto {
 		return "Produto [cod_produto=" + cod_produto + ", nome=" + nome + ", descricao=" + descricao + ", tipo=" + tipo
 				+ ", preco=" + preco + "]";
 	}
-
 
 	public Produto() {
 		super();

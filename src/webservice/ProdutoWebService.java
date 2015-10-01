@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import dao.ProdutoDAO;
 import entity.PedidoProduto;
@@ -26,7 +27,8 @@ public class ProdutoWebService {
 	@GET 	
 	public String getAllBooks() throws Exception{
 		List<Produto> books = produtoDAO.getProdutos();
-		Gson gson = new Gson();
+		System.out.println(books.size());
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		return gson.toJson(books);
 	}
 
