@@ -27,16 +27,16 @@ public class PedidoWebService {
 
 	@Path("/list")
 	@GET 	
-	public String getAllBooks() throws Exception{
+	public String getAllPedidos() throws Exception{
 		List<Pedido> books = pedidoDAO.getPedido();
 		Gson gson = new Gson();
 		return gson.toJson(books);
 	}
-
+	
 	@Path("/pedidocreate")
-	@GET
+	@POST
 	@Consumes("application/json")
-	public void setBook(String json) throws Exception {
+	public void setPedido(String json) throws Exception {
 		System.out.println("Processando pedido...");
 		System.out.println(json);
 		Gson gson = new Gson();
@@ -58,7 +58,7 @@ public class PedidoWebService {
 
 	@Path("/createform")
 	@GET
-	public void createProduto(@QueryParam("id_pedido") int id_pedido, 
+	public void createPedido(@QueryParam("id_pedido") int id_pedido, 
 			@QueryParam("Produtos") List<PedidoProduto> Produtos,
 			@QueryParam("valor") float valor,
 			@QueryParam("senha") int senha)
