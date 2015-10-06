@@ -8,12 +8,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import dao.ProdutoDAO;
-import entity.PedidoProduto;
 import entity.Produto;
 
 @Path("/produto")
@@ -26,10 +22,9 @@ public class ProdutoWebService {
 	@Path("/list")
 	@GET 	
 	public String getAllBooks() throws Exception{
-		List<Produto> books = produtoDAO.getProdutos();
-		System.out.println(books.size());
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		return gson.toJson(books);
+		List<Produto> produtos = produtoDAO.getProdutos();
+		Gson gson = new Gson();
+		return gson.toJson(produtos);
 	}
 
 	@Path("/produtocreate")
@@ -43,14 +38,13 @@ public class ProdutoWebService {
 	
 	@Path("/createform")
 	@GET
-	public void createProduto(@QueryParam("cod_produto") int cod_produto, 
+	public void createProduto(@QueryParam("id") String id, 
 			@QueryParam("nome") String nome,
 			@QueryParam("descricao") String descricao,
 			@QueryParam("tipo") String tipo,
-			@QueryParam("preco") float preco,
-			@QueryParam("pedidos") List<PedidoProduto> pedidos)
+			@QueryParam("preco") Float preco)
 			throws Exception {
-		 	Produto b =  new Produto(cod_produto, nome, descricao, tipo, preco, pedidos); 
+		 	Produto b =  new Produto(nome, descricao, tipo, preco); 
             produtoDAO.addProduto(b);
 	}
 }

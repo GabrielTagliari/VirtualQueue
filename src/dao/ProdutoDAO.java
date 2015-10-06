@@ -16,12 +16,12 @@ public class ProdutoDAO {
 	 @PersistenceContext(unitName = "livraria")
 	    private EntityManager entityManager;
 
-	    public void addProduto(Produto books) throws Exception {
-	    	entityManager.persist(books);
+	    public void addProduto(Produto produtos) throws Exception {
+	    	entityManager.persist(produtos);
 	    }
 
-	    public void deleteProduto(Produto books) throws Exception {
-	        entityManager.remove(books);
+	    public void deleteProduto(Produto produtos) throws Exception {
+	        entityManager.remove(produtos);
 	    }
 
 	    public List<Produto> getProdutos() throws Exception {

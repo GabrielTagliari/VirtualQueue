@@ -1,27 +1,43 @@
 package entity;
 
+import java.util.LinkedList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Pedido {
 	
 	@Id
-	private int id_pedido;
+	@Column(name="PEDIDO_ID")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 	private float valor;
 	private int senha;
 	
-	@OneToMany(mappedBy = "pedido")
-	private List<PedidoProduto> produtos;
+	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable
+	 (
+	      name="PEDIDO_PRODUTO",
+	      joinColumns={ @JoinColumn(name="PEDIDO_ID", referencedColumnName="PEDIDO_ID") }
+	  )
+	List<Produto> produtos = new LinkedList<Produto>();
 	
-	public int getId_pedido() {
-		return id_pedido;
+	
+	public long getId() {
+		return id;
 	}
 
-	public void setId_pedido(int id_pedido) {
-		this.id_pedido = id_pedido;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public float getValor() {
@@ -38,22 +54,6 @@ public class Pedido {
 
 	public void setSenha(int senha) {
 		this.senha = senha;
-	}
-
-	public List<PedidoProduto> getProdutos() {
-		return produtos;
-	}
-
-	public void setProdutos(List<PedidoProduto> produtos) {
-		this.produtos = produtos;
-	}
-
-	public Pedido(int id_pedido, float valor, int senha, List<PedidoProduto> produtos) {
-		super();
-		this.id_pedido = id_pedido;
-		this.valor = valor;
-		this.senha = senha;
-		this.produtos = produtos;
 	}
 
 	public Pedido() {
