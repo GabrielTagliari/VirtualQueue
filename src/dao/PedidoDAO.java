@@ -17,12 +17,12 @@ public class PedidoDAO {
 	 @PersistenceContext(unitName = "livraria")
 	    private EntityManager entityManager;
 
-	    public void addPedido(Pedido books) throws Exception {
-	    	entityManager.persist(books);
+	    public void addPedido(Pedido pedido) throws Exception {
+	    	entityManager.persist(pedido);
 	    }
 
-	    public void deletePedido(Pedido books) throws Exception {
-	        entityManager.remove(books);
+	    public void deletePedido(Pedido pedido) throws Exception {
+	        entityManager.remove(pedido);
 	    }
 
 	    public List<Pedido> getPedido() throws Exception {

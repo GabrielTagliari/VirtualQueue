@@ -56,6 +56,7 @@
 		var pedido = [];
 		var produtos = [];
 		var total = 0;
+		var senha;
 		
 		//Chama as funções
 		lista();
@@ -80,20 +81,20 @@
 		function populaCombo() {
 			//Popula a combobox com produtos do banco de dados
 			$(document).ready(function() {
-					$.ajax({
-						dataType : 'json',
-						url : "http://localhost:8080/VirtualQueue/VQ/produto/list",
-						data : produtos, //array produtos
-						success : function(data) {
-							var q = '<select name="idCombox2" id="idCombox2" class="form-control"> <option value="-1"><-- Selecione um Produto --></option>';
-							for (i = 0; i < data.length; i++) {
-								q += '<option value=' + i + '>'
-										+ data[i].nome
-										+ '</option>';
+				$.ajax({
+					dataType : 'json',
+					url : "http://localhost:8080/VirtualQueue/VQ/produto/list",
+					data : produtos, //array produtos
+					success : function(data) {
+						var q = '<select name="idCombox2" id="idCombox2" class="form-control"> <option value="-1"><-- Selecione um Produto --></option>';
+						for (i = 0; i < data.length; i++) {
+							q += '<option value=' + i + '>'
+								+ data[i].nome
+								+ '</option>';
 							}
 							q += '</select>';
 							$('#combo').html(q);
-							}
+						}
 					});
 			});
 		}
@@ -117,11 +118,14 @@
 				var cell4 = row.insertCell(3);
 				var cell5 = row.insertCell(4);
 				
-				cell1.innerHTML = produtos[selecionado].cod_produto;
+				var qntd = prompt("Quantidade: ", 1);
+				produtos[selecionado].quantidade = qntd;
+				
+				cell1.innerHTML = produtos[selecionado].id;
 				cell2.innerHTML = produtos[selecionado].nome;
 				cell3.innerHTML = "R$ "+produtos[selecionado].preco;
-				cell4.innerHTML = "<input type='text' name='quantidade' id='quantidade' value='1' style='width:50px;'>";
-				cell5.innerHTML = "<a href='#' class='delete' value='"+produtos[selecionado].cod_produto+"'><img src='../img/x.png' onclick='removeProduto("+selecionado+");"+total_pedido(selecionado)+";' height='15' width='15'></a>";
+				cell4.innerHTML = "<input type='text' name='quantidade' id='quantidade' value='"+qntd+"' onchange='altera_quantidade("+selecionado+")' style='width:50px;'>";
+				cell5.innerHTML = "<a href='#' class='delete' value='"+produtos[selecionado].id+"'><img src='../img/x.png' onclick='removeProduto("+selecionado+");"+total_pedido(selecionado)+";' height='15' width='15'></a>";
 				pedido[selecionado] = produtos[selecionado];
 			}
 		}
@@ -134,15 +138,24 @@
 			    });
 			    /* pedido[remove] = null; */
 			    delete (pedido[remove]);
-			    total = total - produtos[remove].preco;
+			    total = total - produtos[remove].preco * produtos[remove].quantidade;
 			    $("#total").html("R$ "+total);
 		}
 		
-		function total_pedido(preco){
+		function total_pedido(selecionado){
 			//Realiza a soma dos pedidos da tabela e atualiza o valor total do pedido
-			total += produtos[preco].preco;
+			total += produtos[selecionado].preco * produtos[selecionado].quantidade;
 			$("#total").html("R$ "+total);
 		}
+		
+		function altera_quantidade(selecionado){
+			total = total - produtos[selecionado].preco * produtos[selecionado].quantidade;
+			var qntd = $("#quantidade").val();
+			$("#quantidade").attr("value", qntd);
+			produtos[selecionado].quantidade = qntd;
+			total = total + produtos[selecionado].preco * produtos[selecionado].quantidade;
+			$("#total").html("R$ "+total);
+			}
 		
 		function fechar_pedido() {
 			//Finaliza e envia o Pedido
@@ -160,13 +173,12 @@
 			         alert("Erro" + xhr.responseText);
 			     }
 			 });
-			
 			alert(JSON.stringify(pedido));
 		}
 		
 		function gerar_senha(){
 			//Gera uma senha randomica automaticamente
-			var senha = Math.floor((Math.random() * 100)+1);
+			senha = Math.floor((Math.random() * 100)+1);
 			$("#senha").html("Senha: "+senha);
 		}
 		

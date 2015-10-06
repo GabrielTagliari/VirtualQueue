@@ -1,7 +1,9 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,16 +14,21 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+
 
 @Entity
-public class Pedido {
+public class Pedido implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Column(name="PEDIDO_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private float valor;
-	private int senha;
+	
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	private long senha;
 	
 	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable
@@ -48,15 +55,20 @@ public class Pedido {
 		this.valor = valor;
 	}
 
-	public int getSenha() {
+	public long getSenha() {
 		return senha;
 	}
 
-	public void setSenha(int senha) {
+	public void setSenha(long senha) {
 		this.senha = senha;
 	}
 
 	public Pedido() {
 		super();
+	}
+
+	public void setProdutos(List<Produto> lista) {
+		// TODO Auto-generated method stub
+		
 	}	
 }

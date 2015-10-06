@@ -37,21 +37,14 @@ public class PedidoWebService {
 	public void setPedido(String json) throws Exception {
 		System.out.println("Processando pedido...");
 		System.out.println(json);
-		/*Gson gson = new Gson();
-		Pedido p = new Pedido();
-		PedidoProduto pedprod = new PedidoProduto();
-		Produto prod = new Produto(1, "Lanche", "Lanche", "Alimento", 10,	null);
-		pedprod.setProduto(prod);
-		List<PedidoProduto> lista = new LinkedList<PedidoProduto>();
-		p.setProdutos(lista);*/
-		/*
+		Gson gson = new Gson();
 		Type listType = new TypeToken<List<Produto>>() {}.getType();
 		List<Produto> lista =  gson.fromJson(json, listType);
 		System.out.println(lista.size() + lista.get(0).getNome());
 		Pedido p = new Pedido();
+		p.setValor(100);
 		p.setProdutos(lista);
-		*/
-		/*pedidoDAO.addPedido(p);*/
+		pedidoDAO.addPedido(p);
 	}
 
 	/*@Path("/createform")
