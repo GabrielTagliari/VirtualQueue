@@ -107,27 +107,33 @@
 		function addProduto() {
 			//Adiciona um produto da combobox na tabela de pedido
 			var selecionado = document.getElementById("idCombox2").value;
-			if (selecionado == -1) {
-				alert("Por favor, selecione um produto...");
-			} else {
-				var table = document.getElementById("myTable");
-				var row = table.insertRow(1);
-				var cell1 = row.insertCell(0);
-				var cell2 = row.insertCell(1);
-				var cell3 = row.insertCell(2);
-				var cell4 = row.insertCell(3);
-				var cell5 = row.insertCell(4);
-				
-				var qntd = prompt("Quantidade: ", 1);
-				produtos[selecionado].quantidade = qntd;
-				
-				cell1.innerHTML = produtos[selecionado].id;
-				cell2.innerHTML = produtos[selecionado].nome;
-				cell3.innerHTML = "R$ "+produtos[selecionado].preco;
-				cell4.innerHTML = "<input type='text' name='quantidade' id='quantidade' value='"+qntd+"' onchange='altera_quantidade("+selecionado+")' style='width:50px;'>";
-				cell5.innerHTML = "<a href='#' class='delete' value='"+produtos[selecionado].id+"'><img src='../img/x.png' onclick='removeProduto("+selecionado+");"+total_pedido(selecionado)+";' height='15' width='15'></a>";
-				pedido[selecionado] = produtos[selecionado];
-			}
+			
+			if(pedido.indexOf(produtos[selecionado])==-1){
+				if (selecionado == -1) {
+					alert("Por favor, selecione um produto...");
+				} else {
+					var table = document.getElementById("myTable");
+					var row = table.insertRow(1);
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					var cell3 = row.insertCell(2);
+					var cell4 = row.insertCell(3);
+					var cell5 = row.insertCell(4);
+					
+					/* var qntd = prompt("Quantidade: ", 1);
+					produtos[selecionado].quantidade = qntd; */
+					produtos[selecionado].quantidade = 1;
+					
+					cell1.innerHTML = produtos[selecionado].id;
+					cell2.innerHTML = produtos[selecionado].nome;
+					cell3.innerHTML = "R$ "+produtos[selecionado].preco;
+					cell4.innerHTML = "<input type='text' name='quantidade' id='quantidade' value='"+1+"' onchange='altera_quantidade("+selecionado+")' style='width:50px;'>";
+					cell5.innerHTML = "<a href='#' class='delete' value='"+produtos[selecionado].id+"'><img src='../img/x.png' onclick='removeProduto("+selecionado+");"+total_pedido(selecionado)+";' height='15' width='15'></a>";
+					pedido[selecionado] = produtos[selecionado];
+				}
+			}else{
+				pedido[selecionado].quantidade += 1;
+			}			
 		}
 		
 		function removeProduto(remove){
