@@ -125,7 +125,7 @@
 					cell1.innerHTML = produtos[selecionado].id;
 					cell2.innerHTML = produtos[selecionado].nome;
 					cell3.innerHTML = "R$ "+produtos[selecionado].preco;
-					cell4.innerHTML = "<input type='text' name='quantidade' id='quantidade' value='1' onchange='altera_quantidade("+selecionado+");total_pedido("+selecionado+");' style='width:50px;'>";
+					cell4.innerHTML = "<input type='text' name='quantidade' id='quantidade' value='1' onchange='altera_quantidade("+selecionado+");total_pedido();' style='width:50px;'>";
 					cell5.innerHTML = "<a href='#' class='delete' value='"+produtos[selecionado].id+"'><img src='../img/x.png' onclick='removeProduto("+selecionado+");total_pedido("+selecionado+");' height='15' width='15'></a>";
 					pedido[selecionado] = produtos[selecionado];
 				}
@@ -144,7 +144,7 @@
 			    $("#total").html("R$ "+total);
 		}
 		
-		 function total_pedido(selecionado){
+		 function total_pedido(){
 			//Realiza a soma dos pedidos da tabela e atualiza o valor total do pedido
 				total = 0;
 				pedido.forEach(function(value) {
