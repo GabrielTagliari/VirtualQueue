@@ -27,7 +27,6 @@ public class Pedido implements Serializable {
 	private long id;
 	private float valor;
 	
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private long senha;
 	
 	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)

@@ -55,7 +55,7 @@
 		//Cria arrays de pedido e produtos
 		var pedido = [];
 		var produtos = [];
-		var total = 0;
+		var total;
 		var senha;
 		
 		//Chama as funções
@@ -120,19 +120,17 @@
 					var cell4 = row.insertCell(3);
 					var cell5 = row.insertCell(4);
 					
-					/* var qntd = prompt("Quantidade: ", 1);
-					produtos[selecionado].quantidade = qntd; */
 					produtos[selecionado].quantidade = 1;
 					
 					cell1.innerHTML = produtos[selecionado].id;
 					cell2.innerHTML = produtos[selecionado].nome;
 					cell3.innerHTML = "R$ "+produtos[selecionado].preco;
-					cell4.innerHTML = "<input type='text' name='quantidade' id='quantidade' value='"+1+"' onchange='altera_quantidade("+selecionado+")' style='width:50px;'>";
-					cell5.innerHTML = "<a href='#' class='delete' value='"+produtos[selecionado].id+"'><img src='../img/x.png' onclick='removeProduto("+selecionado+");"+total_pedido(selecionado)+";' height='15' width='15'></a>";
+					cell4.innerHTML = "<input type='text' name='quantidade' id='quantidade' value='1' onchange='altera_quantidade("+selecionado+");total_pedido("+selecionado+");' style='width:50px;'>";
+					cell5.innerHTML = "<a href='#' class='delete' value='"+produtos[selecionado].id+"'><img src='../img/x.png' onclick='removeProduto("+selecionado+");total_pedido("+selecionado+");' height='15' width='15'></a>";
 					pedido[selecionado] = produtos[selecionado];
 				}
 			}else{
-				pedido[selecionado].quantidade += 1;
+				alert("Produto já adicionado, altere a quantidade.");
 			}			
 		}
 		
@@ -142,26 +140,25 @@
 			        var tr = td.parent();
 			        tr.remove();
 			    });
-			    /* pedido[remove] = null; */
 			    delete (pedido[remove]);
-			    total = total - produtos[remove].preco * produtos[remove].quantidade;
 			    $("#total").html("R$ "+total);
 		}
 		
-		function total_pedido(selecionado){
+		 function total_pedido(selecionado){
 			//Realiza a soma dos pedidos da tabela e atualiza o valor total do pedido
-			total += produtos[selecionado].preco * produtos[selecionado].quantidade;
+				total = 0;
+				pedido.forEach(function(value) {
+		  			total += value.preco * value.quantidade;
+				});
 			$("#total").html("R$ "+total);
-		}
+		 }
+
 		
 		function altera_quantidade(selecionado){
-			total = total - produtos[selecionado].preco * produtos[selecionado].quantidade;
 			var qntd = $("#quantidade").val();
 			$("#quantidade").attr("value", qntd);
-			produtos[selecionado].quantidade = qntd;
-			total = total + produtos[selecionado].preco * produtos[selecionado].quantidade;
-			$("#total").html("R$ "+total);
-			}
+			pedido[selecionado].quantidade = qntd;
+		}
 		
 		function fechar_pedido() {
 			//Finaliza e envia o Pedido
@@ -201,12 +198,14 @@
 		$("#clock").html(currentTimeString);
 	}
 	$(document).ready(function(){
-	   setInterval('updateClock()', 1000);
+	   setInterval('updateClock()', 1000); //Update do relógio a cada segundo
 	});
 	
 	function verifica_pedido(){
 		//Botão para checar o json que será mandado ao PedidoWebService
 		alert(JSON.stringify(pedido));
+		alert(JSON.stringify(produtos));
+		
 	}
 	
 	$(document).ready(function(){

@@ -21,7 +21,7 @@ public class ProdutoWebService {
 
 	@Path("/list")
 	@GET 	
-	public String getAllBooks() throws Exception{
+	public String getAllProdutos() throws Exception{
 		List<Produto> produtos = produtoDAO.getProdutos();
 		Gson gson = new Gson();
 		return gson.toJson(produtos);
@@ -30,7 +30,7 @@ public class ProdutoWebService {
 	@Path("/produtocreate")
 	@POST
 	@Consumes("application/json")
-	public void setBook(String json) throws Exception {
+	public void setProduto(String json) throws Exception {
 		Gson gson = new Gson();
 		Produto b =  gson.fromJson(json, Produto.class);
 		produtoDAO.addProduto(b);

@@ -43,6 +43,7 @@ public class PedidoWebService {
 		System.out.println(lista.size() + lista.get(0).getNome());
 		Pedido p = new Pedido();
 		p.setValor(100);
+		p.setSenha(1);
 		p.setProdutos(lista);
 		pedidoDAO.addPedido(p);
 	}
