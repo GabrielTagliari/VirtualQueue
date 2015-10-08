@@ -23,7 +23,7 @@ public class Pedido implements Serializable {
 	
 	@Id
 	@Column(name="PEDIDO_ID")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	private float valor;
 	
