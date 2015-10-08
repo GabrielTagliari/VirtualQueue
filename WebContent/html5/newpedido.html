@@ -44,7 +44,7 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset">
-				<input type="submit" class="btn btn-default" value="Finalizar Pedido" onclick="fechar_pedido()"	style="margin-top: 10px;">
+				<input type="submit" class="btn btn-primary" value="Finalizar Pedido" onclick="fechar_pedido()"	style="margin-top: 10px;">
 			</div>
 		</div>
 			<input type="submit" class="btn btn-default" value="Ver Dados Pedido" onclick="verifica_pedido()"	style="margin-top: 10px;">
@@ -178,7 +178,7 @@
 			     dataType: "json",
 			     processData: true,
 			     success: function (vdata, status, jqXHR) {
-			         alert("Pedido Enviado com Sucesso");
+			    	 swal("Pedido Cadastrado!","","success")
 			     },
 			     error: function (xhr) {
 			         alert("Erro" + xhr.responseText);
