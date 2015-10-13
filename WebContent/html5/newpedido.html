@@ -130,7 +130,7 @@
 					pedido.push(produtos[selecionado]);
 				}
 			}else{
-				alert("Produto já adicionado, altere a quantidade.");
+				swal("","Produto já adicionado, altere a quantidade.")
 			}			
 		}
 		
@@ -160,12 +160,16 @@
 		function altera_quantidade(selecionado){
 			//Altera a quantidade do item do pedido
 			var qntd = $("#"+selecionado+"").val();
-			$("#"+selecionado+"").attr("value", qntd);
-			for (var i =0; i < pedido.length; i++)
-				   if (pedido[i].id === selecionado) {
-				      pedido[i].quantidade = qntd;
-				      break;
-				   }
+			if (qntd == 0) {
+				swal("","A quantidade deve ser maior ou igual a 1")
+			} else {
+				$("#"+selecionado+"").attr("value", qntd);
+				for (var i =0; i < pedido.length; i++)
+					   if (pedido[i].id === selecionado) {
+					      pedido[i].quantidade = qntd;
+					      break;
+				}
+			}
 		}
 		
 		function fechar_pedido() {
