@@ -110,7 +110,7 @@
 			
 			if(pedido.indexOf(produtos[selecionado])==-1){
 				if (selecionado == -1) {
-					alert("Por favor, selecione um produto...");
+					swal("","Por favor, selecione um produto...")
 				} else {
 					var table = document.getElementById("myTable");
 					var row = table.insertRow(1);
