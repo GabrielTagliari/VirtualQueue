@@ -12,6 +12,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import PDF.PDF;
 import dao.PedidoDAO;
 import entity.Pedido;
 import entity.Produto;
@@ -47,7 +49,7 @@ public class PedidoWebService {
 		p.setProdutos(lista);
 		pedidoDAO.addPedido(p);
 	}
-
+	
 	/*@Path("/createform")
 	@GET
 	public void createPedido(@QueryParam("id_pedido") int id_pedido, 
