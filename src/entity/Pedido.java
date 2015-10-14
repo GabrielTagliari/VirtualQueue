@@ -67,7 +67,7 @@ public class Pedido implements Serializable {
 	}
 
 	public void setProdutos(List<Produto> lista) {
-		// TODO Auto-generated method stub
+		this.produtos = lista;
 		
 	}	
 }
