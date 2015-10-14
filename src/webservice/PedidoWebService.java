@@ -35,7 +35,7 @@ public class PedidoWebService {
 	public void setPedido(String json) throws Exception {
 		Gson gson = new Gson();
 		System.out.println(json);
-		/*Type listType = new TypeToken<List<Produto>>() {}.getType();
+		Type listType = new TypeToken<List<Produto>>() {}.getType();
 		List<Produto> lista =  gson.fromJson(json, listType);
 		float total = 0;
 		for (Produto produto : lista) {
@@ -45,10 +45,9 @@ public class PedidoWebService {
 		p.setValor(total);
 		p.setSenha(1);
 		for (Produto produto : lista) {
-			p.addProduto(produto);
-			System.out.println(produto);
+			p.addProduto(new Produto(produto.getNome(),produto.getDescricao(),produto.getTipo(),produto.getPreco(),produto.getQuantidade()));
 		}
-		pedidoDAO.addPedido(p);	*/	
+		pedidoDAO.addPedido(p);	
 	}
 	
 	/*@Path("/createform")
