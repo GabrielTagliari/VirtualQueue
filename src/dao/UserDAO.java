@@ -18,7 +18,7 @@ public class UserDAO {
         entityManager.persist(user);
     }
 
-    public void deleteMovie(User user) throws Exception {
+    public void deleteUser(User user) throws Exception {
         entityManager.remove(user);
     }
 

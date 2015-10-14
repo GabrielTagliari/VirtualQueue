@@ -12,8 +12,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import PDF.PDF;
 import dao.PedidoDAO;
 import entity.Pedido;
 import entity.Produto;
@@ -43,11 +41,16 @@ public class PedidoWebService {
 		Type listType = new TypeToken<List<Produto>>() {}.getType();
 		List<Produto> lista =  gson.fromJson(json, listType);
 		System.out.println(lista.size() + lista.get(0).getNome());
+		float total = 0;
+		for (Produto produto : lista) {
+			total += produto.getPreco() * produto.getQuantidade();
+		}
 		Pedido p = new Pedido();
-		p.setValor(100);
+		p.setValor(total);
 		p.setSenha(1);
 		p.setProdutos(lista);
 		pedidoDAO.addPedido(p);
+		
 	}
 	
 	/*@Path("/createform")
