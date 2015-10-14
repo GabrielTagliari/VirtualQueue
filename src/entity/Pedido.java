@@ -70,4 +70,12 @@ public class Pedido implements Serializable {
 		this.produtos = lista;
 		
 	}	
+	public void addProduto(Produto b) {
+    	this.produtos.add(b);
+    }
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+	
 }

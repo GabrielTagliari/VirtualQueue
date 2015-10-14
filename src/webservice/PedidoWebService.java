@@ -1,7 +1,6 @@
 package webservice;
 
 import java.lang.reflect.Type;
-import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -9,7 +8,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import dao.PedidoDAO;
@@ -26,21 +24,19 @@ public class PedidoWebService {
 	@Path("/list")
 	@GET 	
 	public String getAllPedidos() throws Exception{
-		List<Pedido> books = pedidoDAO.getPedido();
+		List<Pedido> produtos = pedidoDAO.getPedido();
 		Gson gson = new Gson();
-		return gson.toJson(books);
+		return gson.toJson(produtos);
 	}
 	
 	@Path("/pedidocreate")
 	@POST
 	@Consumes("application/json")
 	public void setPedido(String json) throws Exception {
-		System.out.println("Processando pedido...");
-		System.out.println(json);
 		Gson gson = new Gson();
-		Type listType = new TypeToken<List<Produto>>() {}.getType();
+		System.out.println(json);
+		/*Type listType = new TypeToken<List<Produto>>() {}.getType();
 		List<Produto> lista =  gson.fromJson(json, listType);
-		System.out.println(lista.size() + lista.get(0).getNome());
 		float total = 0;
 		for (Produto produto : lista) {
 			total += produto.getPreco() * produto.getQuantidade();
@@ -48,9 +44,11 @@ public class PedidoWebService {
 		Pedido p = new Pedido();
 		p.setValor(total);
 		p.setSenha(1);
-		p.setProdutos(lista);
-		pedidoDAO.addPedido(p);
-		
+		for (Produto produto : lista) {
+			p.addProduto(produto);
+			System.out.println(produto);
+		}
+		pedidoDAO.addPedido(p);	*/	
 	}
 	
 	/*@Path("/createform")

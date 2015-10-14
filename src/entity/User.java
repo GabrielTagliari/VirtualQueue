@@ -16,10 +16,9 @@ public class User implements Serializable {
 	private String password;
 	private String address;
 	
-	public User(){
-		
+	public User() {
+		super();
 	}
-	
 	public String getEmail() {
 		return email;
 	}
