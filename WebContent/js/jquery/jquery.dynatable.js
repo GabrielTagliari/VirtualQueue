@@ -273,13 +273,13 @@
   };
 
   function defaultRowWriter(rowIndex, record, columns, cellWriter) {
-    var tr = '';
+    var tr = ' ';
 
     // grab the record's attribute for each column
     for (var i = 0, len = columns.length; i < len; i++) {
-      tr += cellWriter(columns[i], record);
+		tr += cellWriter(columns[i], record);
     }
-
+    	tr += cellWriter(columns[0], record);
     return '<tr>' + tr + '</tr>';
   };
 

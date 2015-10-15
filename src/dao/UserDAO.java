@@ -15,7 +15,7 @@ public class UserDAO {
     private EntityManager entityManager;
 
     public void addUser(User user) throws Exception {
-        entityManager.persist(user);
+        entityManager.merge(user);
     }
 
     public void deleteUser(User user) throws Exception {

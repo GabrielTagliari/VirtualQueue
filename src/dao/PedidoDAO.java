@@ -18,7 +18,12 @@ public class PedidoDAO {
 	    private EntityManager entityManager;
 
 	    public void addPedido(Pedido pedido) throws Exception {
-	    	entityManager.persist(pedido);
+	    	try {
+	    		entityManager.merge(pedido);
+	    	}
+	    	catch(Exception e){
+	    		e.printStackTrace();
+	    	}
 	    }
 
 	    public void deletePedido(Pedido pedido) throws Exception {

@@ -17,7 +17,7 @@ public class ProdutoDAO {
 	    private EntityManager entityManager;
 
 	    public void addProduto(Produto produtos) throws Exception {
-	    	entityManager.persist(produtos);
+	    	entityManager.merge(produtos);
 	    }
 
 	    public void deleteProduto(Produto produtos) throws Exception {
