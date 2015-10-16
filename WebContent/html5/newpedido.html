@@ -17,7 +17,7 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset">
-				<input type="submit" class="btn btn-default" value="Adicionar" onclick="addProduto();total_pedido();" style="margin-top: 10px;">
+				<input type="submit" class="btn btn-default" value="Adicionar" onclick="addProduto();valor_pedido();" style="margin-top: 10px;">
 			</div>
 		</div>
 		<div class="">
@@ -33,8 +33,8 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td align="right"><b>Total: </b></td>
-					<td id="total"><b>R$0,00</b></td>
+					<td align="right"><b>valor: </b></td>
+					<td id="valor"><b>R$0,00</b></td>
 				</tr>
 			</table>
 		</div>
@@ -52,11 +52,13 @@
 		<br><br><br><br><br><br>
 		<div id="footer"></div>
 	<script>
-		//Cria arrays de pedido e produtos
-		var pedido = [];
-		var produtos = [];
-		var total;
-		var senha;
+		//Cria arrays de pedido e produtolist
+		p = new Object();
+		p.valor;
+		p.senha;
+		p.produtos = [];
+		var produtolist = [];
+		
 		
 		//Chama as funções
 		lista();
@@ -70,7 +72,7 @@
 				url : list,
 				crossDomain : true,
 				dataType : "json",
-				success : carregaProduto, // função de retorno dos produtos
+				success : carregaProduto, // função de retorno dos produtolist
 				error : function(xhr, status, error) {
 					var err = eval("(" + xhr.responseText + ")");
 					alert(err.Message);
@@ -79,12 +81,12 @@
 		}
 
 		function populaCombo() {
-			//Popula a combobox com produtos do banco de dados
+			//Popula a combobox com produtolist do banco de dados
 			$(document).ready(function() {
 				$.ajax({
 					dataType : 'json',
 					url : "http://localhost:8080/VirtualQueue/VQ/produto/list",
-					data : produtos, //array produtos
+					data : produtolist, //array produtolist
 					success : function(data) {
 						var q = '<select name="idCombox2" id="idCombox2" class="form-control"> <option value="-1"><-- Selecione um Produto --></option>';
 						for (i = 0; i < data.length; i++) {
@@ -100,15 +102,16 @@
 		}
 		
 		function carregaProduto(data) {
-			produtos = data;
-			// gerar Combo dos Produtos
+			produtolist = data;
+			alert(JSON.stringify(produtolist));		
+			// gerar Combo dos produtolist
 		}
 
 		function addProduto() {
 			//Adiciona um produto da combobox na tabela de pedido
 			var selecionado = document.getElementById("idCombox2").value;
 			
-			if(pedido.indexOf(produtos[selecionado])==-1){
+			if(p.produtos.indexOf(produtolist[selecionado])==-1){
 				if (selecionado == -1) {
 					swal("","Por favor, selecione um produto...")
 				} else {
@@ -120,14 +123,14 @@
 					var cell4 = row.insertCell(3);
 					var cell5 = row.insertCell(4);
 					
-					produtos[selecionado].quantidade = 1;
+					produtolist[selecionado].quantidade = 1;
 					
-					cell1.innerHTML = produtos[selecionado].id;
-					cell2.innerHTML = produtos[selecionado].nome;
-					cell3.innerHTML = "R$ "+produtos[selecionado].preco;
-					cell4.innerHTML = "<input type='text' name='quantidade' id='"+produtos[selecionado].id+"' value='1' onchange='altera_quantidade("+produtos[selecionado].id+");total_pedido();' style='width:50px;'>";
-					cell5.innerHTML = "<a href='#' class='delete' value='"+produtos[selecionado].id+"'><img src='../img/x.png' onclick='removeProduto("+produtos[selecionado].id+");total_pedido("+selecionado+");' height='15' width='15'></a>";
-					pedido.push(produtos[selecionado]);
+					cell1.innerHTML = produtolist[selecionado].id;
+					cell2.innerHTML = produtolist[selecionado].nome;
+					cell3.innerHTML = "R$ "+produtolist[selecionado].preco;
+					cell4.innerHTML = "<input type='text' name='quantidade' id='"+produtolist[selecionado].id+"' value='1' onchange='altera_quantidade("+produtolist[selecionado].id+");valor_pedido();' style='width:50px;'>";
+					cell5.innerHTML = "<a href='#' class='delete' value='"+produtolist[selecionado].id+"'><img src='../img/x.png' onclick='removeProduto("+produtolist[selecionado].id+");valor_pedido("+selecionado+");' height='15' width='15'></a>";
+					p.produtos.push(produtolist[selecionado]);
 				}
 			}else{
 				swal("","Produto já adicionado, altere a quantidade.")
@@ -141,20 +144,20 @@
 			     var tr = td.parent();
 			   	 tr.remove();
 			});
-			for (var i =0; i < pedido.length; i++)
-				if (pedido[i].id === remove) {
-			    pedido.splice(i,1);
+			for (var i =0; i < p.produtos.length; i++)
+				if (p.produtos[i].id === remove) {
+			    p.produtos.splice(i,1);
 			break;
 			}
 		}
 		
-		 function total_pedido(){
-			//Realiza a soma dos pedidos da tabela e atualiza o valor total do pedido
-			total = 0;
-			pedido.forEach(function(value) {
-		  		total += value.preco * value.quantidade;
+		 function valor_pedido(){
+			//Realiza a soma dos pedidos da tabela e atualiza o valor valor do pedido
+			p.valor = 0;
+			p.produtos.forEach(function(value) {
+		  		p.valor += value.preco * value.quantidade;
 			});
-			$("#total").html("R$ "+total);
+			$("#valor").html("R$ "+p.valor);
 		 }
 		
 		function altera_quantidade(selecionado){
@@ -164,9 +167,9 @@
 				swal("","A quantidade deve ser maior ou igual a 1")
 			} else {
 				$("#"+selecionado+"").attr("value", qntd);
-				for (var i =0; i < pedido.length; i++)
-					   if (pedido[i].id === selecionado) {
-					      pedido[i].quantidade = qntd;
+				for (var i =0; i < p.produtos.length; i++)
+					   if (p.produtos[i].id === selecionado) {
+					      p.produtos[i].quantidade = qntd;
 					      break;
 				}
 			}
@@ -177,7 +180,7 @@
 			$.ajax({
 			     type: "POST",
 			     url: "http://localhost:8080/VirtualQueue/VQ/pedido/pedidocreate",
-			     data: JSON.stringify(pedido),
+			     data: p,
 			     contentType: "application/json; charset=utf-8",
 			     dataType: "json",
 			     processData: true,
@@ -194,6 +197,7 @@
 			//Gera uma senha randomica automaticamente
 			senha = Math.floor((Math.random() * 100)+1);
 			$("#senha").html("Senha: "+senha);
+			p.senha = senha;
 		}
 		
 		function updateClock(){ //Relógio
@@ -209,7 +213,7 @@
 
 		function verifica_pedido(){
 		//Botão somente para checar o json que será mandado ao PedidoWebService
-		alert(JSON.stringify(pedido));	
+		alert(JSON.stringify(p));	
 		}
 	
 		$(document).ready(function(){

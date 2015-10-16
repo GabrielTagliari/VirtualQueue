@@ -9,6 +9,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import dao.PedidoDAO;
 import entity.Pedido;
@@ -35,17 +38,9 @@ public class PedidoWebService {
 	public void setPedido(String json) throws Exception {
 		Gson gson = new Gson();
 		System.out.println(json);
-		Pedido p =  gson.fromJson(json, Pedido.class);
-		/*Type listType = new TypeToken<List<Produto>>() {}.getType();
-		List<Produto> lista =  gson.fromJson(json, listType);
-		float total = 0;
-		for (Produto produto : lista) {
-			total += produto.getPreco() * produto.getQuantidade();
-		}
-		p.setValor(total);
-		p.setSenha(1);
-		p.setProdutos(lista);*/
-		pedidoDAO.addPedido(p);	
+		/*Pedido pedido =  gson.fromJson(json, Pedido.class);
+		System.out.println(pedido);
+		pedidoDAO.addPedido(pedido);*/	
 	}
 	
 	/*@Path("/createform")
