@@ -259,9 +259,9 @@
 		
 		function pedido_pdf(){
 			var doc = new jsPDF();
-			doc.text(20, 20, 'PEDIDO!');
+			doc.text(20, 20, 'PEDIDO');
 			doc.text(20, 30, 'AQUI SERA IMPRESSO O PEDIDO DO CLIENTE');
-			doc.output('dataurlnewwindow');
+			doc.output('dataurlnewwindow');			
 			window.location = "newpedido.html";
 		}
 	</script>
