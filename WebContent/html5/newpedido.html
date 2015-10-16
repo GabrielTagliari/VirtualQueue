@@ -180,7 +180,7 @@
 			$.ajax({
 			     type: "POST",
 			     url: "http://localhost:8080/VirtualQueue/VQ/pedido/pedidocreate",
-			     data: p,
+			     data: JSON.stringify(p),
 			     contentType: "application/json; charset=utf-8",
 			     dataType: "json",
 			     processData: true,
