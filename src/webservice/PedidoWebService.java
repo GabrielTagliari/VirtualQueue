@@ -14,6 +14,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import dao.PedidoDAO;
+import dao.ProdutoDAO;
 import entity.Pedido;
 import entity.Produto;
 
@@ -23,13 +24,16 @@ public class PedidoWebService {
 
 	@EJB
 	private PedidoDAO pedidoDAO;
+	
+	@EJB
+	private ProdutoDAO produtoDAO;
 
 	@Path("/list")
 	@GET 	
 	public String getAllPedidos() throws Exception{
-		List<Pedido> produtos = pedidoDAO.getPedido();
+		List<Pedido> pedidos = pedidoDAO.getPedido();
 		Gson gson = new Gson();
-		return gson.toJson(produtos);
+		return gson.toJson(pedidos);
 	}
 	
 	@Path("/pedidocreate")
