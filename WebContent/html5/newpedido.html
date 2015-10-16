@@ -2,11 +2,16 @@
 <html lang="pt-br">
 <head>
 <title>Virtual Queue</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script src="../js/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
-<script src="../js/jquery/jquery.serializejson.js"	type="text/javascript"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="../js/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+	<script src="../js/jquery/jquery.serializejson.js"	type="text/javascript"></script>
+	<!-- Scripts do jsPDF -->
+	<script type="text/javascript" src="../js/jsPDF/jspdf.js"></script>
+	<script type="text/javascript" src="../js/jsPDF/jspdf.plugin.standard_fonts_metrics.js"></script> 
+	<script type="text/javascript" src="../js/jsPDF/jspdf.plugin.split_text_to_size.js"></script>               
+	<script type="text/javascript" src="../js/jsPDF/jspdf.plugin.from_html.js"></script>
 </head>
 <body onload="updateClock()" style="background-color: #F0F0F0">
 	<div id="header"></div>
@@ -58,7 +63,6 @@
 		p.senha;
 		p.produtos = [];
 		var produtolist = [];
-		
 		
 		//Chama as funções
 		lista();
@@ -187,7 +191,35 @@
 				     dataType: "json",
 				     processData: true,
 				     success: function (vdata, status, jqXHR) {
-				    	 swal("Pedido Cadastrado!","","success")
+				    	 swal({   
+				    		title: "Deseja imprimir o pedido?",   
+				    		text: "Será gerado um PDF",   
+				    		type: "",   
+				    		showCancelButton: true,   
+				    		confirmButtonColor: "#337ab7",   
+				    		confirmButtonText: "Sim",   
+				    		cancelButtonText: "No",   
+				    		closeOnConfirm: true,   
+				    		closeOnCancel: false }, 
+				    		function(isConfirm){   
+				    			if (isConfirm) {     
+				    				pedido_pdf();
+				    			} else {
+				    				swal({   
+							    		title: "",   
+							    		text: "Pedido Gerado!",   
+							    		type: "",   
+							    		showCancelButton: false,   
+							    		confirmButtonColor: "#337ab7",   
+							    		confirmButtonText: "Sim",   
+							    		cancelButtonText: "No",   
+							    		closeOnConfirm: false,   
+							    		closeOnCancel: false }, 
+							    		function(isConfirm){   
+							    			if (isConfirm) {     
+							    				window.location = "newpedido.html";
+							    	}});
+				    	 	} });
 				     },
 				     error: function (xhr) {
 				         alert("Erro" + xhr.responseText);
@@ -224,6 +256,14 @@
 			$("#header").load('menu.html'); //Inclui o menu no topo da página
 			$("#footer").load('footer.html'); //Inclui o footer
 		});
+		
+		function pedido_pdf(){
+			var doc = new jsPDF();
+			doc.text(20, 20, 'PEDIDO!');
+			doc.text(20, 30, 'AQUI SERA IMPRESSO O PEDIDO DO CLIENTE');
+			doc.output('dataurlnewwindow');
+			window.location = "newpedido.html";
+		}
 	</script>
 </body>
 </html>
