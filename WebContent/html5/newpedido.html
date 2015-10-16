@@ -101,10 +101,8 @@
 			});
 		}
 		
-		function carregaProduto(data) {
-			produtolist = data;
-			alert(JSON.stringify(produtolist));		
-			// gerar Combo dos produtolist
+		function carregaProduto(data) { // gerar Combo dos produtolist
+			produtolist = data;		
 		}
 
 		function addProduto() {
@@ -177,27 +175,32 @@
 		
 		function fechar_pedido() {
 			//Finaliza e envia o Pedido
-			$.ajax({
-			     type: "POST",
-			     url: "http://localhost:8080/VirtualQueue/VQ/pedido/pedidocreate",
-			     data: JSON.stringify(p),
-			     contentType: "application/json; charset=utf-8",
-			     dataType: "json",
-			     processData: true,
-			     success: function (vdata, status, jqXHR) {
-			    	 swal("Pedido Cadastrado!","","success")
-			     },
-			     error: function (xhr) {
-			         alert("Erro" + xhr.responseText);
-			     }
-			 });
+			if (p.produtos == 0){
+				swal("Seu pedido está nulo!","Adicione ao menos um produto...");
+			} else {
+				p.senha = senha;
+				$.ajax({
+				     type: "POST",
+				     url: "http://localhost:8080/VirtualQueue/VQ/pedido/pedidocreate",
+				     data: JSON.stringify(p),
+				     contentType: "application/json; charset=utf-8",
+				     dataType: "json",
+				     processData: true,
+				     success: function (vdata, status, jqXHR) {
+				    	 swal("Pedido Cadastrado!","","success")
+				     },
+				     error: function (xhr) {
+				         alert("Erro" + xhr.responseText);
+				     }
+				 });
+			}
 		}
 		
 		function gerar_senha(){
 			//Gera uma senha randomica automaticamente
 			senha = Math.floor((Math.random() * 100)+1);
 			$("#senha").html("Senha: "+senha);
-			p.senha = senha;
+			
 		}
 		
 		function updateClock(){ //Relógio
@@ -221,7 +224,6 @@
 			$("#header").load('menu.html'); //Inclui o menu no topo da página
 			$("#footer").load('footer.html'); //Inclui o footer
 		});
-		
 	</script>
 </body>
 </html>
