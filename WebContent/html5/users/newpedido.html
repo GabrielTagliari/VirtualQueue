@@ -12,6 +12,8 @@
 	<script type="text/javascript" src="../../js/jsPDF/jspdf.plugin.standard_fonts_metrics.js"></script> 
 	<script type="text/javascript" src="../../js/jsPDF/jspdf.plugin.split_text_to_size.js"></script>               
 	<script type="text/javascript" src="../../js/jsPDF/jspdf.plugin.from_html.js"></script>
+	<script src="../../js/jsPDF/jspdf.min.js"></script>
+	<script src="../../js/jsPDF/jspdf.plugin.autotable.js"></script>
 </head>
 <body onload="updateClock()" style="background-color: #F0F0F0">
 	<div id="header"></div>
@@ -34,6 +36,7 @@
 					<th>Quantidade</th>
 					<th>Remover</th>
 				</tr>
+				<tbody>
 				<tr>
 					<td></td>
 					<td></td>
@@ -41,6 +44,7 @@
 					<td align="right"><b>TOTAL: </b></td>
 					<td id="valor"><b>R$0,00</b></td>
 				</tr>
+				</tbody>
 			</table>
 		</div>
 		<div class="form-group" style="float:right;">
@@ -257,10 +261,11 @@
 		});
 		
 		function pedido_pdf(){
-			var doc = new jsPDF();
-			doc.text(20, 20, 'PEDIDO');
-			doc.text(20, 30, 'AQUI SERA IMPRESSO O PEDIDO DO CLIENTE');
-			doc.output('dataurlnewwindow');			
+			var columns = ["Código", "Nome", "Preço", "Quantidade"];
+			var data = ["","","",""];
+			var doc = new jsPDF('p', 'pt');
+			doc.autoTable(columns, data);
+			doc.output('dataurlnewwindow');		
 			window.location = "newpedido.html";
 		}
 	</script>
