@@ -48,6 +48,16 @@ public class ProdutoWebService {
 		 	Produto b =  new Produto(nome, descricao, tipo, preco, quantidade); 
             produtoDAO.addProduto(b);
 	}
+	
+	@Path("/deleta")
+	@POST
+	@Consumes("application/json")
+	public void deleteProduto(String json) throws Exception {
+		Gson gson = new Gson();
+		System.out.println(json);
+		Produto b =  gson.fromJson(json, Produto.class);
+		produtoDAO.deleteProduto(b);
+	}	
 }
 	
 	

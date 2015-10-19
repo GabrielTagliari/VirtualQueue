@@ -1,7 +1,8 @@
 package dao;
 
 import java.util.List;
-
+import javax.persistence.PersistenceContextType;
+import javax.persistence.Query;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +16,7 @@ public class UserDAO {
     private EntityManager entityManager;
 
     public void addUser(User user) throws Exception {
-        entityManager.merge(user);
+        entityManager.persist(user);
     }
 
     public void deleteUser(User user) throws Exception {
@@ -23,7 +24,6 @@ public class UserDAO {
     }
 
     public List<User> getUsers() throws Exception {
-
         CriteriaQuery<User> cq = entityManager.getCriteriaBuilder().createQuery(User.class);
         cq.select(cq.from(User.class));
         return entityManager.createQuery(cq).getResultList();

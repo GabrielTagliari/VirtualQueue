@@ -274,14 +274,28 @@
 
   function defaultRowWriter(rowIndex, record, columns, cellWriter) {
     var tr = ' ';
-
+    
     // grab the record's attribute for each column
     for (var i = 0, len = columns.length; i < len; i++) {
-		tr += cellWriter(columns[i], record);
+		tr += cellWriter(columns[i], record);		
     }
-    	tr += cellWriter(columns[0], record);
-    return '<tr>' + tr + '</tr>';
+    return '<tr>' + tr  + '<td><button id="deletarProduto" onclick="deletarProduto()" class="btn btn-default" style="float:right;">Deletar</button>' + '</tr>';
   };
+  function deleta(record){
+	  $.ajax({
+		     type: "POST",
+		     url: "http://localhost:8080/VirtualQueue/VQ/produto/delete",
+		     data: record,
+		     contentType: "application/json; charset=utf-8",
+		     dataType: "json",
+		     processData: true,
+		     success: function (vdata, status, jqXHR) {	
+		     },
+		     error: function (xhr) {
+		         alert("Erro" + xhr.responseText);
+		     }
+		 });
+  }
 
   function defaultCellWriter(column, record) {
     var html = column.attributeWriter(record),

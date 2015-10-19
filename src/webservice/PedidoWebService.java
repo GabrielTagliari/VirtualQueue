@@ -31,9 +31,9 @@ public class PedidoWebService {
 	@Path("/list")
 	@GET 	
 	public String getAllPedidos() throws Exception{
-		List<Pedido> pedidos = pedidoDAO.getPedido();
+		List<Pedido> pedido = pedidoDAO.getPedido();
 		Gson gson = new Gson();
-		return gson.toJson(pedidos);
+		return gson.toJson(pedido);
 	}
 	
 	@Path("/pedidocreate")

@@ -1,7 +1,6 @@
 package webservice;
 
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -10,9 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-
 import com.google.gson.Gson;
-
 import dao.UserDAO;
 import entity.User;
 
@@ -25,17 +22,17 @@ public class UserWebService {
 
 		@Path("/list")
 		@GET 	
-		public String getAllBooks() throws Exception{
-			List<User> books = userDAO.getUsers();
+		public String getAllUsers() throws Exception{
+			List<User> users = userDAO.getUsers();
 			Gson gson = new Gson();
-			return gson.toJson(books);
+			return gson.toJson(users);
 		}
 
 		@Path("/list/{email}")
 		@GET
 		@Produces("application/json")
 		public String getUser(@PathParam("email") String email){
-			User b =  new User("plucas@lala.com", "lala", "Rua 1234");
+			User b =  new User("plucas@lala.com", "lala");
 			Gson gson = new Gson();
 			return gson.toJson(b);
 		}
@@ -51,13 +48,12 @@ public class UserWebService {
 		
 		@Path("/createform")
 		@GET
-		public void createBook(@QueryParam("email") String email,
-				@QueryParam("password") String password, 
-				@QueryParam("address") String address)
+		public void createProduto(@QueryParam("email") String email, 
+				@QueryParam("password") String password)
 				throws Exception {
-			    User b =  new User(email, password, address); 
+			 	User b =  new User(email, password);
 	            userDAO.addUser(b);
-		     }
 		}
+}
 
 	

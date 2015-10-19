@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(name="Produto.findAll", query="SELECT u FROM Produto u")
 public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
