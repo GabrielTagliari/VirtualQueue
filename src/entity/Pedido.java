@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.TableGenerator;
 
 
 @Entity
@@ -25,7 +26,8 @@ public class Pedido implements Serializable {
 	
 	@Id
 	@Column(name="PEDIDO_ID")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+    @TableGenerator(name="TABLE_GENERATOR", table="ID_TABLE", pkColumnName="ID_TABLE_NAME", pkColumnValue="PEDIDO_ID", valueColumnName="ID_TABLE_VALUE")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator="TABLE_GENERATOR")
 	private long id;
 	private float valor;
 	
