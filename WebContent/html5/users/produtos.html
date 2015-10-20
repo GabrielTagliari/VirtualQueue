@@ -32,13 +32,6 @@
 </div>
 <div id="footer"></div>
 <script>
-p = new Object();
-p.id = 201;
-p.nome = "Teste";
-p.descricao = "Teste";
-p.preco = 100;
-p.quantidade = 1;
-p.tipo = "TESTE";
 
 $.ajax({
   url: '/VirtualQueue/VQ/produto/list',
@@ -46,38 +39,13 @@ $.ajax({
     $('#my-table').dynatable({
       dataset: {
         records: data
-      }
-    });
+    }
+  });
   }
 });
+
 function deletarProduto(){
-	swal({   
-		title: "",   
-		text: "Deseja realmente deletar este produto?\n (esta ação não poderá ser desfeita)",   
-		type: "",   
-		showCancelButton: true,
-		confirmButtonColor: "#337ab7",   
-		confirmButtonText: "Sim",   
-		cancelButtonText: "Não",   
-		closeOnConfirm: false,   
-		closeOnCancel: true }, 
-		function(isConfirm){   
-			if (isConfirm) {
-				$.ajax({
-				     type: "POST",
-				     url: "http://localhost:8080/VirtualQueue/VQ/produto/deleta",
-				     data: JSON.stringify(p),
-				     contentType: "application/json; charset=utf-8",
-				     dataType: "json",
-				     processData: true,
-				     success: function (vdata, status, jqXHR) {
-				    	 swal("","Produto deletado!")	
-				     },
-				     error: function (xhr) {
-				         alert("Erro" + xhr.responseText);
-				     }
-			});
-	}});
+	swal("","Você não tem permissão para deletar")
 }
 
 $(document).ready(function(){

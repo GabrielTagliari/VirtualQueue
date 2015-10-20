@@ -265,7 +265,7 @@
 		function demoFromHTML() {
 		    var pdf = new jsPDF('p', 'pt', 'letter');
 		    pdf.setFontSize(22);
-		    pdf.text(20, 20, 'Pedido');
+		    pdf.text(130, 20, 'Pedido');
 		    // source can be HTML-formatted string, or a reference
 		    // to an actual DOM element from which the text will be scraped.
 		    source = $('#customers')[0];
@@ -296,11 +296,11 @@
 		        'width': margins.width, // max width of content on PDF
 		        'elementHandlers': specialElementHandlers
 		    },
-
 		    function (dispose) {
 		        // dispose: object with X, Y of the last line add to the PDF 
 		        //          this allow the insertion of new lines after html
-		    	pdf.output('dataurlnewwindow');		
+		    	
+		        pdf.output('dataurlnewwindow');		
 				window.location = "newpedido.html";
 		    }, margins);
 		}

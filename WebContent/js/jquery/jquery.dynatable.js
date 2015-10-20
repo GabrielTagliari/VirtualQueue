@@ -279,7 +279,7 @@
     for (var i = 0, len = columns.length; i < len; i++) {
 		tr += cellWriter(columns[i], record);		
     }
-    return '<tr>' + tr  + '<td><button id="deletarProduto" onclick="deletarProduto()" class="btn btn-default" style="float:right;">Deletar</button>' + '</tr>';
+    return '<tr>' + tr  + '<td><span id="myBtn" onclick="deletarProduto()" class="glyphicon glyphicon-trash" style="float:right;font-size:20px;span:hover{font-size:50px;}">' + '</tr>';
   };
   function deleta(record){
 	  $.ajax({
