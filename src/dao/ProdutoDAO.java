@@ -20,9 +20,8 @@ public class ProdutoDAO {
 	    	entityManager.merge(produto);
 	    }
 
-	    public void deleteProduto(Produto produto) throws Exception {
-	    	System.out.println(produto.getNome());
-	        entityManager.remove(produto);
+	    public void updateDate(Produto produto) throws Exception {
+	    	entityManager.merge(produto);
 	    }
 
 	    public List<Produto> getProdutos() throws Exception {
@@ -30,5 +29,7 @@ public class ProdutoDAO {
             cq.select(cq.from(Produto.class));
             return entityManager.createQuery(cq).getResultList();
 	    }
-	    
+	    public Produto getProdutoById(long id) throws Exception{
+	    	return entityManager.find(Produto.class, id);
+	    }
 }

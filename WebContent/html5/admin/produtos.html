@@ -43,10 +43,8 @@ p.tipo = "TESTE";
 $.ajax({
   url: '/VirtualQueue/VQ/produto/list',
   success: function(data){
-    $('#my-table').dynatable({
-      dataset: {
-        records: data
-      }
+    $('#my-table').dynatable({		
+      dataset: {records: data}
     });
   }
 });
@@ -67,11 +65,12 @@ function deletarProduto(){
 				$.ajax({
 				     type: "POST",
 				     url: "http://localhost:8080/VirtualQueue/VQ/produto/deleta",
-				     data: JSON.stringify(p),
+				     data: JSON.stringify(p.quantidade),
 				     contentType: "application/json; charset=utf-8",
-				     dataType: "json",
+				     dataType: "long",
 				     processData: true,
 				     success: function (vdata, status, jqXHR) {
+				    	 alert(JSON.stringify(p.quantidade));
 				    	 swal("","Produto deletado!")	
 				     },
 				     error: function (xhr) {

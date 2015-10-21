@@ -1,5 +1,6 @@
 package webservice;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -43,20 +44,21 @@ public class ProdutoWebService {
 			@QueryParam("descricao") String descricao,
 			@QueryParam("tipo") String tipo,
 			@QueryParam("preco") Float preco,
-			@QueryParam("quantidade") int quantidade)
+			@QueryParam("quantidade") int quantidade,
+			@QueryParam("data_exclusao") Date data_exclusao)
 			throws Exception {
-		 	Produto b =  new Produto(nome, descricao, tipo, preco, quantidade); 
+		 	Produto b =  new Produto(nome, descricao, tipo, preco, quantidade, data_exclusao); 
             produtoDAO.addProduto(b);
 	}
 	
 	@Path("/deleta")
 	@POST
 	@Consumes("application/json")
-	public void deleteProduto(String json) throws Exception {
-		Gson gson = new Gson();
-		System.out.println(json);
-		Produto b =  gson.fromJson(json, Produto.class);
-		produtoDAO.deleteProduto(b);
+	public void deleteProduto(long id) throws Exception {
+		Produto produto = produtoDAO.getProdutoById(id);
+		produto.setdata_exclusao(new Date());
+		System.out.println(produto);
+		produtoDAO.updateDate(produto);
 	}	
 }
 	
