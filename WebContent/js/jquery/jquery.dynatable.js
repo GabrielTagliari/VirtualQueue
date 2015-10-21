@@ -97,7 +97,7 @@
       queries: {},
       queryRecordCount: null,
       page: null,
-      perPageDefault: 10,
+      perPageDefault: 5,
       perPageOptions: [5,10,20,50,100],
       sorts: {},
       sortsKeys: null,
@@ -284,22 +284,6 @@
 		
 	}
   };
-  function deleta(record){
-	  $.ajax({
-		     type: "POST",
-		     url: "http://localhost:8080/VirtualQueue/VQ/produto/delete",
-		     data: record,
-		     contentType: "application/json; charset=utf-8",
-		     dataType: "json",
-		     processData: true,
-		     success: function (vdata, status, jqXHR) {	
-		     },
-		     error: function (xhr) {
-		         alert("Erro" + xhr.responseText);
-		     }
-		 });
-  }
-
   function defaultCellWriter(column, record) {
     var html = column.attributeWriter(record),
         td = '<td';

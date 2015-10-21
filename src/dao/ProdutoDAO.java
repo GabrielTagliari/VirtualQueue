@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import entity.Produto;
 
@@ -25,10 +26,12 @@ public class ProdutoDAO {
 	    }
 
 	    public List<Produto> getProdutos() throws Exception {
-            CriteriaQuery<Produto> cq = entityManager.getCriteriaBuilder().createQuery(Produto.class);
-            cq.select(cq.from(Produto.class));
+	    	CriteriaQuery<Produto> cq = entityManager.getCriteriaBuilder().createQuery(Produto.class);
+            Root<Produto> Produto = cq.from(Produto.class);
+            cq.where(Produto.get("data_exclusao").isNull());
             return entityManager.createQuery(cq).getResultList();
 	    }
+	    
 	    public Produto getProdutoById(long id) throws Exception{
 	    	return entityManager.find(Produto.class, id);
 	    }

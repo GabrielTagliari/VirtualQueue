@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import entity.Produto;
 import entity.User;
@@ -27,7 +28,8 @@ public class UserDAO {
 
     public List<User> getUsers() throws Exception {
         CriteriaQuery<User> cq = entityManager.getCriteriaBuilder().createQuery(User.class);
-        cq.select(cq.from(User.class));
+        Root<User> User = cq.from(User.class);
+        cq.where(User.get("data_exclusao").isNull());
         return entityManager.createQuery(cq).getResultList();
     }
     public User getUserById(long id) throws Exception{
