@@ -15,7 +15,7 @@
 	<script type="text/javascript" src="../../js/jsPDF/jspdf.min.js"></script>
 	<script type="text/javascript" src="../../js/jsPDF/jspdf.plugin.autotable.js"></script>
 </head>
-<body onload="updateClock()" style="background-color: #F0F0F0">
+<body onload="updateClock()">
 	<div id="header"></div>
 	<div class="container">
 		<h2>Pedido</h2><br>
@@ -28,8 +28,8 @@
 			</div>
 		</div>
 		<div id="customers">
-			<table id="myTable" border="1" class="table table-hover" style="background-color: #fff;">
-				<tr style="background-color:#F8F8F8;">
+			<table id="myTable" border="1" class="table table-hover">
+				<tr>
 					<th>Código</th>
 					<th>Nome</th>
 					<th>Preço</th>
@@ -207,7 +207,7 @@
 				    		closeOnCancel: false }, 
 				    		function(isConfirm){   
 				    			if (isConfirm) {     
-				    				demoFromHTML();
+				    				geraPdf();
 				    			} else {
 				    				swal({   
 							    		title: "",   
@@ -252,8 +252,6 @@
 		function verifica_pedido(){
 		//Botão somente para checar o json que será mandado ao PedidoWebService
 		alert(JSON.stringify(p));
-		alert(JSON.stringify(p.produtos[0]));
-		alert(JSON.stringify(p.produtos[1]));
 		}
 	
 		$(document).ready(function(){
@@ -262,7 +260,7 @@
 			$("#footer").load('footer.html'); //Inclui o footer
 		});
 		
-		function demoFromHTML() {
+		function geraPdf() {
 		    var pdf = new jsPDF('p', 'pt', 'letter');
 		    pdf.setFontSize(22);
 		    pdf.text(130, 20, 'Pedido');
@@ -299,9 +297,8 @@
 		    function (dispose) {
 		        // dispose: object with X, Y of the last line add to the PDF 
 		        //          this allow the insertion of new lines after html
-		    	
-		        pdf.output('dataurlnewwindow');		
-				window.location = "newpedido.html";
+		    	window.location = "newpedido.html";
+		        pdf.output('dataurlnewwindow');
 		    }, margins);
 		}
 	</script>
