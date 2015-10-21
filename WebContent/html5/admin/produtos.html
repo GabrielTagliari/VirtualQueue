@@ -32,14 +32,6 @@
 </div>
 <div id="footer"></div>
 <script>
-p = new Object();
-p.id = 201;
-p.nome = "Teste";
-p.descricao = "Teste";
-p.preco = 100;
-p.quantidade = 1;
-p.tipo = "TESTE";
-
 $.ajax({
   url: '/VirtualQueue/VQ/produto/list',
   success: function(data){
@@ -49,7 +41,7 @@ $.ajax({
   }
 });
 
-function deletarProduto(){
+function deletarProduto(id){
 	swal({   
 		title: "",   
 		text: "Deseja realmente deletar este produto?\n (esta ação não poderá ser desfeita)",   
@@ -65,13 +57,12 @@ function deletarProduto(){
 				$.ajax({
 				     type: "POST",
 				     url: "http://localhost:8080/VirtualQueue/VQ/produto/deleta",
-				     data: JSON.stringify(p.quantidade),
+				     data: JSON.stringify(id),
 				     contentType: "application/json; charset=utf-8",
 				     dataType: "long",
 				     processData: true,
 				     success: function (vdata, status, jqXHR) {
-				    	 alert(JSON.stringify(p.quantidade));
-				    	 swal("","Produto deletado!")	
+				    	 window.location = "produtos.html";
 				     },
 				     error: function (xhr) {
 				         alert("Erro" + xhr.responseText);
@@ -79,7 +70,8 @@ function deletarProduto(){
 			});
 	}});
 }
-
+function deletaUser(){
+}
 $(document).ready(function(){
 	$("#header").load('menu.html');
 	$("#footer").load('footer.html');

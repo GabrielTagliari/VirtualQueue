@@ -98,9 +98,11 @@
 					success : function(data) {
 						var q = '<select name="idCombox2" id="idCombox2" class="form-control"> <option value="-1"><-- Selecione um Produto --></option>';
 						for (i = 0; i < data.length; i++) {
-							q += '<option value=' + i + '>'
-								+ data[i].nome
-								+ '</option>';
+								if (data[i].data_exclusao == null) {
+									q += '<option value=' + i + '>'
+									+ data[i].nome
+									+ '</option>';
+								} else {}							
 							}
 							q += '</select>';
 							$('#combo').html(q);

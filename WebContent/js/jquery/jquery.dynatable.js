@@ -97,7 +97,7 @@
       queries: {},
       queryRecordCount: null,
       page: null,
-      perPageDefault: 5,
+      perPageDefault: 10,
       perPageOptions: [5,10,20,50,100],
       sorts: {},
       sortsKeys: null,
@@ -273,13 +273,16 @@
   };
 
   function defaultRowWriter(rowIndex, record, columns, cellWriter) {
-    var tr = ' ';
     
-    // grab the record's attribute for each column
-    for (var i = 0, len = columns.length; i < len; i++) {
-		tr += cellWriter(columns[i], record);		
-    }
-    return '<tr>' + tr  + '<td><span id="myBtn" onclick="deletarProduto()" class="glyphicon glyphicon-trash" style="float:right;font-size:20px;span:hover{font-size:50px;}">' + '</tr>';
+    if (record.data_exclusao == null) {
+    	var tr = ' ';
+    	for (var i = 0, len = columns.length; i < len; i++) {
+			tr += cellWriter(columns[i], record);
+	    }
+	    return '<tr>' + tr  + '<td><span id="myBtn" onclick="deletarProduto('+record.id+');deletaUser('+record.id+');" class="glyphicon glyphicon-trash" style="float:right;font-size:20px;">' + '</tr>';
+	} else {
+		
+	}
   };
   function deleta(record){
 	  $.ajax({

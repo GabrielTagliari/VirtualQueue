@@ -7,6 +7,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
+
+import entity.Produto;
 import entity.User;
 
 @Stateless
@@ -19,8 +21,8 @@ public class UserDAO {
         entityManager.persist(user);
     }
 
-    public void deleteUser(User user) throws Exception {
-        entityManager.remove(user);
+    public void updateDate(User user) throws Exception {
+        entityManager.merge(user);
     }
 
     public List<User> getUsers() throws Exception {
@@ -28,6 +30,8 @@ public class UserDAO {
         cq.select(cq.from(User.class));
         return entityManager.createQuery(cq).getResultList();
     }
-
+    public User getUserById(long id) throws Exception{
+    	return entityManager.find(User.class, id);
+    }
 
 }
