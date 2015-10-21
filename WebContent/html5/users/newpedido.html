@@ -14,6 +14,7 @@
 	<script type="text/javascript" src="../../js/jsPDF/jspdf.plugin.from_html.js"></script>
 	<script type="text/javascript" src="../../js/jsPDF/jspdf.min.js"></script>
 	<script type="text/javascript" src="../../js/jsPDF/jspdf.plugin.autotable.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../css/newpedido.css">
 </head>
 <body onload="updateClock()">
 	<div id="header"></div>
@@ -23,13 +24,11 @@
 			<div class="form-group" id="combo"></div>
 		</div>
 		<div class="form-group">
-			<div class="col-sm-offset">
-				<input type="submit" class="btn btn-default" value="Adicionar" onclick="addProduto();valor_pedido();" style="margin-top: 10px;">
-			</div>
+			<button onclick="addProduto(); valor_pedido();">Adicionar</button>	
 		</div>
 		<div id="customers">
-			<table id="myTable" border="1" class="table table-hover" style="background-color: #fff;">
-				<tr style="background-color:#F8F8F8;">
+			<table id="myTable" border="1" class="table table-hover">
+				<tr>
 					<th>Código</th>
 					<th>Nome</th>
 					<th>Preço</th>
@@ -47,14 +46,14 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="form-group" style="float:right;">
-			<h4><label class="col-rm-10" id="senha">Senha: </label></h4>
-			<h4><label class="col-rm-10" id="clock">Data: </label></h4>
-		</div>
+		
 		<div class="form-group">
-			<div class="col-sm-offset">
-				<input type="submit" id="fecha" class="btn btn-primary" value="Finalizar Pedido" onclick="fechar_pedido()"	style="margin-top: 10px;">
-				<input type="submit" class="btn btn-default" value="Ver Dados Pedido" onclick="verifica_pedido()"	style="margin-top: 10px;">
+			<h4><label id="senha">Senha: </label></h4>
+			<h4><label id="clock">Data: </label></h4>
+		</div>
+		<div class="form-group">		
+				<button id="fecha" onclick="fechar_pedido()">Finalizar Pedido</button>
+				<button onclick="verifica_pedido()">Ver dados do Pedido</button>
 			</div>
 		</div>
 		</div>
