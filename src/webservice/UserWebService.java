@@ -34,7 +34,7 @@ public class UserWebService {
 		@GET
 		@Produces("application/json")
 		public String getUser(@PathParam("email") String email){
-			User b =  new User("plucas@lala.com", "lala", null);
+			User b =  new User("","plucas@lala.com", "lala", null);
 			Gson gson = new Gson();
 			return gson.toJson(b);
 		}
@@ -50,19 +50,20 @@ public class UserWebService {
 		
 		@Path("/createform")
 		@GET
-		public void createUser(@QueryParam("email") String email, 
+		public void createUser(@QueryParam("nome") String nome,
+				@QueryParam("email") String email, 
 				@QueryParam("password") String password,
 				@QueryParam("data_exclusao") Date data_exclusao)
 				throws Exception {
-			 	User b =  new User(email, password, data_exclusao);
+			 	User b =  new User(email, nome, password, data_exclusao);
 	            userDAO.addUser(b);
 		}
 		
 		@Path("/deleta")
 		@POST
 		@Consumes("application/json")
-		public void deleteUser(long id) throws Exception {
-			User user = userDAO.getUserById(id);
+		public void deleteUser(String email) throws Exception {
+			User user = userDAO.getUserByEmail(email);
 			user.setData_exclusao(new Date());
 			userDAO.updateDate(user);
 		}

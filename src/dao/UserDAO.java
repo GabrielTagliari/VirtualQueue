@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.EntityType;
+import javax.persistence.metamodel.Metamodel;
 
 import entity.Produto;
 import entity.User;
@@ -32,8 +34,10 @@ public class UserDAO {
         cq.where(User.get("data_exclusao").isNull());
         return entityManager.createQuery(cq).getResultList();
     }
-    public User getUserById(long id) throws Exception{
-    	return entityManager.find(User.class, id);
+    public User getUserByEmail(String email) throws Exception{
+    	CriteriaQuery<User> cq = entityManager.getCriteriaBuilder().createQuery(User.class);
+    	Root<User> user = cq.from(User.class);
+    	cq.where(user.get("email").in(email));
+        return entityManager.createQuery(cq).getSingleResult();
     }
-
 }

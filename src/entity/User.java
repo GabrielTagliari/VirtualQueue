@@ -14,16 +14,19 @@ import javax.persistence.TableGenerator;
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@TableGenerator(name="TABLE_GENERATOR", table="ID_TABLE", pkColumnName="ID_TABLE_NAME", pkColumnValue="USER_ID", valueColumnName="ID_TABLE_VALUE")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator="TABLE_GENERATOR")
-	private Long id;
 	
+	@Id
+	private String nome;
 	private String email;
 	private String password;
 	private Date data_exclusao;
 	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	public Date getData_exclusao() {
 		return data_exclusao;
 	}
@@ -45,17 +48,11 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public User(String email, String password, Date data_exclusao) {
+	public User(String email, String nome, String password, Date data_exclusao) {
 		super();
 		this.email = email;
+		this.nome = nome;
 		this.password = password;
 		this.data_exclusao = data_exclusao;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
 	}
 }
