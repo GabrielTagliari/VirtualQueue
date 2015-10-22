@@ -63,7 +63,7 @@ public class UserWebService {
 		@POST
 		@Consumes("application/json")
 		public void deleteUser(String email) throws Exception {
-			User user = userDAO.getUserByEmail(email);
+			User user = userDAO.getUserUpdate(email);
 			user.setData_exclusao(new Date());
 			userDAO.updateDate(user);
 		}
@@ -71,15 +71,18 @@ public class UserWebService {
 		@Path("/login")
 		@POST
 		@Consumes("application/json")
-		public void loginUser(String email) throws Exception {
-			User user = userDAO.getUserByEmail(email);
-			if (user.getEmail().equals(email)) {
-				System.out.println("Válido!");
-			}else{
+		public void loginUser(String email, String senha) throws Exception {
+			List<User> user = userDAO.getUserByEmail(email);
+			System.out.println(user.get(0).getNome());
+			System.out.println(user.get(0).getPassword());
+			if (user == null || user.isEmpty()) {
 				System.out.println("Não é válido!");
+			} else {
+				if (user.get(0).getEmail().equals(email) && user.get(0).getPassword().equalsIgnoreCase(senha)) {
+					System.out.println("Válido!");
+				}
 			}
 		}
-		
 }
 
 	

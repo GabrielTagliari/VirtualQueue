@@ -15,18 +15,41 @@
          <div class="container login-container">           
             <div class="divcenter">
                 <h1>Virtual Queue</h1>
-                <form method="post" action="../VQ/user/login">                   
-                    <input type="email" id='email' placeholder="E-mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'E-mail'">                  
-                    <input type="password" id='password' placeholder="Senha" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Senha'">
-                    <button>Entrar</button>
-                </form>
+                    <input type="email" id='email' placeholder="E-mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'E-mail'" required>                  
+                    <input type="password" id='password' placeholder="Senha" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Senha'" required>
+                    <button onclick="valida()">Entrar</button>
             </div>            
         </div>
         <div id="footer"></div>
         <script>
-            $(document).ready(function () {
-                $("#footer").load('users/footer.html');
-            });
+	        $(document).ready(function () {
+	            $("#footer").load('admin/footer.html');
+	        });
+	        
+	        function valida(){
+	        	/* user = new Object();
+	        	user.email = document.getElementById("email").value;
+	        	user.senha = document.getElementById("password").value; */
+	        	var user = new Array();
+	        	user[0] = document.getElementById("email").value;
+	        	user[1] = document.getElementById("password").value;
+	        	
+	        	alert(JSON.stringify(user));
+		        	$.ajax({
+					     type: "POST",
+					     url: "http://localhost:8080/VirtualQueue/VQ/user/login",
+					     data: user,
+					     contentType: "application/json; charset=utf-8",
+					     dataType: "text",
+					     processData: true,
+					     success: function (vdata, status, jqXHR) {
+					    	 window.location = "produtos.html";
+					     },
+					     error: function (xhr) {
+					         alert("Erro" + xhr.responseText);
+					     }
+					});
+	        }
         </script>
     </body>
 </html>
