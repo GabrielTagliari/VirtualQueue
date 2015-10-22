@@ -27,23 +27,25 @@
 	        });
 	        
 	        function valida(){
-	        	/* user = new Object();
+	        	user = new Object();
 	        	user.email = document.getElementById("email").value;
-	        	user.senha = document.getElementById("password").value; */
-	        	var user = new Array();
-	        	user[0] = document.getElementById("email").value;
-	        	user[1] = document.getElementById("password").value;
+	        	user.password = document.getElementById("password").value;
 	        	
 	        	alert(JSON.stringify(user));
 		        	$.ajax({
 					     type: "POST",
 					     url: "http://localhost:8080/VirtualQueue/VQ/user/login",
-					     data: user,
+					     data: JSON.stringify(user),
 					     contentType: "application/json; charset=utf-8",
-					     dataType: "text",
+					     dataType: "json",
 					     processData: true,
 					     success: function (vdata, status, jqXHR) {
-					    	 window.location = "produtos.html";
+					    	 if (vdata == true) {
+					    		window.location = "admin/home.html";
+							} else {
+								swal("","Usuário e/ou senha inválido")
+							}
+					    	 
 					     },
 					     error: function (xhr) {
 					         alert("Erro" + xhr.responseText);

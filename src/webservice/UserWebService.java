@@ -71,17 +71,24 @@ public class UserWebService {
 		@Path("/login")
 		@POST
 		@Consumes("application/json")
-		public void loginUser(String email, String senha) throws Exception {
-			List<User> user = userDAO.getUserByEmail(email);
-			System.out.println(user.get(0).getNome());
-			System.out.println(user.get(0).getPassword());
-			if (user == null || user.isEmpty()) {
-				System.out.println("Não é válido!");
+		public boolean loginUser(String json) throws Exception {
+			Gson gson = new Gson();
+			User b =  gson.fromJson(json, User.class);
+			List<User> user = userDAO.getUserByEmail(b.getEmail());
+			if (user.get(0).getEmail().equals(b.getEmail()) && user.get(0).getPassword().equals(b.getPassword())) {
+				return true;
 			} else {
-				if (user.get(0).getEmail().equals(email) && user.get(0).getPassword().equalsIgnoreCase(senha)) {
-					System.out.println("Válido!");
+				return false;
+			}
+			
+			/*if (user == null || user.isEmpty()) {
+				return false;
+			} else {
+				if (user.get(0).getEmail().equals(b.getEmail()) && user.get(0).getPassword().equals(b.getPassword())) {
+					return true;
 				}
 			}
+			return false;*/
 		}
 }
 
