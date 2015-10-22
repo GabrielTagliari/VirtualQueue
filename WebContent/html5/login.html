@@ -29,7 +29,7 @@
 	        });
 	        
 	        function valida(){
-	        	if ($("input").val() == '') { 
+	        	if ($("#email").val() == '' || $("#password").val() == '') { 
  	        	     swal("", "Por favor, preencha os campos...");
  	            }else{
 	        		user = new Object();

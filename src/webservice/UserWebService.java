@@ -75,7 +75,9 @@ public class UserWebService {
 			Gson gson = new Gson();
 			User b =  gson.fromJson(json, User.class);
 			List<User> user = userDAO.getUserByEmail(b.getEmail());
-				if (user.get(0).getData_exclusao() == null && user.get(0).getEmail().equals(b.getEmail()) && user.get(0).getPassword().equals(b.getPassword())){ 
+				if (user == null || user.isEmpty()) {
+					return false;
+				}else if (user.get(0).getData_exclusao() == null && user.get(0).getEmail().equals(b.getEmail()) && user.get(0).getPassword().equals(b.getPassword())){ 
 					return true;
 				} else {
 					return false;
