@@ -279,7 +279,7 @@
     	for (var i = 0, len = columns.length; i < len; i++) {
 			tr += cellWriter(columns[i], record);
 	    }
-	    return '<tr>' + tr  + '<td><span id="myBtn" onclick="deletarProduto('+record.id+')" class="glyphicon glyphicon-trash" style="float:right;font-size:20px;">' + '</tr>';
+	    return '<tr>' + tr  + '<td><span id="myBtn" onclick="deletarProduto('+record.id+');deletaUser(\'' + record.email + '\');" class="glyphicon glyphicon-trash" style="float:right;font-size:20px;">' + '</tr>';
 	} else {
 		
 	}

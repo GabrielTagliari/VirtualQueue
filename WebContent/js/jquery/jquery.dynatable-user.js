@@ -279,7 +279,6 @@
     	for (var i = 0, len = columns.length; i < len; i++) {
 			tr += cellWriter(columns[i], record);
 	    }
-    	var email = JSON.stringify((record.email));
 	    return '<tr>' + tr  + '<td><span id="myBtn" onclick="deletaUser(\'' + record.email + '\');" class="glyphicon glyphicon-trash" style="float:right;font-size:20px;">' + '</tr>';
 	} else {
 		

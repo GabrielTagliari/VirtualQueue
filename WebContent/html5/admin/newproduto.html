@@ -50,8 +50,12 @@
     }
     
     $('#form').submit(function(){
-    	swal("Produto Cadastrado!","","success")
-    	setTimeout(function () { window.location.reload(); }, 1000);
+    	swal({   
+    		title: "Produto Cadastrado!",   
+    		text: "",   
+    		showConfirmButton: false 
+    		});
+    	setTimeout(function () { window.location.reload(); }, 500);
     });
    
     </script>

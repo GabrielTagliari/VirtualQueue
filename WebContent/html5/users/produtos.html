@@ -42,36 +42,11 @@ $.ajax({
 });
 
 function deletarProduto(id){
-	swal({   
-		title: "",   
-		text: "Deseja realmente deletar este produto?\n (esta ação não poderá ser desfeita)",   
-		type: "",   
-		showCancelButton: true,
-		confirmButtonColor: "#141E5F",   
-		confirmButtonText: "Sim",   
-		cancelButtonText: "Não",   
-		closeOnConfirm: false,   
-		closeOnCancel: true }, 
-		function(isConfirm){   
-			if (isConfirm) {
-				$.ajax({
-				     type: "POST",
-				     url: "http://localhost:8080/VirtualQueue/VQ/produto/deleta",
-				     data: JSON.stringify(id),
-				     contentType: "application/json; charset=utf-8",
-				     dataType: "long",
-				     processData: true,
-				     success: function (vdata, status, jqXHR) {
-				    	 window.location = "produtos.html";
-				     },
-				     error: function (xhr) {
-				         alert("Erro" + xhr.responseText);
-				     }
-			});
-	}});
+	swal("","Você não tem permissão para deletar um produto")
 }
-function deletaUser(){
-}
+
+function deletaUser(){}
+
 $(document).ready(function(){
 	$("#header").load('menu.html');
 	$("#footer").load('footer.html');
