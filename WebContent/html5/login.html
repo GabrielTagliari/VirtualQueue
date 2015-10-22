@@ -15,9 +15,11 @@
          <div class="container login-container">           
             <div class="divcenter">
                 <h1>Virtual Queue</h1>
-                    <input type="email" id='email' placeholder="E-mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'E-mail'" required>                  
-                    <input type="password" id='password' placeholder="Senha" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Senha'" required>
-                    <button onclick="valida()">Entrar</button>
+                <form action="javascript:valida();">
+                    <input type="email" id='email' placeholder="E-mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'E-mail'">                  
+                    <input type="password" id='password' placeholder="Senha" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Senha'">
+                    <button>Entrar</button>
+				</form>
             </div>            
         </div>
         <div id="footer"></div>
@@ -27,30 +29,33 @@
 	        });
 	        
 	        function valida(){
-	        	user = new Object();
-	        	user.email = document.getElementById("email").value;
-	        	user.password = document.getElementById("password").value;
-	        	
-	        	alert(JSON.stringify(user));
-		        	$.ajax({
-					     type: "POST",
-					     url: "http://localhost:8080/VirtualQueue/VQ/user/login",
-					     data: JSON.stringify(user),
-					     contentType: "application/json; charset=utf-8",
-					     dataType: "json",
-					     processData: true,
-					     success: function (vdata, status, jqXHR) {
-					    	 if (vdata == true) {
-					    		window.location = "admin/home.html";
-							} else {
-								swal("","Usuário e/ou senha inválido")
-							}
-					    	 
-					     },
-					     error: function (xhr) {
-					         alert("Erro" + xhr.responseText);
-					     }
-					});
+	        	if ($("input").val() == '') { 
+ 	        	     swal("", "Por favor, preencha os campos...");
+ 	            }else{
+	        		user = new Object();
+	    	        user.email = document.getElementById("email").value;
+	    	        user.password = document.getElementById("password").value;
+	    	      	
+	    	        	$.ajax({
+	    					     type: "POST",
+	    					     url: "http://localhost:8080/VirtualQueue/VQ/user/login",
+	    					     data: JSON.stringify(user),
+	    					     contentType: "application/json; charset=utf-8",
+	    					     dataType: "json",
+	    					     processData: true,
+	    					     success: function (vdata, status, jqXHR) {
+	    					    	 if (vdata == true) {
+	    					    		window.location = "admin/home.html";
+	    							} else {
+	    								swal("","Usuário e/ou senha inválido")
+	    							}
+	    					    	 
+	    					     },
+	    					     error: function (xhr) {
+	    					         alert("Erro" + xhr.responseText);
+	    					     }
+	    					});
+	        	    }
 	        }
         </script>
     </body>
