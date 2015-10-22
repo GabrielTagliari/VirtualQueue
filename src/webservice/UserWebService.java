@@ -67,6 +67,19 @@ public class UserWebService {
 			user.setData_exclusao(new Date());
 			userDAO.updateDate(user);
 		}
+		
+		@Path("/login")
+		@POST
+		@Consumes("application/json")
+		public void loginUser(String email) throws Exception {
+			User user = userDAO.getUserByEmail(email);
+			if (user.getEmail().equals(email)) {
+				System.out.println("Válido!");
+			}else{
+				System.out.println("Não é válido!");
+			}
+		}
+		
 }
 
 	
