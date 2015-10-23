@@ -33,7 +33,7 @@
 					<th>Nome</th>
 					<th>Preço</th>
 					<th>Quantidade</th>
-					<th>Remover</th>
+					<th id="remove">Remover</th>
 				</tr>
 				<tbody>
 				<tr>
@@ -135,8 +135,8 @@
 					cell1.innerHTML = produtolist[selecionado].id;
 					cell2.innerHTML = produtolist[selecionado].nome;
 					cell3.innerHTML = "R$ "+produtolist[selecionado].preco;
-					cell4.innerHTML = "<input type='text' name='quantidade' id='"+produtolist[selecionado].id+"' value='1' onchange='altera_quantidade("+produtolist[selecionado].id+");valor_pedido();' style='width:50px;'>";
-					cell5.innerHTML = "<a href='#' class='delete' value='"+produtolist[selecionado].id+"'><img src='../../img/x.png' onclick='removeProduto("+produtolist[selecionado].id+");valor_pedido("+selecionado+");' height='15' width='15'></a>";
+					cell4.innerHTML = "<input type='text' name='quantidade' id='"+produtolist[selecionado].id+"' value='1' onchange='altera_quantidade("+produtolist[selecionado].id+");valor_pedido();' style='width:50px;'><span id='qntd"+produtolist[selecionado].id+"' hidden>"+produtolist[selecionado].quantidade+"</span>";
+					cell5.innerHTML = "<a href='#' class='delete' value='"+produtolist[selecionado].id+"'><img src='../../img/x.png' onclick='removeProduto("+produtolist[selecionado].id+");valor_pedido("+selecionado+");' height='15' width='15'></a><span id='totaldoproduto"+produtolist[selecionado].id+"' hidden>R$"+produtolist[selecionado].preco+"</span>";
 					p.produtos.push(produtolist[selecionado]);
 				}
 			}else{
@@ -165,11 +165,12 @@
 		  		p.valor += value.preco * value.quantidade;
 			});
 			$("#valor").html("R$ "+p.valor);
-		 }
+		}
 		
 		function altera_quantidade(selecionado){
 			//Altera a quantidade do item do pedido
 			var qntd = $("#"+selecionado+"").val();
+			$("#qntd"+selecionado+"").text(qntd);//PDF
 			if (qntd == 0) {
 				swal("","A quantidade deve ser maior ou igual a 1")
 			} else {
@@ -180,6 +181,7 @@
 					      break;
 				}
 			}
+			
 		}
 		
 		function fechar_pedido() {
@@ -262,7 +264,8 @@
 		});
 		
 		function geraPdf() {
-		    var pdf = new jsPDF('p', 'pt', 'letter');
+			$("#remove").text("Total");
+			var pdf = new jsPDF('p', 'pt', 'letter');
 		    pdf.setFontSize(22);
 		    // source can be HTML-formatted string, or a reference
 		    // to an actual DOM element from which the text will be scraped.
