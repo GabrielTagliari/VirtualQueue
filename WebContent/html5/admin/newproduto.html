@@ -53,9 +53,16 @@
     	swal({   
     		title: "Produto Cadastrado!",   
     		text: "",   
-    		showConfirmButton: false 
+    		type: "",   
+    		showCancelButton: false,   
+    		confirmButtonColor: "#141E5F",   
+    		confirmButtonText: "Sim",   
+    		cancelButtonText: "No",   
+    		closeOnConfirm: true,   
+    		closeOnCancel: false }, 
+    		function(isConfirm){   
+    			window.location = "newproduto.html";
     		});
-    	setTimeout(function () { window.location.reload(); }, 500);
     });
    
     </script>

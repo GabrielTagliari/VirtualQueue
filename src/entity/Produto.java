@@ -2,6 +2,8 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,8 +17,9 @@ public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@TableGenerator(name="TABLE_GENERATOR", table="ID_TABLE", pkColumnName="ID_TABLE_NAME", pkColumnValue="PRODUTO_ID", valueColumnName="ID_TABLE_VALUE")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator="TABLE_GENERATOR")
+	@Column(name="PRODUTO_ID")
+	@TableGenerator(name="PRODUTO_GENERATOR", table="ID_TABLE", pkColumnName="ID_TABLE_NAME", pkColumnValue="PRODUTO_ID", valueColumnName="ID_TABLE_VALUE")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator="PRODUTO_GENERATOR")
 	private Long id;
 	private String nome;
 	private String descricao;

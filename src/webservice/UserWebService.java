@@ -49,14 +49,18 @@ public class UserWebService {
 		}
 		
 		@Path("/createform")
-		@GET
-		public void createUser(@QueryParam("nome") String nome,
-				@QueryParam("email") String email, 
-				@QueryParam("password") String password,
-				@QueryParam("data_exclusao") Date data_exclusao)
-				throws Exception {
-			 	User b =  new User(email, nome, password, data_exclusao);
-	            userDAO.addUser(b);
+		@POST
+		public boolean createUser(String json) throws Exception {
+				Gson gson = new Gson();
+				User b =  gson.fromJson(json, User.class);
+				System.out.println(json);
+			 	List<User> user = userDAO.getUserByEmail(b.getEmail());
+				if (user == null || user.isEmpty()) {
+					userDAO.addUser(b);
+					return true;
+				}else {
+					return false;
+				}
 		}
 		
 		@Path("/deleta")

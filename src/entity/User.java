@@ -15,8 +15,9 @@ import javax.persistence.TableGenerator;
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Id
+	
 	private String nome;
+	@Id
 	private String email;
 	private String password;
 	private Date data_exclusao;
