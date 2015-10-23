@@ -17,7 +17,6 @@ public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name="PRODUTO_ID")
 	@TableGenerator(name="PRODUTO_GENERATOR", table="ID_TABLE", pkColumnName="ID_TABLE_NAME", pkColumnValue="PRODUTO_ID", valueColumnName="ID_TABLE_VALUE")
     @GeneratedValue(strategy = GenerationType.TABLE, generator="PRODUTO_GENERATOR")
 	private Long id;

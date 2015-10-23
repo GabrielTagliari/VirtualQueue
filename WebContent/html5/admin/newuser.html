@@ -25,9 +25,9 @@
                 <p class="form-group">
                     <label for="inputPassword">Senha: </label>
                     <input type="password" id="password" name="password" required>
-                </p>   
-                <button id="submit">Cadastrar</button>                
+                </p>
                 <button onclick="limpa_form()">Limpar</button>
+                <button id="submit">Cadastrar</button>  
                 </div>
             </form>
         </div>
@@ -51,7 +51,6 @@
     		user.nome = document.getElementById("nome").value;
 	        user.email = document.getElementById("email").value;
 	        user.password = document.getElementById("password").value;
-	        user.data_exclusao = null;
 	        
 	        		$.ajax({
 					     type: "POST",

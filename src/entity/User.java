@@ -3,6 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,13 +16,21 @@ import javax.persistence.TableGenerator;
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	
-	private String nome;
 	@Id
+	@TableGenerator(name="USER_GENERATOR", table="ID_TABLE", pkColumnName="ID_TABLE_NAME", pkColumnValue="USER_ID", valueColumnName="ID_TABLE_VALUE")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator="USER_GENERATOR")
+	private Long id;
+	private String nome;
 	private String email;
 	private String password;
 	private Date data_exclusao;
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getNome() {
 		return nome;
 	}

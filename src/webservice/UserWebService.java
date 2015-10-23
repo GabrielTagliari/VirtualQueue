@@ -55,7 +55,7 @@ public class UserWebService {
 				User b =  gson.fromJson(json, User.class);
 				System.out.println(json);
 			 	List<User> user = userDAO.getUserByEmail(b.getEmail());
-				if (user == null || user.isEmpty()) {
+				if (user == null || user.isEmpty() || user.get(0).getData_exclusao() != null) {
 					userDAO.addUser(b);
 					return true;
 				}else {
@@ -69,6 +69,7 @@ public class UserWebService {
 		public void deleteUser(String email) throws Exception {
 			User user = userDAO.getUserUpdate(email);
 			user.setData_exclusao(new Date());
+			user.setEmail(user.getEmail()+"*");
 			userDAO.updateDate(user);
 		}
 		
