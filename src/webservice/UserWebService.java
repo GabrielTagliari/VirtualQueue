@@ -53,7 +53,6 @@ public class UserWebService {
 		public boolean createUser(String json) throws Exception {
 				Gson gson = new Gson();
 				User b =  gson.fromJson(json, User.class);
-				System.out.println(json);
 			 	List<User> user = userDAO.getUserByEmail(b.getEmail());
 				if (user == null || user.isEmpty() || user.get(0).getData_exclusao() != null) {
 					userDAO.addUser(b);

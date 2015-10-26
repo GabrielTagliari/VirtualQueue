@@ -18,7 +18,7 @@
 </head>
 <body onload="updateClock()">
 	<div id="header"></div>
-	<div class="container">
+	<div id="container" class="container">
 		<h2>Pedido</h2><br>
 		<div class="form-group">
 			<div class="form-group" id="combo"></div>
@@ -33,7 +33,7 @@
 					<th>Nome</th>
 					<th>Preço</th>
 					<th>Quantidade</th>
-					<th>Remover</th>
+					<th id="remove">Remover</th>
 				</tr>
 				<tbody>
 				<tr>
@@ -49,12 +49,12 @@
 		
 		<div class="form-group">
 			<h4><label id="senha">Senha: </label></h4>
-			<h4><label id="clock">Data: </label></h4>
+			<h4><label id="data"></label></h4>
+			<h4><label id="clock"></label></h4>
 		</div>
 		<div class="form-group">		
 				<button id="fecha" onclick="fechar_pedido()">Finalizar Pedido</button>
 				<button onclick="verifica_pedido()">Ver dados do Pedido</button>
-			</div>
 		</div>
 		</div>
 		<br><br><br><br><br><br>
@@ -97,9 +97,11 @@
 					success : function(data) {
 						var q = '<select name="idCombox2" id="idCombox2" class="form-control"> <option value="-1"><-- Selecione um Produto --></option>';
 						for (i = 0; i < data.length; i++) {
-							q += '<option value=' + i + '>'
-								+ data[i].nome
-								+ '</option>';
+								if (data[i].data_exclusao == null) {
+									q += '<option value=' + i + '>'
+									+ data[i].nome
+									+ '</option>';
+								} else {}							
 							}
 							q += '</select>';
 							$('#combo').html(q);
@@ -133,8 +135,8 @@
 					cell1.innerHTML = produtolist[selecionado].id;
 					cell2.innerHTML = produtolist[selecionado].nome;
 					cell3.innerHTML = "R$ "+produtolist[selecionado].preco;
-					cell4.innerHTML = "<input type='text' name='quantidade' id='"+produtolist[selecionado].id+"' value='1' onchange='altera_quantidade("+produtolist[selecionado].id+");valor_pedido();' style='width:50px;'>";
-					cell5.innerHTML = "<a href='#' class='delete' value='"+produtolist[selecionado].id+"'><img src='../../img/x.png' onclick='removeProduto("+produtolist[selecionado].id+");valor_pedido("+selecionado+");' height='15' width='15'></a>";
+					cell4.innerHTML = "<input type='text' name='quantidade' id='"+produtolist[selecionado].id+"' value='1' onchange='altera_quantidade("+produtolist[selecionado].id+","+produtolist[selecionado].preco+");valor_pedido();' style='width:50px;'><span id='qntd"+produtolist[selecionado].id+"' hidden>"+produtolist[selecionado].quantidade+"</span>";
+					cell5.innerHTML = "<a href='#' class='delete' value='"+produtolist[selecionado].id+"'><img src='../../img/x.png' onclick='removeProduto("+produtolist[selecionado].id+");valor_pedido("+selecionado+");' height='15' width='15'></a><span id='totaldoproduto"+produtolist[selecionado].id+"' hidden>R$ "+produtolist[selecionado].preco+"</span>";
 					p.produtos.push(produtolist[selecionado]);
 				}
 			}else{
@@ -163,15 +165,17 @@
 		  		p.valor += value.preco * value.quantidade;
 			});
 			$("#valor").html("R$ "+p.valor);
-		 }
+		}
 		
-		function altera_quantidade(selecionado){
+		function altera_quantidade(selecionado, preco){
 			//Altera a quantidade do item do pedido
 			var qntd = $("#"+selecionado+"").val();
+			$("#qntd"+selecionado+"").text(qntd);//Quantidade do produto no PDF
 			if (qntd == 0) {
 				swal("","A quantidade deve ser maior ou igual a 1")
 			} else {
 				$("#"+selecionado+"").attr("value", qntd);
+				$("#totaldoproduto"+selecionado+"").text("R$ "+preco*qntd); // Total do produto no PDF
 				for (var i =0; i < p.produtos.length; i++)
 					   if (p.produtos[i].id === selecionado) {
 					      p.produtos[i].quantidade = qntd;
@@ -199,21 +203,21 @@
 				    		text: "Será gerado um PDF",   
 				    		type: "",   
 				    		showCancelButton: true,   
-				    		confirmButtonColor: "#337ab7",   
+				    		confirmButtonColor: "#141E5F",   
 				    		confirmButtonText: "Sim",   
 				    		cancelButtonText: "No",   
 				    		closeOnConfirm: true,   
 				    		closeOnCancel: false }, 
 				    		function(isConfirm){   
 				    			if (isConfirm) {     
-				    				demoFromHTML();
+				    				geraPdf();
 				    			} else {
 				    				swal({   
 							    		title: "",   
 							    		text: "Pedido Gerado!",   
 							    		type: "",   
 							    		showCancelButton: false,   
-							    		confirmButtonColor: "#337ab7",   
+							    		confirmButtonColor: "#141E5F",   
 							    		confirmButtonText: "Sim",   
 							    		cancelButtonText: "No",   
 							    		closeOnConfirm: false,   
@@ -251,23 +255,22 @@
 		function verifica_pedido(){
 		//Botão somente para checar o json que será mandado ao PedidoWebService
 		alert(JSON.stringify(p));
-		alert(JSON.stringify(p.produtos[0]));
-		alert(JSON.stringify(p.produtos[1]));
 		}
 	
 		$(document).ready(function(){
 			setInterval('updateClock()', 1000); //Update do relógio a cada segundo
 			$("#header").load('menu.html'); //Inclui o menu no topo da página
 			$("#footer").load('footer.html'); //Inclui o footer
+			$("#data").text(new Date().getDate()+"/"+new Date().getDay()+"/"+new Date().getFullYear());
 		});
 		
-		function demoFromHTML() {
-		    var pdf = new jsPDF('p', 'pt', 'letter');
+		function geraPdf() {
+			$("#remove").text("Total");
+			var pdf = new jsPDF('p', 'pt', 'letter');
 		    pdf.setFontSize(22);
-		    pdf.text(20, 20, 'Pedido');
 		    // source can be HTML-formatted string, or a reference
 		    // to an actual DOM element from which the text will be scraped.
-		    source = $('#customers')[0];
+		    source = $('#container')[0];
 
 		    // we support special element handlers. Register them with jQuery-style 
 		    // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
@@ -295,12 +298,11 @@
 		        'width': margins.width, // max width of content on PDF
 		        'elementHandlers': specialElementHandlers
 		    },
-
 		    function (dispose) {
 		        // dispose: object with X, Y of the last line add to the PDF 
 		        //          this allow the insertion of new lines after html
-		    	pdf.output('dataurlnewwindow');		
-				window.location = "newpedido.html";
+		    	window.location = "newpedido.html";
+		        pdf.output('dataurlnewwindow');
 		    }, margins);
 		}
 	</script>
