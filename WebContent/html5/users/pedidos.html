@@ -5,10 +5,11 @@
 <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link href="../../css/jquery.dynatable.css" rel="stylesheet" media="screen">
 	<script src="../../js/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
 	<script src="../../js/jquery/jquery.serializejson.js"	type="text/javascript"></script>
 	<script src="../../js/jquery/jquery.dynatable.js" type="text/javascript"></script>
-	<link href="../../css/jquery.dynatable.css" rel="stylesheet" media="screen">
+	<script src="../../js/menuandfooter.js"	type="text/javascript"></script>
 </head>
 <body>
 <div id="header"></div>
@@ -39,11 +40,6 @@ $.ajax({
       }
     });
   }
-});
-
-$(document).ready(function(){
-	$("#header").load('menu.html');
-	$("#footer").load('footer.html');
 });
 </script>
 </body>
