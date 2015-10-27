@@ -1,4 +1,4 @@
-//Cria arrays de pedido e produtolist
+//Criando o objeto de pedido e a array produtolist
 p = new Object();
 p.valor;
 p.senha = Math.floor((Math.random() * 100)+1);
@@ -24,8 +24,7 @@ function lista() {
 	});
 }
 
-function populaCombo() {
-	//Popula a combobox com produtolist do banco de dados
+function populaCombo() { //Popula a combobox com produtolist do banco de dados
 	$(document).ready(function() {
 		$.ajax({
 			dataType : 'json',
@@ -51,8 +50,7 @@ function carregaProduto(data) { // gerar Combo dos produtolist
 	produtolist = data;		
 }
 
-function addProduto() {
-	//Adiciona um produto da combobox na tabela de pedido
+function addProduto() { //Adiciona um produto da combobox na tabela de pedido
 	var selecionado = document.getElementById("idCombox2").value;
 	
 	if(p.produtos.indexOf(produtolist[selecionado])==-1){
@@ -81,8 +79,7 @@ function addProduto() {
 	}			
 }
 
-function removeProduto(remove){
-	//Remove o produto da lista
+function removeProduto(remove){ //Remove o produto da lista
 	$("#myTable .delete").on("click",function() {
 	     var td = $(this).parent();
 	     var tr = td.parent();
@@ -103,7 +100,7 @@ function removeProduto(remove){
 	$("#valor").html("R$ "+p.valor);
 }
 
-function altera_quantidade(selecionado, preco){	//Altera a quantidade do item do pedido
+function altera_quantidade(selecionado, preco){ //Altera a quantidade do item do pedido
 	var qntd = $("#"+selecionado+"").val();
 	$("#qntd"+selecionado+"").text(qntd);//Quantidade do produto no PDF
 	if (qntd == 0) {
@@ -119,8 +116,7 @@ function altera_quantidade(selecionado, preco){	//Altera a quantidade do item do
 	}
 }
 
-function fechar_pedido() {
-	//Finaliza e envia o Pedido
+function fechar_pedido() { //Finaliza e envia o Pedido
 	if (p.produtos == 0){
 		swal("Seu pedido está vazio!","Adicione ao menos um produto...");
 	} else {
@@ -181,19 +177,18 @@ function updateClock(){ //Relógio
 	$("#clock").html(currentTimeString);
 }
 
-function verifica_pedido(){
-//Botão somente para checar o json que será mandado ao PedidoWebService
+function verifica_pedido(){	//Botão temporário somente para checar o json que será mandado ao PedidoWebService
 alert(JSON.stringify(p));
 }
 
 $(document).ready(function(){
 	setInterval('updateClock()', 1000); //Update do relógio a cada segundo
 	var mes = new Date().getMonth() + 1;
-	$("#data").text(new Date().getDate()+"/"+mes+"/"+new Date().getFullYear());
-	$("#senha").text("Senha: "+p.senha);
+	$("#data").text(new Date().getDate()+"/"+mes+"/"+new Date().getFullYear()); //Mostra a data atual
+	$("#senha").text("Senha: "+p.senha); // Mostra a senha aleatória
 });
 
-function geraPdf() {
+function geraPdf() { //Gera o PDF do pedido
 	$("#remove").text("Total");
 	var pdf = new jsPDF('p', 'pt', 'letter');
 	pdf.setFontSize(22);
