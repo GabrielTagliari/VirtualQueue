@@ -9,6 +9,7 @@
 	<script src="../../js/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
 	<script src="../../js/jquery/jquery.serializejson.js"	type="text/javascript"></script>
 	<script src="../../js/menuandfooter.js"	type="text/javascript"></script>
+	<script src="../../js/newproduto.js"	type="text/javascript"></script>
 </head>
     <body>
     	<div id="header"></div>
@@ -36,30 +37,5 @@
             </form>  
         </div>
         <div id="footer"></div>
-    <script>
-    function limpa_form(){	
-    	$(':input','#form')
-    	 .not(':button, :submit, :reset, :hidden')
-    	 .val('')
-    	 .removeAttr('checked')
-    	 .removeAttr('selected');
-    }
-    
-    $('#form').submit(function(){
-    	swal({   
-    		title: "Produto Cadastrado!",   
-    		text: "",   
-    		type: "",   
-    		showCancelButton: false,   
-    		confirmButtonColor: "#141E5F",   
-    		confirmButtonText: "Sim",   
-    		cancelButtonText: "No",   
-    		closeOnConfirm: true,   
-    		closeOnCancel: false }, 
-    		function(isConfirm){   
-    			window.location = "newproduto.html";
-    		});
-    });
-    </script>
     </body>
 </html>
