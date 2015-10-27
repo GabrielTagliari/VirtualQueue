@@ -1,14 +1,13 @@
 //Cria arrays de pedido e produtolist
 p = new Object();
 p.valor;
-p.senha;
+p.senha = Math.floor((Math.random() * 100)+1);
 p.produtos = [];
 var produtolist = [];
 		
 //Chama as funções
 lista();
 populaCombo();
-gerar_senha();
 				
 function lista() {
 	var list = "http://localhost:8080/VirtualQueue/VQ/produto/list";
@@ -125,7 +124,6 @@ function fechar_pedido() {
 	if (p.produtos == 0){
 		swal("Seu pedido está vazio!","Adicione ao menos um produto...");
 	} else {
-		p.senha = senha;
 		$.ajax({
 		     type: "POST",
 		     url: "http://localhost:8080/VirtualQueue/VQ/pedido/pedidocreate",
@@ -171,11 +169,6 @@ function fechar_pedido() {
 	}
 }
 
-function gerar_senha(){	//Gera uma senha randomica automaticamente
-	senha = Math.floor((Math.random() * 100)+1);
-	$("#senha").html("Senha: "+senha);
-}
-
 function updateClock(){ //Relógio
  	var currentTime = new Date ( );
   	var currentHours = currentTime.getHours ( );
@@ -197,6 +190,7 @@ $(document).ready(function(){
 	setInterval('updateClock()', 1000); //Update do relógio a cada segundo
 	var mes = new Date().getMonth() + 1;
 	$("#data").text(new Date().getDate()+"/"+mes+"/"+new Date().getFullYear());
+	$("#senha").text("Senha: "+p.senha);
 });
 
 function geraPdf() {
