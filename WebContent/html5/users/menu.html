@@ -4,37 +4,13 @@
         <meta charset="UTF-8">
         <title>Menu</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="../../css/sweetalert-master/dist/sweetalert.min.js"></script>
-        <script src="../../css/bootstrap.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="../../css/sweetalert-master/dist/sweetalert.css">
-		<link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
         <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
-        <style>
-            @import url(http://fonts.googleapis.com/css?family=Lora|Oswald);
-            *{padding:0px;}
-            body {font-family:'Oswald', arial, sans-serif; font-size:15px;;}
-            .menu {position:relative; float:left; top:-40px;}
-            .menu li {float:left; position:relative; list-style:none;}
-            .menu li  ul {position:absolute; top:25px;left:0; background-color:#fff; display:none;}  
-            .menu a {text-decoration:none; padding:5px 20px; color: #fff;
-                     -moz-transition:background 0.10s ease-out;
-                     -o-transition:background 0.10s ease-out;
-                     -ms-transition:background 0.10s ease-out;}
-            .menu .sub {color: #191919;}
-            .menu .principal:hover {color: #000; background-color:#fff; border: 1px solid #c0c0c0; border-radius:3px;
-                                    -webkit-transition:background 0.10s ease-out;                             
-                                    filter:alpha(opacity = 100);
-                                    -moz-opacity:5;
-                                    opacity:5;}
-            .menu li ul li {border:1px solid #c0c0c0; display:block; width:200px;}
-            .menu li:hover ul, .menu li.over ul{display:block;}
-
-            .menu-right {position:relative; float:right; top:-40px;}
-            .menu-right ul {list-style:none;}
-            .menu-right ul li a {text-decoration:none; color:#fff; font-style: italic; font-size: 12px;}   
-            .container {}
-            .background {}
-        </style>
+		<link rel="stylesheet" type="text/css" href="../../css/sweetalert-master/dist/sweetalert.css">
+		<link rel="stylesheet" type="text/css" href="../../css/menu.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="../../css/bootstrap.min.js"></script>
+        <script src="../../css/sweetalert-master/dist/sweetalert.min.js"></script>
     </head>
     <body>
         <div class="background">
@@ -44,12 +20,6 @@
             <nav class="menu">
                 <ul>
                     <li><a class="principal" href="home.html"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
-                    <!-- <li><a class="principal"><span class="glyphicon glyphicon-apple"></span> PRODUTO</a>
-                        <ul>
-                            <li><a class="sub" href="newproduto.html">CADASTRO DE PRODUTOS</a></li>
-                            <li><a class="sub" href="produtos.html">LISTAR PRODUTOS</a></li>
-                        </ul>
-                    </li> -->
                     <li><a class="principal"><span class="glyphicon glyphicon-shopping-cart"></span> PEDIDO</a>
                         <ul>
                             <li><a class="sub" href="newpedido.html">GERAR PEDIDO</a></li>
@@ -60,7 +30,7 @@
             </nav>
             <nav class="menu-right">
                 <ul>
-                    <li><a href="../login.html"><span class="glyphicon glyphicon-user"></span> SAIR</a></li>
+                    <li><a href="../login.html">SAIR</a></li>
                 </ul>
             </nav>
         </div>   
