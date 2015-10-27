@@ -25,9 +25,6 @@ public class PedidoWebService {
 	@EJB
 	private PedidoDAO pedidoDAO;
 	
-	@EJB
-	private ProdutoDAO produtoDAO;
-
 	@Path("/list")
 	@GET 	
 	public String getAllPedidos() throws Exception{

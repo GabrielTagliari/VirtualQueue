@@ -32,14 +32,12 @@
 <div id="footer"></div>
 <script>
 $.ajax({
-  url: '/VirtualQueue/VQ/pedido/list',
-  success: function(data){
-    $('#my-table').dynatable({
-      dataset: {
-        records: data
-      }
-    });
-  }
+	  url: '/VirtualQueue/VQ/pedido/list',
+	  success: function(data){
+	    $('#my-table').dynatable({		
+	      dataset: {records: data}
+	    });
+	  }
 });
 </script>
 </body>
