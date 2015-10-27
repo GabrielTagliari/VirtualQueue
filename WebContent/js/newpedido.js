@@ -71,7 +71,7 @@ function addProduto() { //Adiciona um produto da combobox na tabela de pedido
 			cell2.innerHTML = produtolist[selecionado].nome;
 			cell3.innerHTML = "R$ "+produtolist[selecionado].preco;
 			cell4.innerHTML = "<input type='text' name='quantidade' id='"+produtolist[selecionado].id+"' value='1' onchange='altera_quantidade("+produtolist[selecionado].id+","+produtolist[selecionado].preco+");valor_pedido();' style='width:50px;'><span id='qntd"+produtolist[selecionado].id+"' hidden>"+produtolist[selecionado].quantidade+"</span>";
-			cell5.innerHTML = "<a href='#' class='delete' value='"+produtolist[selecionado].id+"'><img src='../../img/x.png' onclick='removeProduto("+produtolist[selecionado].id+");valor_pedido("+selecionado+");' height='15' width='15'></a><span id='totaldoproduto"+produtolist[selecionado].id+"' hidden>R$ "+produtolist[selecionado].preco+"</span>";
+			cell5.innerHTML = "<a href='#' class='delete' value='"+produtolist[selecionado].id+"'><span class='glyphicon glyphicon-remove' onclick='removeProduto("+produtolist[selecionado].id+");valor_pedido("+selecionado+");'></span></a><span id='totaldoproduto"+produtolist[selecionado].id+"' hidden>R$ "+produtolist[selecionado].preco+"</span>";
 			p.produtos.push(produtolist[selecionado]);
 		}
 	}else{
