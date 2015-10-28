@@ -279,10 +279,8 @@
     	for (var i = 0, len = columns.length; i < len; i++) {
 			tr += cellWriter(columns[i], record);
 	    }
-	    return '<tr>' + tr  + '<td><span id="myBtn" onclick="deletarProduto('+record.id+');deletaUser(\'' + record.email + '\');" class="glyphicon glyphicon-trash" style="float:right;font-size:20px;">' + '</tr>';
-	} else {
-		
-	}
+	    return '<tr>' + tr  + '<td><span class="glyphicon glyphicon-pencil" style="float:right;font-size:20px;"> <span id="myBtn" onclick="deletarProduto('+record.id+');deletaUser(\''+record.email+'\');" class="glyphicon glyphicon-trash"></span>' + '</tr>';
+	} else {}
   };
   function defaultCellWriter(column, record) {
     var html = column.attributeWriter(record),
