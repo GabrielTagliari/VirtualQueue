@@ -21,11 +21,15 @@
                 </p>
                 <p class="form-group">
                     <label for="inputEmail">E-mail: </label>
-                    <input type="e-mail" id="email" name="email" required>
+                    <input type="email" id="email" name="email" required>
                 </p>                
                 <p class="form-group">
                     <label for="inputPassword">Senha: </label>
                     <input type="password" id="password" name="password" required>
+                </p>
+                <p class="">
+                    <input type="checkbox"  id="admin" name="admin"  value="1">
+                    <label for="admin">Administrador</label>
                 </p>
                 <button id="submit">Cadastrar</button>  
                 <button onclick="limpa_form()">Limpar</button>
@@ -47,7 +51,12 @@
     		user.nome = document.getElementById("nome").value;
 	        user.email = document.getElementById("email").value;
 	        user.password = document.getElementById("password").value;
-	        
+	        var admin = document.getElementById("admin").checked;
+		        if (admin == true) {
+					user.privilegio = "Administrador";
+				} else {
+					user.privilegio = "Usuario";
+				}
 	        		$.ajax({
 					     type: "POST",
 					     url: "http://localhost:8080/VirtualQueue/VQ/user/createform",

@@ -35,21 +35,23 @@
 	        		user = new Object();
 	    	        user.email = document.getElementById("email").value;
 	    	        user.password = document.getElementById("password").value;
-	    	      	
 	    	        	$.ajax({
 	    					     type: "POST",
 	    					     url: "http://localhost:8080/VirtualQueue/VQ/user/login",
 	    					     data: JSON.stringify(user),
 	    					     contentType: "application/json; charset=utf-8",
-	    					     dataType: "json",
+	    					     dataType: "text",
 	    					     processData: true,
 	    					     success: function (vdata, status, jqXHR) {
-	    					    	 if (vdata == true) {
-	    					    		window.location = "admin/home.html";
-	    							} else {
-	    								swal("","Usuário e/ou senha inválido")
-	    							}
-	    					    	 
+	    					        if (vdata == "false") {
+	    					        	swal("","Usuário e/ou senha inválido")
+									} else {
+										if (vdata == "Administrador") {
+											window.location = "admin/home.html";
+										} else {
+											window.location = "users/home.html";
+										}
+									}
 	    					     },
 	    					     error: function (xhr) {
 	    					         alert("Erro" + xhr.responseText);

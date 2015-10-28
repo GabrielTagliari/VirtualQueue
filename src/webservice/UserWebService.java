@@ -34,7 +34,7 @@ public class UserWebService {
 		@GET
 		@Produces("application/json")
 		public String getUser(@PathParam("email") String email){
-			User b =  new User("","plucas@lala.com", "lala", null);
+			User b =  new User("","plucas@lala.com", "lala", null, "");
 			Gson gson = new Gson();
 			return gson.toJson(b);
 		}
@@ -75,16 +75,16 @@ public class UserWebService {
 		@Path("/login")
 		@POST
 		@Consumes("application/json")
-		public boolean loginUser(String json) throws Exception {
+		public String loginUser(String json) throws Exception {
 			Gson gson = new Gson();
 			User b =  gson.fromJson(json, User.class);
 			List<User> user = userDAO.getUserByEmail(b.getEmail());
 				if (user == null || user.isEmpty()) {
-					return false;
+					return "false";
 				}else if (user.get(0).getData_exclusao() == null && user.get(0).getEmail().equals(b.getEmail()) && user.get(0).getPassword().equals(b.getPassword())){ 
-					return true;
+					return user.get(0).getPrivilegio();
 				} else {
-					return false;
+					return "false";
 				}
 		}
 }
