@@ -38,9 +38,7 @@ public class PedidoWebService {
 	@Consumes("application/json")
 	public void setPedido(String json) throws Exception {
 		Gson gson = new Gson();
-		System.out.println(json);
 		Pedido pedido =  gson.fromJson(json, Pedido.class);
-		System.out.println(pedido);
 		pedidoDAO.addPedido(pedido);	
 	}
 	

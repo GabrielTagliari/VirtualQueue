@@ -1,18 +1,12 @@
 //Criando o objeto de pedido e a array produtolist
 t = new Object();
-t.produto = {"id":1,"nome":"Banana","descricao":"Banana","tipo":"Frutas","preco":2.0,"quantidade":0};
-t.quantidade = 3;
-
-q = new Object();
-q.produto = {"id":2,"nome":"Mamao","descricao":"Mamao","tipo":"Frutas","preco":10.0,"quantidade":0};
-q.quantidade = 12;
+t.produto;
+t.quantidade;
 
 p = new Object();
 p.valor = 100;
 p.senha = Math.floor((Math .random() * 100)+1);
 p.itempedido = [];
-p.itempedido.push(t);
-p.itempedido.push(q);
 
 var produtolist = [];
 
@@ -63,8 +57,14 @@ function carregaProduto(data) { // gerar Combo dos produtolist
 
 function addProduto() { //Adiciona um produto da combobox na tabela de pedido
 	var selecionado = document.getElementById("idCombox2").value;
+	var verifica;
+	p.itempedido.forEach(function(value) {
+  		if (value.produto == produtolist[selecionado]) {
+  			verifica = true;
+		}
+	});
 	
-	if(p.itempedido.indexOf(produtolist[selecionado])==-1){
+	if(verifica != true){
 		if (selecionado == -1) {
 			swal("","Por favor, selecione um produto...")
 		} else {
@@ -78,7 +78,7 @@ function addProduto() { //Adiciona um produto da combobox na tabela de pedido
 			
 			produtolist[selecionado].quantidade = 1;
 			ps = new Object();
-			ps = produtolist[selecionado];
+			ps.produto = produtolist[selecionado];
 			ps.quantidade = 1;
 			
 			cell1.innerHTML = produtolist[selecionado].id;
@@ -99,18 +99,20 @@ function removeProduto(remove){ //Remove o produto da lista
 	     var tr = td.parent();
 	   	 tr.remove();
 	});
-	for (var i =0; i < p.produtos.length; i++)
-		if (p.produtos[i].id === remove) {
-	    p.produtos.splice(i,1);
-	break;
-	}
+	var val = 0;
+	p.itempedido.forEach(function(value) {
+  		if (value.produto.id === remove) {
+  			p.itempedido.splice(val,1);
+		}else{
+			val++;
+		}
+	});
 }
 
  function valor_pedido(){ //Realiza a soma dos pedidos da tabela e atualiza o valor valor do pedido
 	p.valor = 0;
 	p.itempedido.forEach(function(value) {
-		alert(JSON.stringify(value));
-  		p.valor += value.preco * value.quantidade;
+  		p.valor += value.produto.preco * value.quantidade;
 	});
 	$("#valor").html("R$ "+p.valor);
 }
@@ -123,11 +125,11 @@ function altera_quantidade(selecionado, preco){ //Altera a quantidade do item do
 	} else {
 		$("#"+selecionado+"").attr("value", qntd);
 		$("#totaldoproduto"+selecionado+"").text("R$ "+preco*qntd); // Total do produto no PDF
-		for (var i =0; i < p.produtos.length; i++)
-			   if (p.produtos[i].id === selecionado) {
-			      p.produtos[i].quantidade = qntd;
-			      break;
-		}
+		p.itempedido.forEach(function(value) {
+			if (value.produto.id == selecionado) {
+				value.quantidade = qntd;
+			}
+		});
 	}
 }
 
@@ -194,7 +196,6 @@ function updateClock(){ //Relógio
 
 function verifica_pedido(){	//Botão temporário somente para checar o json que será mandado ao PedidoWebService
 alert(JSON.stringify(p));
-alert(JSON.stringify(t));
 }
 
 $(document).ready(function(){
