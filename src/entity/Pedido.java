@@ -3,7 +3,6 @@ package entity;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.TableGenerator;
 
 
@@ -36,10 +34,10 @@ public class Pedido implements Serializable {
 	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinTable
 	 (
-	      name="PEDIDO_PRODUTO",
+	      name="PEDIDO_ITEM",
 	      joinColumns={ @JoinColumn(name="PEDIDO_ID", referencedColumnName="PEDIDO_ID") }
 	  )
-	List<Produto> produtos = new LinkedList<Produto>();
+	List<ItemPedido> itempedido = new LinkedList<ItemPedido>();
 	
 	
 	public long getId() {
@@ -70,16 +68,18 @@ public class Pedido implements Serializable {
 		super();
 	}
 
-	public void setProdutos(List<Produto> lista) {
-		this.produtos = lista;
-		
-	}	
-	public void addProduto(Produto b) {
-    	this.produtos.add(b);
-    }
-
-	public List<Produto> getProdutos() {
-		return produtos;
+	public List<ItemPedido> getItempedido() {
+		return itempedido;
 	}
-	
+
+	public void setItempedido(List<ItemPedido> itempedido) {
+		this.itempedido = itempedido;
+	}
+
+	public Pedido(float valor, long senha, List<ItemPedido> itempedido) {
+		super();
+		this.valor = valor;
+		this.senha = senha;
+		this.itempedido = itempedido;
+	}
 }
