@@ -9,7 +9,7 @@ q.quantidade = 12;
 
 p = new Object();
 p.valor = 100;
-p.senha = Math.floor((Math.random() * 100)+1);
+p.senha = Math.floor((Math .random() * 100)+1);
 p.itempedido = [];
 p.itempedido.push(t);
 p.itempedido.push(q);
@@ -64,7 +64,7 @@ function carregaProduto(data) { // gerar Combo dos produtolist
 function addProduto() { //Adiciona um produto da combobox na tabela de pedido
 	var selecionado = document.getElementById("idCombox2").value;
 	
-	if(p.produtos.indexOf(produtolist[selecionado])==-1){
+	if(p.itempedido.indexOf(produtolist[selecionado])==-1){
 		if (selecionado == -1) {
 			swal("","Por favor, selecione um produto...")
 		} else {
@@ -77,13 +77,16 @@ function addProduto() { //Adiciona um produto da combobox na tabela de pedido
 			var cell5 = row.insertCell(4);
 			
 			produtolist[selecionado].quantidade = 1;
+			ps = new Object();
+			ps = produtolist[selecionado];
+			ps.quantidade = 1;
 			
 			cell1.innerHTML = produtolist[selecionado].id;
 			cell2.innerHTML = produtolist[selecionado].nome;
 			cell3.innerHTML = "R$ "+produtolist[selecionado].preco;
 			cell4.innerHTML = "<input type='text' name='quantidade' id='"+produtolist[selecionado].id+"' value='1' onchange='altera_quantidade("+produtolist[selecionado].id+","+produtolist[selecionado].preco+");valor_pedido();' style='width:50px;'><span id='qntd"+produtolist[selecionado].id+"' hidden>"+produtolist[selecionado].quantidade+"</span>";
 			cell5.innerHTML = "<a href='#' class='delete' value='"+produtolist[selecionado].id+"'><span class='glyphicon glyphicon-remove' onclick='removeProduto("+produtolist[selecionado].id+");valor_pedido("+selecionado+");'></span></a><span id='totaldoproduto"+produtolist[selecionado].id+"' hidden>R$ "+produtolist[selecionado].preco+"</span>";
-			p.produtos.push(produtolist[selecionado]);
+			p.itempedido.push(ps);
 		}
 	}else{
 		swal("","Produto já adicionado, altere a quantidade.")
@@ -105,7 +108,8 @@ function removeProduto(remove){ //Remove o produto da lista
 
  function valor_pedido(){ //Realiza a soma dos pedidos da tabela e atualiza o valor valor do pedido
 	p.valor = 0;
-	p.produtos.forEach(function(value) {
+	p.itempedido.forEach(function(value) {
+		alert(JSON.stringify(value));
   		p.valor += value.preco * value.quantidade;
 	});
 	$("#valor").html("R$ "+p.valor);
