@@ -1,12 +1,18 @@
 //Criando o objeto de pedido e a array produtolist
 t = new Object();
 t.produto = {"id":1,"nome":"Banana","descricao":"Banana","tipo":"Frutas","preco":2.0,"quantidade":0};
-t.quantidade = 1;
+t.quantidade = 3;
+
+q = new Object();
+q.produto = {"id":2,"nome":"Mamao","descricao":"Mamao","tipo":"Frutas","preco":10.0,"quantidade":0};
+q.quantidade = 12;
 
 p = new Object();
 p.valor = 100;
 p.senha = Math.floor((Math.random() * 100)+1);
-p.itempedido = [t];
+p.itempedido = [];
+p.itempedido.push(t);
+p.itempedido.push(q);
 
 var produtolist = [];
 

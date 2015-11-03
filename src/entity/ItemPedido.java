@@ -2,8 +2,10 @@ package entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +24,7 @@ public class ItemPedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE, generator="ITEM_GENERATOR")
 	private long id;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.MERGE)
 	private Produto produto;
 	private long quantidade;
 	
