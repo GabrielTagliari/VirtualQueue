@@ -1,10 +1,15 @@
 //Criando o objeto de pedido e a array produtolist
+t = new Object();
+t.produto = {"id":1,"nome":"Banana","descricao":"Banana","tipo":"Frutas","preco":2.0,"quantidade":0};
+t.quantidade = 1;
+
 p = new Object();
-p.valor;
+p.valor = 100;
 p.senha = Math.floor((Math.random() * 100)+1);
-p.produtos = [];
+p.itempedido = [t];
+
 var produtolist = [];
-		
+
 //Chama as funções
 lista();
 populaCombo();
@@ -179,6 +184,7 @@ function updateClock(){ //Relógio
 
 function verifica_pedido(){	//Botão temporário somente para checar o json que será mandado ao PedidoWebService
 alert(JSON.stringify(p));
+alert(JSON.stringify(t));
 }
 
 $(document).ready(function(){
