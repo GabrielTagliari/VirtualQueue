@@ -56,7 +56,7 @@ public class UserWebService {
 		public boolean createUser(String json) throws Exception {
 				Gson gson = new Gson();
 				User b =  gson.fromJson(json, User.class);
-				
+				b = hash(b);
 			 	List<User> user = userDAO.getUserByEmail(b.getEmail());
 				if (user == null || user.isEmpty() || user.get(0).getData_exclusao() != null) {
 					userDAO.addUser(b);
@@ -82,6 +82,7 @@ public class UserWebService {
 		public String loginUser(String json) throws Exception {
 			Gson gson = new Gson();
 			User b =  gson.fromJson(json, User.class);
+			b = hash(b);
 			List<User> user = userDAO.getUserByEmail(b.getEmail());
 				if (user == null || user.isEmpty()) {
 					return "false";
@@ -92,10 +93,11 @@ public class UserWebService {
 				}
 		}
 		
-		public void hash(User b) throws Exception {
+		public User hash(User b) throws Exception {
 			MessageDigest m = MessageDigest.getInstance("MD5");
 		    m.update(b.getPassword().getBytes(),0,b.getPassword().length());
 		    b.setPassword(new BigInteger(1,m.digest()).toString(16));
+		    return b;
 		}
 }
 
