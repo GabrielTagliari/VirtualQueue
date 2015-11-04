@@ -1,7 +1,10 @@
 package webservice;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.Date;
 import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -9,10 +12,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+
 import com.google.gson.Gson;
+
 import dao.UserDAO;
-import entity.Produto;
 import entity.User;
 
 @Path("/user")
@@ -53,6 +56,7 @@ public class UserWebService {
 		public boolean createUser(String json) throws Exception {
 				Gson gson = new Gson();
 				User b =  gson.fromJson(json, User.class);
+				
 			 	List<User> user = userDAO.getUserByEmail(b.getEmail());
 				if (user == null || user.isEmpty() || user.get(0).getData_exclusao() != null) {
 					userDAO.addUser(b);
@@ -86,6 +90,12 @@ public class UserWebService {
 				} else {
 					return "false";
 				}
+		}
+		
+		public void hash(User b) throws Exception {
+			MessageDigest m = MessageDigest.getInstance("MD5");
+		    m.update(b.getPassword().getBytes(),0,b.getPassword().length());
+		    b.setPassword(new BigInteger(1,m.digest()).toString(16));
 		}
 }
 
