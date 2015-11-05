@@ -10,69 +10,101 @@
 	<script src="../../js/jquery/jquery.serializejson.js"	type="text/javascript"></script>
 	<script src="../../js/jquery/jquery.dynatable.js" type="text/javascript"></script>
 	<script src="../../js/menuandfooter.js"	type="text/javascript"></script>
+	<script src='https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.js'></script>
+  	<link href='https://cdn.vaadin.com/vaadin-elements/latest/vaadin-grid/vaadin-grid.html' rel='import'>
 </head>
 <body>
 <div id="header"></div>
 <div class="container">
-<div><h2>Lista de Produtos</h2><br></div>
-<div>
-<table id="my-table" class="table table-hover">
-  <thead>
-  	<tr>
-  		<th>Id</th>
-    	<th>Nome</th>
-    	<th>Descricao</th>
-    	<th>Tipo</th>
-    	<th>Preco</th>
-  	</tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-</div>
+<h2>Lista de Produtos</h2>
+<vaadin-grid  selection-mode="multi" frozen-columns="1">
+  <table>
+  	<colgroup>
+      <col name="id" header-text="Código" width="70px">
+      <col name="nome" header-text="Nome">
+      <col name="descricao" header-text="Descrição" width="600px">
+      <col name="tipo" header-text="Tipo">
+      <col name="preco" header-text="Preço">
+    </colgroup>
+  </table>
+</vaadin-grid>
 </div>
 <div id="footer"></div>
 <script>
-$.ajax({
-  url: '/VirtualQueue/VQ/produto/list',
-  success: function(data){
-    $('#my-table').dynatable({		
-      dataset: {records: data}
-    });
-  }
-});
-
-function deletarProduto(id){
-	swal({   
-		title: "",   
-		text: "Deseja realmente deletar este produto?\n (esta ação não poderá ser desfeita)",   
-		type: "",   
-		showCancelButton: true,
-		confirmButtonColor: "#141E5F",   
-		confirmButtonText: "Sim",   
-		cancelButtonText: "Não",   
-		closeOnConfirm: false,   
-		closeOnCancel: true }, 
-		function(isConfirm){   
-			if (isConfirm) {
-				$.ajax({
-				     type: "POST",
-				     url: "http://localhost:8080/VirtualQueue/VQ/produto/deleta",
-				     data: JSON.stringify(id),
-				     contentType: "application/json; charset=utf-8",
-				     dataType: "long",
-				     processData: true,
-				     success: function (vdata, status, jqXHR) {
-				    	 window.location = "produtos.html";
-				     },
-				     error: function (xhr) {
-				         alert("Erro" + xhr.responseText);
-				     }
-			});
-	}});
-}
-
-function deletaUser(){}
+  var produtolist = [];
+  var deletar;
+  lista();
+  function lista() {
+		var list = "http://localhost:8080/VirtualQueue/VQ/produto/list";
+		$.ajax({
+			type : 'GET',
+			url : list,
+			crossDomain : true,
+			dataType : "json",
+			success : carregaProduto, // função de retorno dos produtolist
+			error : function(xhr, status, error) {
+				var err = eval("(" + xhr.responseText + ")");
+				alert(err.Message);
+			}
+		});
+	}
+  
+  function carregaProduto(data) { // gerar Combo dos produtolist
+		produtolist = data;
+  		var grid = grid || document.querySelector("vaadin-grid");
+  		grid.header.addRow(0, ["","<button class='btn btn-default' onclick='deletarProduto(deletar)'>Deletar</button>"]);
+		HTMLImports.whenReady(function() {
+		    // code
+		    grid.items = produtolist;
+		    // Optionally set the column names in JS
+		    grid.columns[0].name = "id";
+		    grid.columns[1].name = "nome";
+		    grid.columns[2].name = "descricao";
+		    grid.columns[3].name = "tipo";
+		    grid.columns[4].name = "preco";
+		    // end-code
+		});
+		grid.addEventListener("select", function() {
+			  grid.selection.selected(function(index) {
+			    if(index != null)			    
+			      deletar = produtolist[index].id;
+			  });
+		});
+  } 
+  
+  function deletarProduto(deletar){
+		if (deletar == null) {
+			swal("","Selecione ao menos um produto...")
+		} else {
+			swal({   
+				title: "",   
+				text: "Deseja realmente deletar este produto?\n (esta ação não poderá ser desfeita)",   
+				type: "",   
+				showCancelButton: true,
+				confirmButtonColor: "#141E5F",   
+				confirmButtonText: "Sim",   
+				cancelButtonText: "Não",   
+				closeOnConfirm: false,   
+				closeOnCancel: true }, 
+				function(isConfirm){   
+					if (isConfirm) {
+						$.ajax({
+						     type: "POST",
+						     url: "http://localhost:8080/VirtualQueue/VQ/produto/deleta",
+						     data: JSON.stringify(deletar),
+						     contentType: "application/json; charset=utf-8",
+						     dataType: "long",
+						     processData: true,
+						     success: function (vdata, status, jqXHR) {
+						    	 window.location = "produtos.html";
+						     },
+						     error: function (xhr) {
+						         alert("Erro" + xhr.responseText);
+						     }
+					});
+			}});
+		}
+	}
 </script>
 </body>
 </html>
