@@ -16,8 +16,8 @@
 <body>
 <div id="header"></div>
 <div class="container">
-<div class="form-group"><h2>Lista de Produtos</h2></div>
-<vaadin-grid  frozen-columns="1">
+<h2>Lista de Produtos</h2>
+<vaadin-grid frozen-columns="1">
   <table>
   	<colgroup>
       <col name="id" header-text="Código" width="70px">
@@ -32,7 +32,7 @@
 <div id="footer"></div>
 <script>
   var produtolist = [];
-  var deletar;
+  
   lista();
   function lista() {
 		var list = "http://localhost:8080/VirtualQueue/VQ/produto/list";
@@ -51,7 +51,7 @@
   
   function carregaProduto(data) { // gerar Combo dos produtolist
 		produtolist = data;
-  		var grid = grid || document.querySelector("vaadin-grid");
+		var grid = grid || document.querySelector("vaadin-grid");
 		HTMLImports.whenReady(function() {
 		    // code
 		    grid.items = produtolist;

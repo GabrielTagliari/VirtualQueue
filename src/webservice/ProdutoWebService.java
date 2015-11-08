@@ -57,7 +57,6 @@ public class ProdutoWebService {
 	public void deleteProduto(long id) throws Exception {
 		Produto produto = produtoDAO.getProdutoById(id);
 		produto.setdata_exclusao(new Date());
-		System.out.println(produto);
 		produtoDAO.updateDate(produto);
 	}	
 }
