@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Fast Track</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Luckiest+Guy" />
+    <!-- Sweet Alert -->
+	<link rel="stylesheet" type="text/css" href="../../css/sweetalert-master/dist/sweetalert.css">
+	<script src="../../css/sweetalert-master/dist/sweetalert.min.js"></script>
+    <!-- Scripts -->
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jquery.scrolly.min.js"></script>
+    <script src="../../js/jquery.scrollzer.min.js"></script>
+    <script src="../../js/skel.min.js"></script>
+    <script src="../../js/util.js"></script>
+    <script src="../../js/main.js"></script> 
+    <script src="../../js/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+	<script src="../../js/jquery/jquery.serializejson.js"	type="text/javascript"></script>
+	<!-- Vaadin -->
+	<script src='https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.js'></script>
+  	<link href='https://cdn.vaadin.com/vaadin-elements/latest/vaadin-grid/vaadin-grid.html' rel='import'>
+</head>
+<body>
+    <div id="header">
+        <div class="top">
+            <!-- Logo -->
+            <div id="logo">
+                <span class="image avatar48"><img src="../../img/logo.png" alt="" /></span>
+                <h1 id="title">Fast track</h1>
+                <p>Order your food</p>
+            </div>
+            <!-- Nav -->
+            <nav id="nav">
+                <ul>
+                    <li><a href="#" id="home-link" class="skel-layers-ignoreHref"><span class="icon fa-home">Home</span></a></li>
+                    <li><a href="#" id="produtos-link" class="skel-layers-ignoreHref"><span class="icon fa-apple">Produtos</span></a></li>
+                    <li><a href="#" id="pedidos-link" class="skel-layers-ignoreHref"><span class="icon fa-shopping-cart">Pedidos</span></a></li>
+                    <li><a href="#" id="usuarios-link" class="skel-layers-ignoreHref"><span class="icon fa-user">Usuários</span></a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="bottom">
+            <!-- Social Icons -->
+            <ul class="icons">
+                <li><a href="#" class="icon fa-linkedin"><span class="label">Linkedin</span></a></li>
+                <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="conteudo"></div>
+    <!-- Footer -->
+    <div id="footer">
+        <!-- Copyright -->
+        <ul class="copyright">
+            <li>&copy; All rights reserved.</li>
+            <li>Done: <a href="#">Matheus S Hofart</a> e <a hre="#">Gabriel Tagliari</a></li>
+        </ul>
+    </div>
+    <script>
+	    $(document).ready(function(){
+	    	$("#home-link").on("click",function(){$("#conteudo").load('home2.html');});
+	    	$("#produtos-link").on("click",function(){$("#conteudo").load('produtos2.html');});
+	    	$("#pedidos-link").on("click",function(){$("#conteudo").load('newpedido2.html');});
+	    	$("#usuarios-link").on("click",function(){$("#conteudo").load('users2.html');});
+	    });    
+    </script>
+</body>
+</html>

@@ -134,7 +134,7 @@ function altera_quantidade(selecionado, preco){ //Altera a quantidade do item do
 }
 
 function fechar_pedido() { //Finaliza e envia o Pedido
-	if (p.produtos == 0){
+	if (p.itempedido.length == 0){
 		swal("Seu pedido está vazio!","Adicione ao menos um produto...");
 	} else {
 		$.ajax({
@@ -150,7 +150,7 @@ function fechar_pedido() { //Finaliza e envia o Pedido
 		    		text: "Será gerado um PDF",   
 		    		type: "",   
 		    		showCancelButton: true,   
-		    		confirmButtonColor: "#141E5F",   
+		    		confirmButtonColor: "#8ebebc",   
 		    		confirmButtonText: "Sim",   
 		    		cancelButtonText: "No",   
 		    		closeOnConfirm: true,   
@@ -164,7 +164,7 @@ function fechar_pedido() { //Finaliza e envia o Pedido
 					    		text: "Pedido Gerado!",   
 					    		type: "",   
 					    		showCancelButton: false,   
-					    		confirmButtonColor: "#141E5F",   
+					    		confirmButtonColor: "#8ebebc",   
 					    		confirmButtonText: "Sim",   
 					    		cancelButtonText: "No",   
 					    		closeOnConfirm: false,   

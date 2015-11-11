@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="container">
+<h2>Lista de Usuários</h2>
+<vaadin-grid  selection-mode="multi" frozen-columns="1">
+  <table>
+  	<colgroup>
+      <col name="id" header-text="Código" width="110px">
+      <col name="nome" header-text="Nome">
+      <col name="email" header-text="Email">
+      <col name="privilegio" header-text="Privilégio">
+    </colgroup>
+  </table>
+</vaadin-grid>
+</div>
+<script>
+  var userlist = [];
+  deletar = [];
+  
+  lista();
+  function lista() { //Pega a lista dos produtos do banco de dados
+		var list = "http://localhost:8080/VirtualQueue/VQ/user/list";
+		$.ajax({
+			type : 'GET',
+			url : list,
+			crossDomain : true,
+			dataType : "json",
+			success : geraTabela, // função de retorno dos userlist
+			error : function(xhr, status, error) {
+				var err = eval("(" + xhr.responseText + ")");
+				alert(err.Message);
+			}
+		});
+	}
+  
+  function geraTabela(data) { // Gera a tabela com os dados coletados
+		userlist = data;
+		var grid = grid || document.querySelector("vaadin-grid");
+		if(userlist.length != 0){ // Botão de deletar
+	  		grid.header.addRow(0, ["","<button id='delete' class='btn btn-default' onclick='deletarProduto(deletar)'>Deletar</button>"]);
+		}
+		HTMLImports.whenReady(function() {
+		    grid.items = userlist;
+		    // Setando as colunas
+		    grid.columns[0].name = "id";
+		    grid.columns[1].name = "nome";
+		    grid.columns[2].name = "email";
+		    grid.columns[3].name = "privilegio";
+		});
+		// Evento de seleção do checkbox
+		grid.addEventListener("select", function() {
+			  deletar = [];
+			  grid.selection.selected(function(index) {
+			    if(index != null)			    
+			      deletar.push(userlist[index].email);
+			      console.log(deletar);
+			  });
+		});
+  } 
+  
+  function deletarProduto(deletar){
+		if (deletar.length == 0) {
+			swal("","Selecione ao menos um produto...")
+		} else {
+			swal({   
+				title: "",   
+				text: "Deseja realmente deletar este produto?\n (esta ação não poderá ser desfeita)",   
+				type: "",   
+				showCancelButton: true,
+				confirmButtonColor: "#141E5F",   
+				confirmButtonText: "Sim",   
+				cancelButtonText: "Não",   
+				closeOnConfirm: false,   
+				closeOnCancel: true }, 
+				function(isConfirm){   
+					if (isConfirm) {
+						deletar.forEach(function(value) { //Remove do banco de dados cada produto selecionado
+							$.ajax({
+							     type: "POST",
+							     url: "http://localhost:8080/VirtualQueue/VQ/user/deleta",
+							     data: value,
+							     contentType: "application/json; charset=utf-8",
+							     dataType: "json",
+							     processData: true,
+							     success: function (vdata, status, jqXHR) {
+							    	 window.location = "users.html";
+							     },
+							     error: function (xhr) {
+							         alert("Erro" + xhr.responseText);
+							     }
+							});
+						});
+			}});
+		}
+	}
+</script>
+</body>
+</html>

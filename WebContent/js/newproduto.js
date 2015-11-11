@@ -12,7 +12,7 @@ $(document).ready(function(){
 			text: "",   
 			type: "",   
 			showCancelButton: false,   
-			confirmButtonColor: "#141E5F",   
+			confirmButtonColor: "#8ebebc",   
 			confirmButtonText: "Sim",   
 			cancelButtonText: "No",   
 			closeOnConfirm: true,   
