@@ -10,7 +10,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.TableGenerator;
 
 @Entity
-@NamedQuery(name="Produto.findAll", query="SELECT u FROM Produto u")
+@NamedQuery(name="Produto.findAll", query="SELECT p FROM Produto p WHERE p.data_exclusao IS NULL")
 public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

@@ -29,17 +29,21 @@ public class UserDAO {
     }
 
     public List<User> getUsers() throws Exception {
-        CriteriaQuery<User> cq = entityManager.getCriteriaBuilder().createQuery(User.class);
+    	Query query = entityManager.createNamedQuery("User.findAll");
+    	return query.getResultList();
+       /* CriteriaQuery<User> cq = entityManager.getCriteriaBuilder().createQuery(User.class);
         Root<User> User = cq.from(User.class);
         cq.where(User.get("data_exclusao").isNull());
-        return entityManager.createQuery(cq).getResultList();
+        return entityManager.createQuery(cq).getResultList();*/
     }
     
     public User getUserUpdate(String email) throws Exception{
-    	CriteriaQuery<User> cq = entityManager.getCriteriaBuilder().createQuery(User.class);
+    	Query query = entityManager.createNamedQuery("User.findByEmail").setParameter("email", email);
+    	return (User) query.getSingleResult();
+    	/*CriteriaQuery<User> cq = entityManager.getCriteriaBuilder().createQuery(User.class);
     	Root<User> user = cq.from(User.class);
     	cq.where(user.get("email").in(email));
-        return entityManager.createQuery(cq).getSingleResult();
+        return entityManager.createQuery(cq).getSingleResult();*/
     }
     
     public List<User> getUserByEmail(String email) throws Exception{
