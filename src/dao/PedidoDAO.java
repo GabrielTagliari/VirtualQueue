@@ -30,9 +30,11 @@ public class PedidoDAO {
 	    }
 
 	    public List<Pedido> getPedido() throws Exception {
-            CriteriaQuery<Pedido> cq = entityManager.getCriteriaBuilder().createQuery(Pedido.class);
+	    	Query query = entityManager.createNamedQuery("Pedido.findAll");
+	    	return query.getResultList();
+           /* CriteriaQuery<Pedido> cq = entityManager.getCriteriaBuilder().createQuery(Pedido.class);
             cq.select(cq.from(Pedido.class));
-            return entityManager.createQuery(cq).getResultList();
+            return entityManager.createQuery(cq).getResultList();*/
 	    }
 	    
 }
