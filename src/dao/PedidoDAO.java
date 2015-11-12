@@ -1,12 +1,11 @@
 package dao;
 
 import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.TypedQuery;
 
 import entity.Pedido;
 
@@ -30,11 +29,13 @@ public class PedidoDAO {
 	    }
 
 	    public List<Pedido> getPedido() throws Exception {
-	    	Query query = entityManager.createNamedQuery("Pedido.findAll");
-	    	return query.getResultList();
-           /* CriteriaQuery<Pedido> cq = entityManager.getCriteriaBuilder().createQuery(Pedido.class);
-            cq.select(cq.from(Pedido.class));
-            return entityManager.createQuery(cq).getResultList();*/
+	    	String query = "SELECT i FROM Pedido p INNER JOIN p.itempedido i";
+	    	TypedQuery<Pedido> typedQuery = entityManager.createQuery(query , Pedido.class);
+	    	return typedQuery.getResultList();
+	    	
+	    	/*Query query = entityManager.createNamedQuery("Pedido.findAll");
+	    	return query.getResultList();*/
+			
 	    }
 	    
 }

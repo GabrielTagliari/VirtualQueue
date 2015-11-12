@@ -18,7 +18,7 @@ import javax.persistence.TableGenerator;
 
 
 @Entity
-@NamedQuery(name="Pedido.findAll", query="SELECT p FROM Pedido p")
+@NamedQuery(name="Pedido.findAll", query="SELECT p.itempedido FROM Pedido p WHERE p.id = 1")
 public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
