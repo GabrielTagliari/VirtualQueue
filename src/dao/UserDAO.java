@@ -47,9 +47,11 @@ public class UserDAO {
     }
     
     public List<User> getUserByEmail(String email) throws Exception{
-    	CriteriaQuery<User> cq = entityManager.getCriteriaBuilder().createQuery(User.class);
+    	Query query = entityManager.createNamedQuery("User.findByEmail").setParameter("email", email);
+    	return query.getResultList();
+    	/*CriteriaQuery<User> cq = entityManager.getCriteriaBuilder().createQuery(User.class);
     	Root<User> user = cq.from(User.class);
     	cq.where(user.get("email").in(email));
-    	return entityManager.createQuery(cq).getResultList();
+    	return entityManager.createQuery(cq).getResultList();*/
     }
 }
