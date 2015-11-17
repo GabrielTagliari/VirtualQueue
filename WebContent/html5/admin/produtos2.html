@@ -9,13 +9,20 @@
 <h2>Lista de Produtos</h2>
 <table id="example" class="display" cellspacing="0" width="100%"> 
 </table>
-<button id="meubotao">CHECAR</button>
+<div class="form-group">
+<button id="add">Adicionar</button>
+<button id="remover">Remover</button>
+<button id="checar">Checar</button>
+</div>
 </div>
 <script>
 $(document).ready(function(){
 	$.getJSON( "http://localhost:8080/VirtualQueue/VQ/produto/list", function( data ) {
 		  var produtolist = data;
-		  var table = $('#example').dataTable( {
+		  var table = $('#example').DataTable( {
+			    scrollY:        '50vh',
+		        scrollCollapse: true,
+		        paging:         false,
 			    "aaData": produtolist,
 			    "aoColumns": [
 			      { "sTitle": "Código",   "mData": "id" },
@@ -25,18 +32,16 @@ $(document).ready(function(){
 			      { "sTitle": "Preço",    "mData": "preco" }
 			    ]
 			  } );
-		  $('#example tbody').on( 'click', 'tr', function () {
-		        if ( $(this).hasClass('selected') ) {
-		            $(this).removeClass('selected');
-		        }
-		        else {
-		            table.$('tr.selected').removeClass('selected');
-		            $(this).addClass('selected');
-		        }
+		   
+		    $('#example tbody').on( 'click', 'tr', function () {
+		        $(this).toggleClass('selected');
 		    } );
 		 
-		    $('#meubotao').click( function () {
-		        console.log(table.row('.selected'));
+		    $('#checar').click( function () {
+		    	var data = table.rows('.selected').data();
+		    	for (var int = 0; int < data.length; int++) {
+					console.log(data[int]);
+				}
 		    } );
 	});
 }); 
