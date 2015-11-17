@@ -29,7 +29,7 @@ public class PedidoDAO {
 	    }
 
 	    public List<Pedido> getPedido() throws Exception {
-	    	String query = "SELECT i FROM Pedido p INNER JOIN p.id i";
+	    	String query = "SELECT i FROM Pedido p INNER JOIN p.itempedido i";
 	    	TypedQuery<Pedido> typedQuery = entityManager.createQuery(query , Pedido.class);
 	    	return typedQuery.getResultList();
 	    	
