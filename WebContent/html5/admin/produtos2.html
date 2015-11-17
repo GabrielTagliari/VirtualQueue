@@ -43,8 +43,45 @@ $(document).ready(function(){
 					console.log(data[int]);
 				}
 		    } );
+		    
+		    $('#remover').click( function () {
+		    	var data = table.rows('.selected').data();
+				if (data.length == 0) {
+					swal("","Selecione ao menos um produto...")
+				} else {
+					swal({   
+						title: "",   
+						text: "Deseja realmente deletar este produto?\n (esta ação não poderá ser desfeita)",   
+						type: "",   
+						showCancelButton: true,
+						confirmButtonColor: "#141E5F",   
+						confirmButtonText: "Sim",   
+						cancelButtonText: "Não",   
+						closeOnConfirm: false,   
+						closeOnCancel: true }, 
+						function(isConfirm){   
+							if (isConfirm) {
+									for (var int = 0; int < data.length; int++) {
+										$.ajax({
+										     type: "POST",
+										     url: "http://localhost:8080/VirtualQueue/VQ/produto/deleta",
+										     data: JSON.stringify(data[int].id),
+										     contentType: "application/json; charset=utf-8",
+										     dataType: "json",
+										     processData: true,
+										     success: function (vdata, status, jqXHR) {
+										    	 window.location = "index.html";
+										     },
+										     error: function (xhr) {
+										         alert("Erro" + xhr.responseText);
+										     }
+										});
+									}
+					}});
+				}
+		    } );	    
 	});
-}); 
+});
 </script>
 </body>
 </html>
