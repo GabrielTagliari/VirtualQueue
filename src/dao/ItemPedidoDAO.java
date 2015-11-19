@@ -29,12 +29,9 @@ public class ItemPedidoDAO {
 	        entityManager.remove(item);
 	    }
 
-	    public List<ItemPedido> getItemPedido() throws Exception {
+	    @SuppressWarnings("unchecked")
+		public List<ItemPedido> getItemPedido() throws Exception {
 	    	Query query = entityManager.createNamedQuery("ItemPedido.findAll");
 	    	return query.getResultList();
-           /* CriteriaQuery<ItemPedido> cq = entityManager.getCriteriaBuilder().createQuery(ItemPedido.class);
-            cq.select(cq.from(ItemPedido.class));
-            return entityManager.createQuery(cq).getResultList();*/
 	    }
-	    
 }

@@ -28,10 +28,6 @@ public class ProdutoDAO {
 	    public List<Produto> getProdutos() throws Exception {
 	    	Query query = entityManager.createNamedQuery("Produto.findAll");
 	    	return query.getResultList();
-	    	/*CriteriaQuery<Produto> cq = entityManager.getCriteriaBuilder().createQuery(Produto.class);
-            Root<Produto> Produto = cq.from(Produto.class);
-            cq.where(Produto.get("data_exclusao").isNull());
-            return entityManager.createQuery(cq).getResultList();*/
 	    }
 	    
 	    public Produto getProdutoById(long id) throws Exception{

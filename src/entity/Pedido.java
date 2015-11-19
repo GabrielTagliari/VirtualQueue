@@ -18,7 +18,7 @@ import javax.persistence.TableGenerator;
 
 
 @Entity
-@NamedQuery(name="Pedido.findAll", query="SELECT p.itempedido FROM Pedido p WHERE p.id = 1")
+@NamedQuery(name="Pedido.findAll", query="SELECT p FROM Pedido p")
 public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -34,7 +34,7 @@ public class Pedido implements Serializable {
 	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinTable
 	 (
-	      name="PEDIDO_ITEM",
+	      name="PEDIDO_ITEMPEDIDO",
 	      joinColumns={ @JoinColumn(name="PEDIDO_ID", referencedColumnName="PEDIDO_ID") }
 	  )
 	List<ItemPedido> itempedido = new LinkedList<ItemPedido>();

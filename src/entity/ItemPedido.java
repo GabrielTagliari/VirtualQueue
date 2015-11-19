@@ -19,12 +19,11 @@ public class ItemPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name="ITEM_ID")
     @TableGenerator(name="ITEM_GENERATOR", table="ID_TABLE", pkColumnName="ID_TABLE_NAME", pkColumnValue="ITEM_ID", valueColumnName="ID_TABLE_VALUE")
     @GeneratedValue(strategy = GenerationType.TABLE, generator="ITEM_GENERATOR")
 	private long id;
 	
-	@OneToOne(cascade = CascadeType.MERGE)
+	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Produto produto;
 	private long quantidade;
 	

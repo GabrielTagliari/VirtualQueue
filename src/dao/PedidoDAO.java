@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import entity.Pedido;
@@ -27,15 +28,11 @@ public class PedidoDAO {
 	    public void deletePedido(Pedido pedido) throws Exception {
 	        entityManager.remove(pedido);
 	    }
-
+	    
 	    public List<Pedido> getPedido() throws Exception {
-	    	String query = "SELECT i FROM Pedido p INNER JOIN p.itempedido i";
-	    	TypedQuery<Pedido> typedQuery = entityManager.createQuery(query , Pedido.class);
-	    	return typedQuery.getResultList();
-	    	
-	    	/*Query query = entityManager.createNamedQuery("Pedido.findAll");
-	    	return query.getResultList();*/
-			
+	    	 Query query = entityManager.createQuery("SELECT p FROM Pedido p", Pedido.class);
+	    	 return query.getResultList();
+
 	    }
 	    
 }
