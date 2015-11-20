@@ -1,87 +1,75 @@
-<!DOCTYPE html>
-<html>
 <head>
-<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
 </head>
 <body>
-<div class="container">
-<h2>Lista de Produtos</h2>
-<table id="example" class="display" cellspacing="0" width="100%"> 
-</table>
-<div class="form-group">
-<span class="icon fa-plus"></span>
-<span class="icon fa-pencil-square-o"></span>
-<span id="remover" class="icon fa-trash-o"></span>
-</div>
-</div>
-<script>
-$(document).ready(function(){
-	$.getJSON( "http://localhost:8080/VirtualQueue/VQ/produto/list", function( data ) {
-		  var produtolist = data;
-		  var table = $('#example').DataTable( {
-			    scrollY:        '50vh',
-		        scrollCollapse: true,
-		        paging:         false,
-			    "aaData": produtolist,
-			    "aoColumns": [
-			      { "sTitle": "Código",   "mData": "id" },
-			      { "sTitle": "Nome",  "mData": "nome" },
-			      { "sTitle": "Descrição", "mData": "descricao" },
-			      { "sTitle": "Tipo",  "mData": "tipo" },
-			      { "sTitle": "Preço",    "mData": "preco" }
-			    ]
-			  } );
-		   
-		    $('#example tbody').on( 'click', 'tr', function () {
-		        $(this).toggleClass('selected');
-		    } );
-		 
-		    $('#checar').click( function () {
-		    	var data = table.rows('.selected').data();
-		    	for (var int = 0; int < data.length; int++) {
-					console.log(data[int]);
-				}
-		    } );
-		    
-		    $('#remover').click( function () {
-		    	var data = table.rows('.selected').data();
-				if (data.length == 0) {
-					swal("","Selecione ao menos um produto...")
-				} else {
-					swal({   
-						title: "",   
-						text: "Deseja realmente deletar este produto?\n (esta ação não poderá ser desfeita)",   
-						type: "",   
-						showCancelButton: true,
-						confirmButtonColor: "#8ebebc",   
-						confirmButtonText: "Sim",   
-						cancelButtonText: "Não",   
-						closeOnConfirm: false,   
-						closeOnCancel: true }, 
-						function(isConfirm){   
-							if (isConfirm) {
-									for (var int = 0; int < data.length; int++) {
-										$.ajax({
-										     type: "POST",
-										     url: "http://localhost:8080/VirtualQueue/VQ/produto/deleta",
-										     data: JSON.stringify(data[int].id),
-										     contentType: "application/json; charset=utf-8",
-										     dataType: "json",
-										     processData: true,
-										     success: function (vdata, status, jqXHR) {
-										    	 window.location = "index.html";
-										     },
-										     error: function (xhr) {
-										         alert("Erro" + xhr.responseText);
-										     }
-										});
-									}
-					}});
-				}
-		    } );	    
-	});
-});
-</script>
+   	<div class="container">
+		<h2>Lista de Produtos</h2>
+		<table id="example" class="display" cellspacing="0" width="100%"></table>
+		<div class="form-group">
+		<span class="icon fa-plus"></span>
+		<span class="icon fa-pencil-square-o"></span>
+		<span id="remover" class="icon fa-trash-o"></span>
+		</div>
+	</div>
+    <script>
+	    $(document).ready(function(){
+	    	$.getJSON( "http://localhost:8080/VirtualQueue/VQ/produto/list", function( data ) {
+	    		var produtolist = data;
+	    		var table = $('#example').DataTable( {
+	  			    scrollY:        '50vh',
+	  		        scrollCollapse: true,
+	  		        paging:         false,
+	  			    "aaData": produtolist,
+	  			    "aoColumns": [
+	  			      { "sTitle": "Código",   "mData": "id" },
+	  			      { "sTitle": "Nome",  "mData": "nome" },
+	  			      { "sTitle": "Descrição", "mData": "descricao" },
+	  			      { "sTitle": "Tipo",  "mData": "tipo" },
+	  			      { "sTitle": "Preço",    "mData": "preco" }
+	  			    ]
+	  			  });
+	    	 
+	    		 $('#example tbody').on( 'click', 'tr', function () {
+		  		        $(this).toggleClass('selected');
+		  		 });
+	    			  		 
+	  		    $('#remover').click( function () {
+	  		    	var data = table.rows('.selected').data();
+	  				if (data.length == 0) {
+	  					swal("","Selecione ao menos um produto...")
+	  				} else {
+	  					swal({   
+	  						title: "",   
+	  						text: "Deseja realmente deletar este produto?\n (esta ação não poderá ser desfeita)",   
+	  						type: "",   
+	  						showCancelButton: true,
+	  						confirmButtonColor: "#8ebebc",   
+	  						confirmButtonText: "Sim",   
+	  						cancelButtonText: "Não",   
+	  						closeOnConfirm: false,   
+	  						closeOnCancel: true }, 
+	  						function(isConfirm){   
+	  							if (isConfirm) {
+	  									for (var int = 0; int < data.length; int++) {
+	  										$.ajax({
+	  										     type: "POST",
+	  										     url: "http://localhost:8080/VirtualQueue/VQ/produto/deleta",
+	  										     data: JSON.stringify(data[int].id),
+	  										     contentType: "application/json; charset=utf-8",
+	  										     dataType: "json",
+	  										     processData: true,
+	  										     success: function (vdata, status, jqXHR) {
+	  										    	 window.location = "index.html";
+	  										     },
+	  										     error: function (xhr) {
+	  										         alert("Erro" + xhr.responseText);
+	  										     }
+	  										});
+	  									}
+	  					}});
+	  				}
+	  		    } );	    
+	  	});
+	    });    
+    </script>
 </body>
-</html>

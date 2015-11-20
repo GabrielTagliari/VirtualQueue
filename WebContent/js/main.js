@@ -84,8 +84,6 @@
 
 				});
 
-				$.scrollzer(ids, { pad: 200, lastHack: true });
-
 		// Header (narrower + mobile).
 
 			// Toggle.
