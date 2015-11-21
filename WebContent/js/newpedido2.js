@@ -11,6 +11,7 @@ p.itempedido = [];
 var produtolist = [];
 var pedidolist = [];
 var table;
+
 //Chama as funções
 lista();
 populaCombo();
@@ -53,6 +54,7 @@ function populaCombo() { //Popula a combobox com produtolist do banco de dados
 
 function carregaProduto(data) { // gerar Combo dos produtolist
 	produtolist = data;
+	$("#example").append("<tfoot><tr><th></th><th></th><th></th><th colspan='2'><span id='total'>TOTAL: R$ 0</span></th></tr></tfoot>")
 	table = $('#example').DataTable( {
 	    scrollY:        '30vh',
         scrollCollapse: true,
@@ -76,7 +78,8 @@ function carregaProduto(data) { // gerar Combo dos produtolist
 	    	  	
 	            "targets": -1,
 	            "data": null,
-	            "defaultContent": "<button>Remover</button>"
+	            "defaultContent": "<span class='icon fa-trash' onclick='removeProduto("+"id"+")'></span>",
+	            "width": "5px" 
 	        }
 	    ]
 	});
@@ -107,13 +110,16 @@ function addProduto() { //Adiciona um produto da combobox na tabela de pedido
 	}			
 }
 
-function removeProduto(remove){ //Remove o produto da lista
-	$("#myTable .delete").on("click",function() {
-	     var td = $(this).parent();
-	     var tr = td.parent();
-	   	 tr.remove();
-	});
-	var val = 0;
+/*$('#example tbody').on( 'click', '.icon fa-trash', function () {
+    table
+        .row( $(this).parents('tr') )
+        .remove()
+        .draw();
+} );*/
+
+function removeProduto(id){ //Remove o produto da lista
+	console.log(id);
+	table.row('.selected').remove().draw( false );
 	p.itempedido.forEach(function(value) {
   		if (value.produto.id === remove) {
   			p.itempedido.splice(val,1);
@@ -128,7 +134,7 @@ function removeProduto(remove){ //Remove o produto da lista
 	p.itempedido.forEach(function(value) {
   		p.valor += value.produto.preco * value.quantidade;
 	});
-	$("#valor").html("R$ "+p.valor);
+	$("#total").html("TOTAL: R$ "+p.valor);
 }
 
 function altera_quantidade(selecionado, preco){ //Altera a quantidade do item do pedido
@@ -217,7 +223,6 @@ $(document).ready(function(){
 	var mes = new Date().getMonth() + 1;
 	$("#data").text(new Date().getDate()+"/"+mes+"/"+new Date().getFullYear()); //Mostra a data atual
 	$("#senha").text("Senha: "+p.senha); // Mostra a senha aleatória
-	
 });
 
 function geraPdf() { //Gera o PDF do pedido
