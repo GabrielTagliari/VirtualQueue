@@ -19,13 +19,14 @@
 	  			    scrollY:        '50vh',
 	  		        scrollCollapse: true,
 	  		        paging:         false,
+	  		        "language": {"emptyTable": "Nenhum Produto Cadastrado"},
 	  			    "aaData": produtolist,
 	  			    "aoColumns": [
 	  			      { "sTitle": "Código",   "mData": "id" },
 	  			      { "sTitle": "Nome",  "mData": "nome" },
 	  			      { "sTitle": "Descrição", "mData": "descricao" },
-	  			      { "sTitle": "Tipo",  "mData": "tipo" },
-	  			      { "sTitle": "Preço",    "mData": "preco" }
+	  			      { "sTitle": "Tipo", "mData": "tipo" },
+	  			      { "sTitle": "Preco", "mData": "preco", render: $.fn.dataTable.render.number( '.', ',', 2, 'R$ ' )}
 	  			    ]
 	  			  });
 	    	 

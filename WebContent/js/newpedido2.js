@@ -57,11 +57,14 @@ function carregaProduto(data) { // gerar Combo dos produtolist
 	    scrollY:        '30vh',
         scrollCollapse: true,
         paging:         false,
+        "bFilter": false,
+        "info": false,
+        "language": {"emptyTable": "Pedido Vazio"},
 	    "aaData": pedidolist,
 	    "aoColumns": [
 	      { "sTitle": "Código",   "mData": "id", "width": "10px" },
 	      { "sTitle": "Nome",  "mData": "nome" },
-	      { "sTitle": "Preco", "mData": "preco", render: $.fn.dataTable.render.number( ',', '.', 0, 'R$ ' )},
+	      { "sTitle": "Preco", "mData": "preco", render: $.fn.dataTable.render.number( '.', ',', 2, 'R$ ' )},
 	      {
 	    	  	"sTitle": "Quantidade",
 	    	  	"width": "1%",
