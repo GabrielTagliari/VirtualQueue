@@ -59,13 +59,24 @@ function carregaProduto(data) { // gerar Combo dos produtolist
         paging:         false,
 	    "aaData": pedidolist,
 	    "aoColumns": [
-	      { "sTitle": "Código",   "mData": "id" },
+	      { "sTitle": "Código",   "mData": "id", "width": "10px" },
 	      { "sTitle": "Nome",  "mData": "nome" },
-	      { "sTitle": "Preco", "mData": "preco" }
+	      { "sTitle": "Preco", "mData": "preco", render: $.fn.dataTable.render.number( ',', '.', 0, 'R$ ' )},
+	      {
+	    	  	"sTitle": "Quantidade",
+	    	  	"width": "1%",
+	            "targets": -1,
+	            "data": null,
+	            "defaultContent": "<input type='text' id='quantidade' value='1' style='width:50px;'/>"
+	        },
+	        {
+	    	  	
+	            "targets": -1,
+	            "data": null,
+	            "defaultContent": "<button>Remover</button>"
+	        }
 	    ]
 	});
-	console.log(JSON.stringify(produtolist[0]));//testando
-	
 }
 
 function addProduto() { //Adiciona um produto da combobox na tabela de pedido
