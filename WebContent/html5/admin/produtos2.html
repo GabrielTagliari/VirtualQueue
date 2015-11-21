@@ -4,7 +4,7 @@
 <body>
    	<div class="container">
 		<h2>Lista de Produtos</h2>
-		<table id="example" class="display" cellspacing="0" width="100%"></table>
+		<table id="example" class="display compact" cellspacing="0" width="100%"></table>
 		<div class="form-group">
 		<span class="icon fa-plus"></span>
 		<span class="icon fa-pencil-square-o"></span>
@@ -46,7 +46,7 @@
 	  						confirmButtonColor: "#8ebebc",   
 	  						confirmButtonText: "Sim",   
 	  						cancelButtonText: "Não",   
-	  						closeOnConfirm: false,   
+	  						closeOnConfirm: true,   
 	  						closeOnCancel: true }, 
 	  						function(isConfirm){   
 	  							if (isConfirm) {
@@ -59,7 +59,7 @@
 	  										     dataType: "json",
 	  										     processData: true,
 	  										     success: function (vdata, status, jqXHR) {
-	  										    	 window.location = "index.html";
+	  										    	 $("#conteudo").load("produtos2.html");
 	  										     },
 	  										     error: function (xhr) {
 	  										         alert("Erro" + xhr.responseText);

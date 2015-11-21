@@ -9,11 +9,13 @@ p.senha = Math.floor((Math .random() * 100)+1);
 p.itempedido = [];
 
 var produtolist = [];
-
+var pedidolist = [];
+var table;
 //Chama as funções
 lista();
 populaCombo();
-				
+updateClock();
+
 function lista() {
 	var list = "http://localhost:8080/VirtualQueue/VQ/produto/list";
 	$.ajax({
@@ -51,17 +53,19 @@ function populaCombo() { //Popula a combobox com produtolist do banco de dados
 
 function carregaProduto(data) { // gerar Combo dos produtolist
 	produtolist = data;
-	var table = $('#example').DataTable( {
-		    scrollY:        '30vh',
-	        scrollCollapse: true,
-	        paging:         false,
-		    "aaData": produtolist,
-		    "aoColumns": [
-		      { "sTitle": "Código",   "mData": "id" },
-		      { "sTitle": "Nome",  "mData": "nome" },
-		      { "sTitle": "Preco", "mData": "preco" }
-		    ]
+	table = $('#example').DataTable( {
+	    scrollY:        '30vh',
+        scrollCollapse: true,
+        paging:         false,
+	    "aaData": pedidolist,
+	    "aoColumns": [
+	      { "sTitle": "Código",   "mData": "id" },
+	      { "sTitle": "Nome",  "mData": "nome" },
+	      { "sTitle": "Preco", "mData": "preco" }
+	    ]
 	});
+	console.log(JSON.stringify(produtolist[0]));//testando
+	
 }
 
 function addProduto() { //Adiciona um produto da combobox na tabela de pedido
@@ -72,30 +76,17 @@ function addProduto() { //Adiciona um produto da combobox na tabela de pedido
   			verifica = true;
 		}
 	});
-	
 	if(verifica != true){
 		if (selecionado == -1) {
 			swal("","Por favor, selecione um produto...")
 		} else {
-			var table = document.getElementById("myTable");
-			var row = table.insertRow(1);
-			var cell1 = row.insertCell(0);
-			var cell2 = row.insertCell(1);
-			var cell3 = row.insertCell(2);
-			var cell4 = row.insertCell(3);
-			var cell5 = row.insertCell(4);
-			
 			produtolist[selecionado].quantidade = 1;
 			ps = new Object();
 			ps.produto = produtolist[selecionado];
 			ps.quantidade = 1;
-			
-			cell1.innerHTML = produtolist[selecionado].id;
-			cell2.innerHTML = produtolist[selecionado].nome;
-			cell3.innerHTML = "R$ "+produtolist[selecionado].preco;
-			cell4.innerHTML = "<input type='text' name='quantidade' id='"+produtolist[selecionado].id+"' value='1' onchange='altera_quantidade("+produtolist[selecionado].id+","+produtolist[selecionado].preco+");valor_pedido();' style='width:50px;'><span id='qntd"+produtolist[selecionado].id+"' hidden>"+produtolist[selecionado].quantidade+"</span>";
-			cell5.innerHTML = "<a href='#' class='delete' value='"+produtolist[selecionado].id+"'><span class='glyphicon glyphicon-remove' onclick='removeProduto("+produtolist[selecionado].id+");valor_pedido("+selecionado+");'></span></a><span id='totaldoproduto"+produtolist[selecionado].id+"' hidden>R$ "+produtolist[selecionado].preco+"</span>";
 			p.itempedido.push(ps);
+			pedidolist.push(produtolist[selecionado]);
+			table.rows.add([produtolist[selecionado]]).draw();
 		}
 	}else{
 		swal("","Produto já adicionado, altere a quantidade.")
@@ -212,10 +203,10 @@ $(document).ready(function(){
 	var mes = new Date().getMonth() + 1;
 	$("#data").text(new Date().getDate()+"/"+mes+"/"+new Date().getFullYear()); //Mostra a data atual
 	$("#senha").text("Senha: "+p.senha); // Mostra a senha aleatória
+	
 });
 
 function geraPdf() { //Gera o PDF do pedido
-	$("#remove").text("Total");
 	var pdf = new jsPDF('p', 'pt', 'letter');
 	pdf.setFontSize(22);
 	source = $('#container')[0];

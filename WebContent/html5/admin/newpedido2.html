@@ -10,7 +10,7 @@
 	<script type="text/javascript" src="../../js/jsPDF/jspdf.min.js"></script>
 	<script type="text/javascript" src="../../js/jsPDF/jspdf.plugin.autotable.js"></script>
 </head>
-<body onload="updateClock()">
+<body>
 	<div class="container">
 		<h2>Pedido</h2><br>
 		<div class="form-group">
@@ -47,7 +47,7 @@
 			<h4><label id="clock"></label></h4>
 		</div>
 		<div class="form-group">		
-				<button id="fecha" onclick="fechar_pedido()">Finalizar Pedido</button>
+				<button id="fecha" onclick="geraPdf()">Finalizar Pedido</button>
 		</div>
 		</div>
 </body>
