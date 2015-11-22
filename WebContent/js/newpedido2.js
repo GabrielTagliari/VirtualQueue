@@ -9,7 +9,6 @@ p.senha = Math.floor((Math .random() * 100)+1);
 p.itempedido = [];
 
 var produtolist = [];
-var pedidolist = [];
 var table;
 
 //Chama as funções
@@ -62,7 +61,7 @@ function carregaProduto(data) { // gerar Combo dos produtolist
         "bFilter": false,
         "info": false,
         "language": {"emptyTable": "Pedido Vazio"},
-	    "aaData": pedidolist,
+	    "aaData": p.itempedido,
 	    "aoColumns": [
 	      { "sTitle": "Código",   "mData": "id", "width": "10px" },
 	      { "sTitle": "Nome",  "mData": "nome" },
@@ -78,11 +77,25 @@ function carregaProduto(data) { // gerar Combo dos produtolist
 	    	  	
 	            "targets": -1,
 	            "data": null,
-	            "defaultContent": "<span class='icon fa-trash' onclick='removeProduto("+"id"+")'></span>",
+	            "defaultContent": "<span class='icon fa-remove' onclick=''></span>",
 	            "width": "5px" 
 	        }
 	    ]
 	});
+	//Remove item do pedido
+	$('#example tbody').on( 'click', '.icon.fa-remove', function () {
+		var data = table.row( $(this).parents('tr')).data();
+		var val = 0;
+		p.itempedido.forEach(function(value) {
+			if (value.produto.id === data.id) {
+				p.itempedido.splice(val,1);
+			}else{
+				val++;
+			}
+		});
+	    table.row($(this).parents('tr')).remove().draw();
+	});
+	
 }
 
 function addProduto() { //Adiciona um produto da combobox na tabela de pedido
@@ -102,7 +115,6 @@ function addProduto() { //Adiciona um produto da combobox na tabela de pedido
 			ps.produto = produtolist[selecionado];
 			ps.quantidade = 1;
 			p.itempedido.push(ps);
-			pedidolist.push(produtolist[selecionado]);
 			table.rows.add([produtolist[selecionado]]).draw();
 		}
 	}else{
@@ -110,26 +122,7 @@ function addProduto() { //Adiciona um produto da combobox na tabela de pedido
 	}			
 }
 
-/*$('#example tbody').on( 'click', '.icon fa-trash', function () {
-    table
-        .row( $(this).parents('tr') )
-        .remove()
-        .draw();
-} );*/
-
-function removeProduto(id){ //Remove o produto da lista
-	console.log(id);
-	table.row('.selected').remove().draw( false );
-	p.itempedido.forEach(function(value) {
-  		if (value.produto.id === remove) {
-  			p.itempedido.splice(val,1);
-		}else{
-			val++;
-		}
-	});
-}
-
- function valor_pedido(){ //Realiza a soma dos pedidos da tabela e atualiza o valor valor do pedido
+function valor_pedido(){ //Realiza a soma dos pedidos da tabela e atualiza o valor valor do pedido
 	p.valor = 0;
 	p.itempedido.forEach(function(value) {
   		p.valor += value.produto.preco * value.quantidade;
@@ -223,6 +216,7 @@ $(document).ready(function(){
 	var mes = new Date().getMonth() + 1;
 	$("#data").text(new Date().getDate()+"/"+mes+"/"+new Date().getFullYear()); //Mostra a data atual
 	$("#senha").text("Senha: "+p.senha); // Mostra a senha aleatória
+	 
 });
 
 function geraPdf() { //Gera o PDF do pedido
