@@ -46,7 +46,6 @@ $(document).ready(function(){
 		    
 		    $('#remover').click( function () {
   		    	var data = table.rows('.selected').data();
-  		    	console.log(JSON.stringify(data[0].email));
   				if (data.length == 0) {
   					swal("","Selecione ao menos um usuário...")
   				} else {
