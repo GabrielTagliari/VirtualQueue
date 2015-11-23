@@ -93,7 +93,7 @@
 				closeOnCancel: true }, 
 				function(isConfirm){   
 					if (isConfirm) {
-						deletar.forEach(function(value) { //Remove do banco de dados cada produto selecionado
+						deletar.forEach(function(value) { 
 							$.ajax({
 							     type: "POST",
 							     url: "http://localhost:8080/VirtualQueue/VQ/user/deleta",

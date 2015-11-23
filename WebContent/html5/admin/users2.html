@@ -12,7 +12,7 @@
 <div class="form-group">
 <span class="icon fa-plus"></span>
 <span class="icon fa-pencil-square-o"></span> 
-<span class="icon fa-trash-o"></span>
+<span id="remover" class="icon fa-trash-o"></span>
 </div>
 </div>
 <script>
@@ -43,6 +43,44 @@ $(document).ready(function(){
 					console.log(data[int]);
 				}
 		    } );
+		    
+		    $('#remover').click( function () {
+  		    	var data = table.rows('.selected').data();
+  		    	console.log(JSON.stringify(data[0].email));
+  				if (data.length == 0) {
+  					swal("","Selecione ao menos um usuário...")
+  				} else {
+  					swal({   
+  						title: "",   
+  						text: "Deseja realmente deletar este usuário?\n (esta ação não poderá ser desfeita)",   
+  						type: "",   
+  						showCancelButton: true,
+  						confirmButtonColor: "#8ebebc",   
+  						confirmButtonText: "Sim",   
+  						cancelButtonText: "Não",   
+  						closeOnConfirm: true,   
+  						closeOnCancel: true }, 
+  						function(isConfirm){   
+  							if (isConfirm) {
+  									for (var int = 0; int < data.length; int++) {
+  										$.ajax({
+  										     type: "POST",
+  										     url: "http://localhost:8080/VirtualQueue/VQ/user/deleta",
+  										     data: data[int].email,
+  										     contentType: "application/json; charset=utf-8",
+  										     dataType: "json",
+  										     processData: true,
+  										     success: function (vdata, status, jqXHR) {
+  										    	 $("#conteudo").load("users2.html");
+  										     },
+  										     error: function (xhr) {
+  										         alert("Erro" + xhr.responseText);
+  										     }
+  										});
+  									}
+  					}});
+  				}
+  		    });	
 	});
 }); 
 </script>

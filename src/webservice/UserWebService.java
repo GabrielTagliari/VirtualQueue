@@ -70,7 +70,9 @@ public class UserWebService {
 	@POST
 	@Consumes("application/json")
 	public void deleteUser(String email) throws Exception {
+		System.out.println(email);
 		User user = userDAO.getUserUpdate(email);
+		System.out.println(user);
 		user.setData_exclusao(new Date());
 		user.setEmail(user.getEmail()+"*");
 		userDAO.updateDate(user);

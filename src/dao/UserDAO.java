@@ -38,6 +38,10 @@ public class UserDAO {
     	return (User) query.getSingleResult();
     }
     
+    public User getUserById(long id) throws Exception{
+    	return entityManager.find(User.class, id);
+    }
+    
     public List<User> getUserByEmail(String email) throws Exception{
     	Query query = entityManager.createNamedQuery("User.findByEmail").setParameter("email", email);
     	return query.getResultList();
