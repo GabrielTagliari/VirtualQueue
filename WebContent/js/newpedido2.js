@@ -23,7 +23,7 @@ function lista() {
 		url : list,
 		crossDomain : true,
 		dataType : "json",
-		success : carregaProduto, // função de retorno dos produtolist
+		success : carregaProduto,
 		error : function(xhr, status, error) {
 			var err = eval("(" + xhr.responseText + ")");
 			alert(err.Message);
@@ -51,7 +51,7 @@ function populaCombo() { //Popula a combobox com produtolist do banco de dados
 			});
 }
 
-function carregaProduto(data) { // gerar Combo dos produtolist
+function carregaProduto(data) {
 	produtolist = data;
 	$("#example").append("<tfoot><tr><th></th><th></th><th></th><th colspan='2'><span id='total'>TOTAL: R$ 0</span></th></tr></tfoot>")
 	table = $('#example').DataTable( {
@@ -77,11 +77,12 @@ function carregaProduto(data) { // gerar Combo dos produtolist
 	    	  	
 	            "targets": -1,
 	            "data": null,
-	            "defaultContent": "<span class='icon fa-remove' onclick=''></span>",
+	            "defaultContent": "<span class='icon fa-remove''></span>",
 	            "width": "5px" 
 	        }
 	    ]
 	});
+	
 	//Remove item do pedido
 	$('#example tbody').on( 'click', '.icon.fa-remove', function () {
 		var data = table.row( $(this).parents('tr')).data();
@@ -94,6 +95,22 @@ function carregaProduto(data) { // gerar Combo dos produtolist
 			}
 		});
 	    table.row($(this).parents('tr')).remove().draw();
+	    valor_pedido();
+	});
+	
+	//Altera a quantidade
+	$('#example tbody').on( 'change', '#quantidade', function () {
+		var data = table.row( $(this).parents('tr')).data();
+		console.log(data.quantidade);
+		p.itempedido.forEach(function(value) {
+			if (value.produto.id === data.id) {
+					
+			}else{
+				
+			}
+		});
+	    table.row($(this).parents('tr')).remove().draw();
+	    valor_pedido();
 	});
 	
 }
@@ -207,16 +224,11 @@ function updateClock(){ //Relógio
 	$("#clock").html(currentTimeString);
 }
 
-function verifica_pedido(){	//Botão temporário somente para checar o json que será mandado ao PedidoWebService
-alert(JSON.stringify(p));
-}
-
 $(document).ready(function(){
 	setInterval('updateClock()', 1000); //Update do relógio a cada segundo
 	var mes = new Date().getMonth() + 1;
 	$("#data").text(new Date().getDate()+"/"+mes+"/"+new Date().getFullYear()); //Mostra a data atual
 	$("#senha").text("Senha: "+p.senha); // Mostra a senha aleatória
-	 
 });
 
 function geraPdf() { //Gera o PDF do pedido
