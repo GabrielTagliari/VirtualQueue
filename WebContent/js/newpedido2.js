@@ -120,6 +120,56 @@ function carregaProduto(data) {
 		});
 	    valor_pedido();
 	});
+	
+	//Finaliza o pedido
+	$("#finaliza").on('click', function(){
+		if (p.itempedido.length == 0){
+			swal("Seu pedido está vazio!","Adicione ao menos um produto...");
+		} else {
+			$.ajax({
+			     type: "POST",
+			     url: "http://localhost:8080/VirtualQueue/VQ/pedido/pedidocreate",
+			     data: JSON.stringify(p),
+			     contentType: "application/json; charset=utf-8",
+			     dataType: "json",
+			     processData: true,
+			     success: function (vdata, status, jqXHR) {
+			    	 swal({   
+			    		title: "Deseja imprimir o pedido?",   
+			    		text: "Será gerado um PDF",   
+			    		type: "",   
+			    		showCancelButton: true,   
+			    		confirmButtonColor: "#8ebebc",   
+			    		confirmButtonText: "Sim",   
+			    		cancelButtonText: "No",   
+			    		closeOnConfirm: true,   
+			    		closeOnCancel: false }, 
+			    		function(isConfirm){   
+			    			if (isConfirm) {     
+			    				geraPdf();
+			    			} else {
+			    				swal({   
+						    		title: "",   
+						    		text: "Pedido Gerado!",   
+						    		type: "",   
+						    		showCancelButton: false,   
+						    		confirmButtonColor: "#8ebebc",   
+						    		confirmButtonText: "Sim",   
+						    		cancelButtonText: "No",   
+						    		closeOnConfirm: true,   
+						    		closeOnCancel: false }, 
+						    		function(isConfirm){   
+						    			if (isConfirm) {     
+						    				$("#conteudo").load("newpedido2.html");
+						    	}});
+			    	 	} });
+			     },
+			     error: function (xhr) {
+			         alert("Erro" + xhr.responseText);
+			     }
+			 });
+		}
+	});
 }
 
 function addProduto() { //Adiciona um produto da combobox na tabela de pedido
@@ -154,61 +204,6 @@ function valor_pedido(){ //Realiza a soma dos pedidos da tabela e atualiza o val
 	$("#total").html("TOTAL: R$ "+p.valor);
 }
 
-/*function fechar_pedido() { //Finaliza e envia o pedido para o banco de dados
-	console.log("Processando pedido...");
-	if (p.itempedido.length == 0){
-		swal("Seu pedido está vazio!","Adicione ao menos um produto...");
-	} else {
-		$.ajax({
-		     type: "POST",
-		     url: "http://localhost:8080/VirtualQueue/VQ/pedido/pedidocreate",
-		     data: JSON.stringify(p),
-		     contentType: "application/json; charset=utf-8",
-		     dataType: "json",
-		     processData: true,
-		     success: function (vdata, status, jqXHR) {
-		    	 swal({   
-		    		title: "Deseja imprimir o pedido?",   
-		    		text: "Será gerado um PDF",   
-		    		type: "",   
-		    		showCancelButton: true,   
-		    		confirmButtonColor: "#8ebebc",   
-		    		confirmButtonText: "Sim",   
-		    		cancelButtonText: "No",   
-		    		closeOnConfirm: true,   
-		    		closeOnCancel: false }, 
-		    		function(isConfirm){   
-		    			if (isConfirm) {     
-		    				geraPdf();
-		    			} else {
-		    				swal({   
-					    		title: "",   
-					    		text: "Pedido Gerado!",   
-					    		type: "",   
-					    		showCancelButton: false,   
-					    		confirmButtonColor: "#8ebebc",   
-					    		confirmButtonText: "Sim",   
-					    		cancelButtonText: "No",   
-					    		closeOnConfirm: false,   
-					    		closeOnCancel: false }, 
-					    		function(isConfirm){   
-					    			if (isConfirm) {     
-					    				window.location = "newpedido.html";
-					    	}});
-		    	 	} });
-		     },
-		     error: function (xhr) {
-		         alert("Erro" + xhr.responseText);
-		     }
-		 });
-	}
-}*/
-
-function teste(){
-	console.log("OK");
-	alert("OK");
-}
-
 function updateClock(){ //Relógio
  	var currentTime = new Date ( );
   	var currentHours = currentTime.getHours ( );
@@ -222,29 +217,11 @@ function updateClock(){ //Relógio
 }
 
 function geraPdf() { //Gera o PDF do pedido
-	var pdf = new jsPDF('p', 'pt', 'letter');
-	pdf.setFontSize(22);
-	source = $('#container')[0];
-	specialElementHandlers = {
-			'#bypassme': function (element, renderer) {
-				return true
-			}
-	};
-	margins = {
-			top: 80,
-			bottom: 60,
-			left: 40,
-			width: 522
-	};
-	pdf.fromHTML(
-			source,
-			margins.left,
-			margins.top, {
-				'width': margins.width,
-				'elementHandlers': specialElementHandlers
-			},
-			function (dispose) {
-				window.location = "newpedido.html";
-				pdf.output('dataurlnewwindow');
-			}, margins);
+	var doc = new jsPDF('p', 'pt');
+	doc.text(250, 20, 'Pedido');
+	var elem = document.getElementById("example");
+	var res = doc.autoTableHtmlToJson(elem);
+	doc.autoTable(res.columns, res.data);
+	doc.text(260, 30, ''+p.senha);
+	doc.save("table.pdf");
 }
