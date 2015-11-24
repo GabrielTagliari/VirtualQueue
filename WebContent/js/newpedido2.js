@@ -4,7 +4,7 @@ t.produto;
 t.quantidade;
 
 p = new Object();
-p.valor = 100;
+p.valor;
 p.senha = Math.floor((Math .random() * 100)+1);
 p.itempedido = [];
 
@@ -71,7 +71,7 @@ function carregaProduto(data) {
 	    	  	"width": "1%",
 	            "targets": -1,
 	            "data": null,
-	            "defaultContent": "<input type='text' id='quantidade' value='1' style='width:50px;'/>"
+	            "defaultContent": "<input type='text' class='quantidade' value='1' style='width:50px;'/>"
 	        },
 	        {
 	    	  	
@@ -99,17 +99,18 @@ function carregaProduto(data) {
 	});
 	
 	//Altera a quantidade
-	$('#example tbody').on( 'change', '#quantidade', function () {
-		var data = table.row( $(this).parents('tr')).data();
-		console.log(data.quantidade);
+	$('#example tbody').on( 'change', '.quantidade', function () {
+		var qntd = $(this).val();
+		console.log(qntd);
+		var data = table.row($(this).parents('tr')).data();
+		console.log(data.id);
 		p.itempedido.forEach(function(value) {
 			if (value.produto.id === data.id) {
-					
-			}else{
-				
+					console.log(value);
+					value.quantidade = qntd;
 			}
+		console.log(JSON.stringify(p.itempedido));
 		});
-	    table.row($(this).parents('tr')).remove().draw();
 	    valor_pedido();
 	});
 	
@@ -145,22 +146,6 @@ function valor_pedido(){ //Realiza a soma dos pedidos da tabela e atualiza o val
   		p.valor += value.produto.preco * value.quantidade;
 	});
 	$("#total").html("TOTAL: R$ "+p.valor);
-}
-
-function altera_quantidade(selecionado, preco){ //Altera a quantidade do item do pedido
-	var qntd = $("#"+selecionado+"").val();
-	$("#qntd"+selecionado+"").text(qntd);//Quantidade do produto no PDF
-	if (qntd == 0) {
-		swal("","A quantidade deve ser maior ou igual a 1")
-	} else {
-		$("#"+selecionado+"").attr("value", qntd);
-		$("#totaldoproduto"+selecionado+"").text("R$ "+preco*qntd); // Total do produto no PDF
-		p.itempedido.forEach(function(value) {
-			if (value.produto.id == selecionado) {
-				value.quantidade = qntd;
-			}
-		});
-	}
 }
 
 function fechar_pedido() { //Finaliza e envia o Pedido
