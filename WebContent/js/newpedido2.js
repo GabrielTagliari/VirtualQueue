@@ -78,13 +78,13 @@ function carregaProduto(data) {
 	    	  	"width": "1%",
 	            "targets": -1,
 	            "data": null,
-	            "defaultContent": "<input type='text' class='quantidade' value='1' style='width:50px;'/><span id='hiddenqntd' hidden>1</span>"
+	            "defaultContent": "<input type='text' class='quantidade' value='1' style='width:50px;'/><span class='hiddenqntd' hidden>1</span>"
 	        },
 	        {
-	    	  	
+	        	"sTitle": "<span hidden>Total</span>",
 	            "targets": -1,
 	            "data": null,
-	            "defaultContent": "<span class='icon fa-remove''></span>",
+	            "defaultContent": "<span class='icon fa-remove''></span><span class='hiddentotal' hidden></span>",
 	            "width": "5px" 
 	        }
 	    ]
@@ -108,17 +108,17 @@ function carregaProduto(data) {
 	//Altera a quantidade
 	$('#example tbody').on( 'change', '.quantidade', function () {
 		var qntd = $(this).val();
-		console.log(qntd);
 		var data = table.row($(this).parents('tr')).data();
-		console.log(data.id);
-		p.itempedido.forEach(function(value) {
+		console.log(data);
+		p.itempedido.forEach(function(value){
 			if (value.produto.id === data.id) {
 					console.log(value);
 					value.quantidade = qntd;
 			}
-		console.log(JSON.stringify(p.itempedido));
 		});
+		$(".hiddenqntd").text(qntd);
 	    valor_pedido();
+	    
 	});
 	
 	//Finaliza o pedido
@@ -216,14 +216,14 @@ function updateClock(){ //Relógio
 	$("#clock").html(currentTimeString);
 }
 
-function geraPdf() { //Gera o PDF do pedido
+function geraPdf(){ //Gera o PDF do pedido
 	var doc = new jsPDF('p', 'pt');
     var header = function (data) {
     	doc.setFontSize(20);
         doc.setTextColor(40);
         doc.setFontStyle('normal');
-        doc.text("Pedido", data.settings.margin.left + 35, 60);
-        doc.fromHTML($('#dados').get(0), 10, 100, {'width': 90});
+        doc.text("Pedido", data.settings.margin.left + 20, 60);
+        doc.fromHTML($('#dados').get(0), 37, 60, {'width': 100});
     };
     
     var footer = function (data) {
@@ -232,7 +232,7 @@ function geraPdf() { //Gera o PDF do pedido
    var options = {
         beforePageContent: header,
         afterPageContent: footer,
-        margin: {top: 80}
+        margin: {top: 150}
     };
    	var elem = document.getElementById("example");
 	var res = doc.autoTableHtmlToJson(elem);
