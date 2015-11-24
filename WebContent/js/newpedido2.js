@@ -78,7 +78,7 @@ function carregaProduto(data) {
 	    	  	"width": "1%",
 	            "targets": -1,
 	            "data": null,
-	            "defaultContent": "<input type='text' class='quantidade' value='1' style='width:50px;'/>"
+	            "defaultContent": "<input type='text' class='quantidade' value='1' style='width:50px;'/><span id='hiddenqntd' hidden>1</span>"
 	        },
 	        {
 	    	  	
@@ -218,10 +218,40 @@ function updateClock(){ //Relógio
 
 function geraPdf() { //Gera o PDF do pedido
 	var doc = new jsPDF('p', 'pt');
+    var header = function (data) {
+    	doc.setFontSize(20);
+        doc.setTextColor(40);
+        doc.setFontStyle('normal');
+        doc.text("Pedido", data.settings.margin.left + 35, 60);
+        doc.fromHTML($('#dados').get(0), 10, 100, {'width': 90});
+    };
+    
+    var footer = function (data) {
+    };
+
+   var options = {
+        beforePageContent: header,
+        afterPageContent: footer,
+        margin: {top: 80}
+    };
+   	var elem = document.getElementById("example");
+	var res = doc.autoTableHtmlToJson(elem);
+	doc.autoTable(res.columns, res.data, options);
+    doc.output("dataurlnewwindow");
+	
+	/*var printDoc = new jsPDF();
+    printDoc.fromHTML($('h2').get(0), 10, 10, {'width': 90});
+    var elem = document.getElementById("example");
+	var res = printDoc.autoTableHtmlToJson(elem);
+	printDoc.autoTable(res.columns, res.data);
+    printDoc.fromHTML($('#dados').get(0), 10, 100, {'width': 180});
+    printDoc.output("dataurlnewwindow");*/
+
+	/*var doc = new jsPDF('p', 'pt');
 	doc.text(250, 20, 'Pedido');
 	var elem = document.getElementById("example");
 	var res = doc.autoTableHtmlToJson(elem);
 	doc.autoTable(res.columns, res.data);
-	doc.text(260, 30, ''+p.senha);
-	doc.save("table.pdf");
+	doc.text(250, 40, 'Senha: ' +p.senha);
+	doc.save("table.pdf");*/
 }
