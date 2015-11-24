@@ -16,6 +16,13 @@ lista();
 populaCombo();
 updateClock();
 
+$(document).ready(function(){
+	setInterval('updateClock()', 1000); //Update do relógio a cada segundo
+	var mes = new Date().getMonth() + 1;
+	$("#data").text(new Date().getDate()+"/"+mes+"/"+new Date().getFullYear()); //Mostra a data atual
+	$("#senha").text("Senha: "+p.senha); // Mostra a senha aleatória
+});
+
 function lista() {
 	var list = "http://localhost:8080/VirtualQueue/VQ/produto/list";
 	$.ajax({
@@ -37,7 +44,7 @@ function populaCombo() { //Popula a combobox com produtolist do banco de dados
 			url : "http://localhost:8080/VirtualQueue/VQ/produto/list",
 			data : produtolist, //array produtolist
 			success : function(data) {
-				var q = '<select name="idCombox2" id="idCombox2" class="form-control"> <option value="-1"><-- Selecione um Produto --></option>';
+				var q = '<select name="idCombox2" id="idCombox2" class="form-control"><option value="-1"><-- Selecione um Produto --></option>';
 				for (i = 0; i < data.length; i++) {
 						if (data[i].data_exclusao == null) {
 							q += '<option value=' + i + '>'
@@ -113,7 +120,6 @@ function carregaProduto(data) {
 		});
 	    valor_pedido();
 	});
-	
 }
 
 function addProduto() { //Adiciona um produto da combobox na tabela de pedido
@@ -148,7 +154,8 @@ function valor_pedido(){ //Realiza a soma dos pedidos da tabela e atualiza o val
 	$("#total").html("TOTAL: R$ "+p.valor);
 }
 
-function fechar_pedido() { //Finaliza e envia o Pedido
+/*function fechar_pedido() { //Finaliza e envia o pedido para o banco de dados
+	console.log("Processando pedido...");
 	if (p.itempedido.length == 0){
 		swal("Seu pedido está vazio!","Adicione ao menos um produto...");
 	} else {
@@ -195,6 +202,11 @@ function fechar_pedido() { //Finaliza e envia o Pedido
 		     }
 		 });
 	}
+}*/
+
+function teste(){
+	console.log("OK");
+	alert("OK");
 }
 
 function updateClock(){ //Relógio
@@ -208,13 +220,6 @@ function updateClock(){ //Relógio
   	var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds;
 	$("#clock").html(currentTimeString);
 }
-
-$(document).ready(function(){
-	setInterval('updateClock()', 1000); //Update do relógio a cada segundo
-	var mes = new Date().getMonth() + 1;
-	$("#data").text(new Date().getDate()+"/"+mes+"/"+new Date().getFullYear()); //Mostra a data atual
-	$("#senha").text("Senha: "+p.senha); // Mostra a senha aleatória
-});
 
 function geraPdf() { //Gera o PDF do pedido
 	var pdf = new jsPDF('p', 'pt', 'letter');
