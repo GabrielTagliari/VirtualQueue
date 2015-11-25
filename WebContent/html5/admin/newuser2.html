@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Virtual Queue</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+    <body>
+        <div class="container">
+        	<div><h2>Cadastro de Usuário</h2><br></div>
+         	<form action="javascript:verifica();">
+                <p class="form-group">
+                    <label for="inputUser">Usuário: </label>
+                    <input type="text" id="nome" name="nome" placeholder="Nome de Usuário" required>
+                </p>
+                <p class="form-group">
+                    <label for="inputEmail">E-mail: </label>
+                    <input type="email" id="email" name="email" required>
+                </p>                
+                <p class="form-group">
+                    <label for="inputPassword">Senha: </label>
+                    <input type="password" id="password" name="password" required>
+                </p>
+                <p class="">
+                    <input type="checkbox"  id="admin" name="admin"  value="1">
+                    <label for="admin">Administrador</label>
+                </p>
+                <button id="submit">Cadastrar</button>  
+                <button onclick="limpa_form()">Limpar</button>
+                </div>
+            </form>
+        </div>
+    <script>
+    function limpa_form(){	
+    	$(':input','#form')
+    	 .not(':button, :submit, :reset, :hidden')
+    	 .val('')
+    	 .removeAttr('checked')
+    	 .removeAttr('selected');
+    }
+    
+    function verifica(){
+    		user = new Object();
+    		user.nome = document.getElementById("nome").value;
+	        user.email = document.getElementById("email").value;
+	        user.password = document.getElementById("password").value;
+	        var admin = document.getElementById("admin").checked;
+		        if (admin == true) {
+					user.privilegio = "Administrador";
+				} else {
+					user.privilegio = "Usuario";
+				}
+	        		$.ajax({
+					     type: "POST",
+					     url: "http://localhost:8080/VirtualQueue/VQ/user/createform",
+					     data: JSON.stringify(user),
+					     contentType: "application/json; charset=utf-8",
+					     dataType: "json",
+					     processData: true,
+					     success: function (vdata, status, jqXHR) {
+					    	 if (vdata == true) {
+					    		 swal({   
+					    	    		title: "Usuário Cadastrado!",   
+					    	    		text: "",   
+					    	    		type: "",   
+					    	    		showCancelButton: false,   
+					    	    		confirmButtonColor: "#8ebebc",   
+					    	    		confirmButtonText: "Sim",   
+					    	    		cancelButtonText: "No",   
+					    	    		closeOnConfirm: true,   
+					    	    		closeOnCancel: false }, 
+					    	    		function(isConfirm){   
+					    	    			$("#conteudo").load("newuser2.html");
+					    	    		});
+							 }else {
+								swal("","Este email já está sendo usado")
+							 }
+					     },
+					     error: function (xhr) {
+					         alert("Erro" + xhr.responseText);
+					     }
+					});
+    	    }
+    </script>
+    </body>
+</html>

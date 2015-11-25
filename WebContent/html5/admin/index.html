@@ -35,8 +35,10 @@
                 <ul>
                     <li><a href="#" id="home-link" class="skel-layers-ignoreHref"><span class="icon fa-home">Home</span></a></li>
                     <li><a href="#" id="produtos-link" class="skel-layers-ignoreHref"><span class="icon fa-apple">Produtos</span></a></li>
+                    <li><a href="#" id="newproduto-link" class="skel-layers-ignoreHref"><span class="icon fa-apple">Cadastrar Produto</span></a></li>
                     <li><a href="#" id="pedidos-link" class="skel-layers-ignoreHref"><span class="icon fa-shopping-cart">Pedidos</span></a></li>
                     <li><a href="#" id="usuarios-link" class="skel-layers-ignoreHref"><span class="icon fa-user">Usuários</span></a></li>
+                    <li><a href="#" id="newuser-link" class="skel-layers-ignoreHref"><span class="icon fa-user">Cadastrar Usuário</span></a></li>
                 </ul>
             </nav>
         </div>
@@ -62,8 +64,10 @@
 	    $(document).ready(function(){
 	    	$("#home-link").on("click",function(){$("#conteudo").load('home2.html');});
 	    	$("#produtos-link").on("click",function(){$("#conteudo").load('produtos2.html');});
+	    	$("#newproduto-link").on("click",function(){$("#conteudo").load('newproduto2.html');});
 	    	$("#pedidos-link").on("click",function(){$("#conteudo").load('newpedido2.html');});
 	    	$("#usuarios-link").on("click",function(){$("#conteudo").load('users2.html');});
+	    	$("#newuser-link").on("click",function(){$("#conteudo").load('newuser2.html');});
 	    });    
     </script>
 </body>
