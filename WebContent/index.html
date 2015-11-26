@@ -4,18 +4,17 @@
         <title>VirtualQueue</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../css/sweetalert-master/dist/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="css/sweetalert-master/dist/sweetalert.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="../css/mycss.css" />
-        <script src="../js/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
-		<script src="../js/jquery/jquery.serializejson.js"	type="text/javascript"></script>
-		<script src="../css/sweetalert-master/dist/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/mycss.css" />
+        <script src="js/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+		<script src="js/jquery/jquery.serializejson.js"	type="text/javascript"></script>
+		<script src="css/sweetalert-master/dist/sweetalert.min.js"></script>
 	</head>
     <body>
          <div class="container login-container">           
             <div class="divcenter">
-                <!-- <h1>Virtual Queue</h1> -->
-                <img alt="logo" src="../img/logo2.png" width="250px">
+                <h1>Fast Track</h1>
                 <form action="javascript:valida();">
                     <input type="email" id='email' placeholder="E-mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'E-mail'">                  
                     <input type="password" id='password' placeholder="Senha" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Senha'">
@@ -48,9 +47,9 @@
 	    					        	swal("","Usuário e/ou senha inválido")
 									} else {
 										if (vdata == "Administrador") {
-											window.location = "admin/index.html";
+											window.location = "html5/admin/index.html";
 										} else {
-											window.location = "users/home.html";
+											window.location = "html5/users/home.html";
 										}
 									}
 	    					     },
