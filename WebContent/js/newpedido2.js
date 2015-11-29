@@ -84,7 +84,7 @@ function carregaProduto(data) {
 	        	"sTitle": "<span hidden>Total</span>",
 	            "targets": -1,
 	            "data": null,
-	            "defaultContent": "<span class='icon fa-remove''></span><span class='hiddentotal' hidden></span>",
+	            "defaultContent": "<span class='icon fa-remove''></span><span class='hiddentotal' hidden>1</span>",
 	            "width": "5px" 
 	        }
 	    ]
