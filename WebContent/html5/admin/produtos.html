@@ -1,15 +1,43 @@
 <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../css/modal.css">
 </head>
 <body>
    	<div class="container">
 		<h2>Lista de Produtos</h2>
 		<table id="example" class="display compact" cellspacing="0" width="100%"></table>
 		<div class="form-group">
-		<span class="icon fa-plus"></span>
+		<a href="#openModal"><span class="icon fa-plus"></span></a>
 		<span class="icon fa-pencil-square-o"></span>
 		<span id="remover" class="icon fa-trash-o"></span>
 		</div>
+		
+    </div>
+    <div id="openModal" class="modalDialog">
+        <div>
+            <a href="#close" title="Close" class="close">X</a>
+            <h2>Cadastrar Produto</h2>
+            <form id="form" action="../../VQ/produto/createform" method="GET">
+                <p class="form-group">
+                    <label for="inputName">Nome: </label>
+                    <input type="text" id="name" name="nome" autofocus="autofocus" required>
+                </p>
+                <p class="form-group">
+                    <label for="inputDescription">Descrição: </label>
+                    <input type="text" id="descricao" name="descricao">
+                </p>
+                <p class="form-group">
+                    <label for="inputCategory">Categoria: </label>
+                    <input type="text" id="tipo" name="tipo" required>
+                </p>
+                <p class="form-group">
+                    <label for="inputPrice">Valor: </label>
+                    <input for="number" id="preco" name="preco" required>
+                </p>  
+                <button>Cadastrar</button>
+                <button onclick="limpa_form()">Limpar</button>
+            </form>
+    </div>
 	</div>
     <script>
 	    $(document).ready(function(){
@@ -60,7 +88,7 @@
 	  										     dataType: "json",
 	  										     processData: true,
 	  										     success: function (vdata, status, jqXHR) {
-	  										    	 $("#conteudo").load("produtos2.html");
+	  										    	 $("#conteudo").load("produtos.html");
 	  										     },
 	  										     error: function (xhr) {
 	  										         alert("Erro" + xhr.responseText);

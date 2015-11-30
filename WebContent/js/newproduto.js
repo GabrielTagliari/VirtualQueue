@@ -18,7 +18,7 @@ $(document).ready(function(){
 			closeOnConfirm: true,   
 			closeOnCancel: false }, 
 			function(isConfirm){   
-				$("#conteudo").load("newproduto2.html");
+				$("#conteudo").load("newproduto.html");
 			});
 	});
 });
