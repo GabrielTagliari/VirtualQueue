@@ -223,27 +223,27 @@ function geraPdf(){ //Gera o PDF do pedido
     	doc.setFontSize(20);
         doc.setTextColor(40);
         doc.setFontStyle('normal');
-        doc.text("Pedido", data.settings.margin.left + 20, 60);
-        doc.fromHTML($('#dados').get(0), 37, 60, {'width': 100});
+        doc.text("Pedido", data.settings.margin.left + 200, 60);
     };
     
     var footer = function (data) {
     };
 
-   var options = {
+    var options = {
         beforePageContent: header,
         afterPageContent: footer,
-        margin: {top: 150}
+        margin: {top: 80},
     };
-   var columns = ["Código", "Nome", "Preço", "Quantidade", "Total"];
+  	var columns = ["Código", "Nome", "Preço", "Quantidade", "Total"];
 	var rows = [];
+	var total = 0;
 	p.itempedido.forEach(function(value){
-		var array = [value.produto.id, value.produto.nome, value.produto.preco, value.quantidade, value.produto.preco*value.quantidade];
+		var array = [value.produto.id, value.produto.nome, "R$ "+value.produto.preco, value.quantidade,"R$ "+value.produto.preco*value.quantidade];
 		rows.push(array);
-		t
+		total += value.produto.preco*value.quantidade;
 	});
-	var totalgeral = ["","","","",];
-	rows.push(totalgeral);
+	rows.push(["","","","TOTAL: ","R$ "+total]);
+	rows.push(["","","SENHA: "+p.senha,$("#data").text(),$("#clock").text()]);
 	doc.autoTable(columns, rows, options);
     doc.output("dataurlnewwindow");
 }
