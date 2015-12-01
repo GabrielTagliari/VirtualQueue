@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="../../css/modal.css">
 </head>
 <body>
 <div class="container">
@@ -10,11 +11,63 @@
 <table id="example" class="display" cellspacing="0" width="100%"> 
 </table>
 <div class="form-group">
-<span class="icon fa-plus"></span>
-<span class="icon fa-pencil-square-o"></span> 
-<span id="remover" class="icon fa-trash-o"></span>
+<a href="#openModalCreate"><span class="icon fa-plus"></span></a>
+<a href="#openModalEdit"><span class="icon fa-pencil-square-o"></span></a>
+<a href="#"><span id="remover" class="icon fa-trash-o"></span></a>
 </div>
 </div>
+<div id="openModalCreate" class="modalDialog">
+        <div>
+            <a href="#close" title="Close" class="close">X</a>
+            <h2>Cadastrar Usuário</h2>
+            <form action="javascript:verifica();">
+                <p class="form-group">
+                    <label for="inputUser">Usuário: </label>
+                    <input type="text" id="nome" name="nome" placeholder="Nome de Usuário" required>
+                </p>
+                <p class="form-group">
+                    <label for="inputEmail">E-mail: </label>
+                    <input type="email" id="email" name="email" required>
+                </p>                
+                <p class="form-group">
+                    <label for="inputPassword">Senha: </label>
+                    <input type="password" id="password" name="password" required>
+                </p>
+                <p class="">
+                    <input type="checkbox"  id="admin" name="admin"  value="1">
+                    <label for="admin">Administrador</label>
+                </p>
+                <button id="submit">Cadastrar</button>  
+                </div>
+            </form>
+    </div>
+	</div>
+	<div id="openModalEdit" class="modalDialog">
+        <div>
+            <a href="#close" title="Close" class="close">X</a>
+            <h2>Editar Usuário</h2>
+            <form action="javascript:verifica();">
+                <p class="form-group">
+                    <label for="inputUser">Usuário: </label>
+                    <input type="text" id="nome" name="nome" placeholder="Nome de Usuário" required>
+                </p>
+                <p class="form-group">
+                    <label for="inputEmail">E-mail: </label>
+                    <input type="email" id="email" name="email" required>
+                </p>                
+                <p class="form-group">
+                    <label for="inputPassword">Senha: </label>
+                    <input type="password" id="password" name="password" required>
+                </p>
+                <p class="">
+                    <input type="checkbox"  id="admin" name="admin"  value="1">
+                    <label for="admin">Administrador</label>
+                </p>
+                <button id="submit">Cadastrar</button>  
+                </div>
+            </form>
+    </div>
+	</div>
 <script>
 $(document).ready(function(){
 	$.getJSON( "http://localhost:8080/VirtualQueue/VQ/user/list", function( data ) {
@@ -82,6 +135,49 @@ $(document).ready(function(){
   		    });	
 	});
 }); 
+
+function verifica(){
+	user = new Object();
+	user.nome = document.getElementById("nome").value;
+    user.email = document.getElementById("email").value;
+    user.password = document.getElementById("password").value;
+    var admin = document.getElementById("admin").checked;
+        if (admin == true) {
+			user.privilegio = "Administrador";
+		} else {
+			user.privilegio = "Usuario";
+		}
+    		$.ajax({
+			     type: "POST",
+			     url: "http://localhost:8080/VirtualQueue/VQ/user/createform",
+			     data: JSON.stringify(user),
+			     contentType: "application/json; charset=utf-8",
+			     dataType: "json",
+			     processData: true,
+			     success: function (vdata, status, jqXHR) {
+			    	 if (vdata == true) {
+			    		 swal({   
+			    	    		title: "Usuário Cadastrado!",   
+			    	    		text: "",   
+			    	    		type: "",   
+			    	    		showCancelButton: false,   
+			    	    		confirmButtonColor: "#8ebebc",   
+			    	    		confirmButtonText: "Sim",   
+			    	    		cancelButtonText: "No",   
+			    	    		closeOnConfirm: true,   
+			    	    		closeOnCancel: false }, 
+			    	    		function(isConfirm){   
+			    	    			$("#conteudo").load("newuser2.html");
+			    	    		});
+					 }else {
+						swal("","Este email já está sendo usado")
+					 }
+			     },
+			     error: function (xhr) {
+			         alert("Erro" + xhr.responseText);
+			     }
+			});
+    }
 </script>
 </body>
 </html>
