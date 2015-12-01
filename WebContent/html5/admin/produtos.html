@@ -59,7 +59,7 @@
                     <label for="inputPrice">Valor: </label>
                     <input for="number" id="preco" name="preco" required>
                 </p>  
-                <button>Cadastrar</button>
+                <button>Editar</button>
             </form>
     </div>
 	</div>
@@ -121,8 +121,12 @@
 	  									}
 	  					}});
 	  				}
-	  		    });	    
+	  		    });
+	  		 $('#form').submit(function(){
+	  			$("#conteudo").load("produtos.html");
+	  		 });
 	  	});
-	    });    
+	    });
+	    
     </script>
 </body>
