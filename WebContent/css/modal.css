@@ -1,5 +1,5 @@
 /* Modal */
-		 .modalDialog {
+		  .modalDialog {
             position: fixed;
             font-family: Arial, Helvetica, sans-serif;
             top: 0;
@@ -51,7 +51,7 @@
             box-shadow: 1px 1px 3px #000;
         }
         
-        .close:hover {
+        a .close:hover {
             background: #8ebebc;
         }
          -webkit-transition: opacity 400ms ease-in;
