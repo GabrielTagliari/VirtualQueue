@@ -44,10 +44,9 @@ public class ProdutoWebService {
 			@QueryParam("descricao") String descricao,
 			@QueryParam("tipo") String tipo,
 			@QueryParam("preco") Float preco,
-			@QueryParam("quantidade") int quantidade,
 			@QueryParam("data_exclusao") Date data_exclusao)
 			throws Exception {
-		 	Produto b =  new Produto(nome, descricao, tipo, preco, quantidade, data_exclusao); 
+		 	Produto b =  new Produto(nome, descricao, tipo, preco, data_exclusao); 
             produtoDAO.addProduto(b);
 	}
 	

@@ -22,7 +22,6 @@ public class Produto implements Serializable {
 	private String descricao;
 	private String tipo;
 	private float preco;
-	private int quantidade;
 	private Date data_exclusao;
 	
 	public Date getdata_exclusao() {
@@ -31,14 +30,6 @@ public class Produto implements Serializable {
 
 	public void setdata_exclusao(Date data_exclusao) {
 		this.data_exclusao = data_exclusao;
-	}
-
-	public int getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
 	}
 
 	public static long getSerialversionuid() {
@@ -86,13 +77,12 @@ public class Produto implements Serializable {
 		this.preco = preco;
 	}
 
-	public Produto(String nome, String descricao, String tipo, float preco, int quantidade, Date data_exclusao) {
+	public Produto(String nome, String descricao, String tipo, float preco, Date data_exclusao) {
 		super();
 		this.nome = nome;
 		this.descricao = descricao;
 		this.tipo = tipo;
 		this.preco = preco;
-		this.quantidade = quantidade;
 		this.data_exclusao = data_exclusao;
 	}
 
