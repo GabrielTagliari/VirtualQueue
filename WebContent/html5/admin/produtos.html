@@ -8,7 +8,7 @@
 		<table id="example" class="display compact" cellspacing="0" width="100%"></table>
 		<div class="form-group">
 		<a href="#openModalCreate"><span class="icon fa-plus"></span></a>
-		<a href="#openModalEdit"><span class="icon fa-pencil-square-o"></span></a>
+		<a href="#openModalEdit"><span id="edit" class="icon fa-pencil-square-o"></span></a>
 		<a href="#"><span id="remover" class="icon fa-trash-o"></span></a>
 		</div>
 		
@@ -42,7 +42,7 @@
         <div>
             <a href="#close" title="Close" class="close">X</a>
             <h2>Editar Produto</h2>
-            <form id="form" action="../../VQ/produto/createform" method="GET">
+            <form id="form-edit" action="../../VQ/produto/createform" method="GET">
                 <p class="form-group">
                     <label for="inputName">Nome: </label>
                     <input type="text" id="name" name="nome" autofocus="autofocus" required>
@@ -122,9 +122,23 @@
 	  					}});
 	  				}
 	  		    });
+	  		 
 	  		 $('#form').submit(function(){
 	  			$("#conteudo").load("produtos.html");
 	  		 });
+	  		 
+	  		 $('#edit').click(function(){
+	  			var data = table.rows('.selected').data();
+	  			if (condition) {
+					
+				} else {
+			  		$("#form-edit input#name").val(data[0].nome);
+			  		$("#form-edit input#descricao").val(data[0].descricao);
+			  		$("#form-edit input#tipo").val(data[0].tipo);
+			  		$("#form-edit input#preco").val(data[0].preco);
+				}
+	  			
+		  	 });
 	  	});
 	    });
 	    
