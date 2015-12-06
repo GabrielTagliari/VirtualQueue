@@ -24,6 +24,10 @@ public class ProdutoDAO {
 	    public void updateDate(Produto produto) throws Exception {
 	    	entityManager.merge(produto);
 	    }
+	    
+	    public void updateProduto(Produto produto) throws Exception {
+	    	entityManager.merge(produto);
+	    }
 
 	    public List<Produto> getProdutos() throws Exception {
 	    	Query query = entityManager.createNamedQuery("Produto.findAll");

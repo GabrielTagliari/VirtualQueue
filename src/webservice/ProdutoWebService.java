@@ -58,6 +58,15 @@ public class ProdutoWebService {
 		produto.setdata_exclusao(new Date());
 		produtoDAO.updateDate(produto);
 	}	
+	
+	@Path("/update")
+	@POST
+	@Consumes("application/json")
+	public void updateProduto(String json) throws Exception {
+		Gson gson = new Gson();
+		Produto b =  gson.fromJson(json, Produto.class);
+		produtoDAO.updateProduto(b);
+	}
 }
 	
 	
