@@ -11632,7 +11632,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sZeroRecords": "No matching records found"
+			"sZeroRecords": "Nenhum dado encontrado"
 		},
 	
 	
