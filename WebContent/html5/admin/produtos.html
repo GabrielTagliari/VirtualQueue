@@ -7,8 +7,8 @@
 		<h2>Lista de Produtos</h2>
 		<table id="example" class="display compact" cellspacing="0" width="100%"></table>
 		<div class="form-group">
-		<a href="#openModalCreate"><span class="icon fa-plus"></span></a>
-		<a href="#openModalEdit"><span id="edit" class="icon fa-pencil-square-o"></span></a>
+		<a href="#openModalCreate"><span id="add" class="icon fa-plus"></span></a>
+		<span id="edit" class="icon fa-pencil-square-o"></span>
 		<a href="#"><span id="remover" class="icon fa-trash-o"></span></a>
 		</div>
     </div>
@@ -124,10 +124,17 @@
 	  		 
 	  		 $('#edit').click(function(){
 	  			var data = table.rows('.selected').data();
-			  		$("#openModalEdit #form_modal input#name").val(data[0].nome);
+				if (data.length == 0) {
+					swal("","Selecione um produto para editá-lo")
+				} else if (data.length > 1){
+					swal("","Selecione apenas um produto")
+				}else{
+					window.location.href = '#openModalEdit';
+					$("#openModalEdit #form_modal input#name").val(data[0].nome);
 			  		$("#openModalEdit #form_modal input#descricao").val(data[0].descricao);
 			  		$("#openModalEdit #form_modal input#tipo").val(data[0].tipo);
 			  		$("#openModalEdit #form_modal input#preco").val(data[0].preco);
+				}
 		  	 });
 	  		$('#openModalEdit #form_modal').submit(function(){
 	  			var data = table.rows('.selected').data();

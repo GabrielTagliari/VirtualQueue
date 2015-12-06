@@ -64,3 +64,4 @@
         #form-modal {background-color: white;}
         #form-group-modal {background-color: white;}
         #form-group-modal .text_lab {font-family: 'Source Sans Pro', inherit, sans-serif;}
+        #edit:hover{color: #41d6c3; cursor: pointer; cursor: hand;}

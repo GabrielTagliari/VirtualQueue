@@ -11,8 +11,8 @@
 		<table id="example" class="display" cellspacing="0" width="100%">
 		</table>
 		<div class="form-group">
-			<a href="#openModalCreate"><span class="icon fa-plus"></span></a> <a
-				href="#openModalEdit"><span id="edit" class="icon fa-pencil-square-o"></span></a>
+			<a href="#openModalCreate"><span class="icon fa-plus"></span></a> 
+			<span id="edit" class="icon fa-pencil-square-o"></span>
 			<a href="#"><span id="remover" class="icon fa-trash-o"></span></a>
 		</div>
 	</div>
@@ -87,12 +87,19 @@ $(document).ready(function(){
 		    $('#edit').click(function(){
 	  			var data = table.rows('.selected').data();
 	  			console.log(data[0]);
-		  		$("#openModalEdit #form_modal input#nome").val(data[0].nome);
-		  		$("#openModalEdit #form_modal input#email").val(data[0].email);
-		  		if (data[0].privilegio == "Administrador") {
-		  			$( "#openModalEdit #form_modal input#admin" ).prop( "checked", true );
+				if (data.length == 0) {
+					swal("","Selecione um usuário para editá-lo")
+				} else if (data.length > 1){
+					swal("","Selecione apenas um usuário")
 				}else{
-					$( "#openModalEdit #form_modal input#admin" ).prop( "checked", false );
+					window.location.href = '#openModalEdit';
+			  		$("#openModalEdit #form_modal input#nome").val(data[0].nome);
+			  		$("#openModalEdit #form_modal input#email").val(data[0].email);
+			  		if (data[0].privilegio == "Administrador") {
+			  			$( "#openModalEdit #form_modal input#admin" ).prop( "checked", true );
+					}else{
+						$( "#openModalEdit #form_modal input#admin" ).prop( "checked", false );
+					}
 				}
 		  	});
 		    
