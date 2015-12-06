@@ -11,58 +11,59 @@
 		<a href="#openModalEdit"><span id="edit" class="icon fa-pencil-square-o"></span></a>
 		<a href="#"><span id="remover" class="icon fa-trash-o"></span></a>
 		</div>
-		
     </div>
     <div id="openModalCreate" class="modalDialog">
-        <div>
+        <div class="background">
             <a href="#close" title="Close" class="close">X</a>
-            <h2>Cadastrar Produto</h2>
-            <form id="form" action="../../VQ/produto/createform" method="GET">
-                <p class="form-group">
-                    <label for="inputName">Nome: </label>
-                    <input type="text" id="name" name="nome" autofocus="autofocus" required>
+            <h2 class="text">Cadastrar Produto</h2>
+
+            <form id="form_modal" action="../../VQ/produto/createform" method="GET">
+                <p id="form-group-modal">
+                    <label class="text_lab" for="inputName">Nome: </label>
+                    <input class="formulario" type="text" id="name" name="nome" autofocus="autofocus" required>
                 </p>
-                <p class="form-group">
-                    <label for="inputDescription">Descrição: </label>
-                    <input type="text" id="descricao" name="descricao">
+                <p id="form-group-modal">
+                    <label class="text_lab" for="inputDescription">Descrição: </label>
+                    <input class="formulario" type="text" id="descricao" name="descricao">
                 </p>
-                <p class="form-group">
-                    <label for="inputCategory">Categoria: </label>
-                    <input type="text" id="tipo" name="tipo" required>
+                <p id="form-group-modal">
+                    <label class="text_lab" for="inputCategory">Categoria: </label>
+                    <input class="formulario" type="text" id="tipo" name="tipo" required>
                 </p>
-                <p class="form-group">
-                    <label for="inputPrice">Valor: </label>
-                    <input for="number" id="preco" name="preco" required>
-                </p>  
+                <p id="form-group-modal">
+                    <label class="text_lab" for="inputPrice">Valor: </label>
+                    <input class="formulario" for="number" id="preco" name="preco" required>
+                </p>
                 <button>Cadastrar</button>
             </form>
+        </div>
     </div>
-	</div>
 	<div id="openModalEdit" class="modalDialog">
-        <div>
+        <div class="background">
             <a href="#close" title="Close" class="close">X</a>
-            <h2>Editar Produto</h2>
-            <form id="form-edit" action="../../VQ/produto/createform" method="GET">
-                <p class="form-group">
-                    <label for="inputName">Nome: </label>
-                    <input type="text" id="name" name="nome" autofocus="autofocus" required>
+            <h2 class="text">Editar Produto</h2>
+
+            <form id="form_modal" action="../../VQ/produto/createform" method="GET">
+                <p id="form-group-modal">
+                    <label class="text_lab" for="inputName">Nome: </label>
+                    <input class="formulario" type="text" id="name" name="nome" autofocus="autofocus" required>
                 </p>
-                <p class="form-group">
-                    <label for="inputDescription">Descrição: </label>
-                    <input type="text" id="descricao" name="descricao">
+                <p id="form-group-modal">
+                    <label class="text_lab" for="inputDescription">Descrição: </label>
+                    <input class="formulario" type="text" id="descricao" name="descricao">
                 </p>
-                <p class="form-group">
-                    <label for="inputCategory">Categoria: </label>
-                    <input type="text" id="tipo" name="tipo" required>
+                <p id="form-group-modal">
+                    <label class="text_lab" for="inputCategory">Categoria: </label>
+                    <input class="formulario" type="text" id="tipo" name="tipo" required>
                 </p>
-                <p class="form-group">	
-                    <label for="inputPrice">Valor: </label>
-                    <input for="number" id="preco" name="preco" required>
-                </p>  
+                <p id="form-group-modal">
+                    <label class="text_lab" for="inputPrice">Valor: </label>
+                    <input class="formulario" for="number" id="preco" name="preco" required>
+                </p>
                 <button>Editar</button>
             </form>
+        </div>
     </div>
-	</div>
     <script>
 	    $(document).ready(function(){
 	    	$.getJSON( "http://localhost:8080/VirtualQueue/VQ/produto/list", function( data ) {
@@ -129,13 +130,13 @@
 	  		 
 	  		 $('#edit').click(function(){
 	  			var data = table.rows('.selected').data();
-	  			if (condition) {
-					
+	  			if (data.length > 1) {
+					swal("","Só é possivel editar um produto por vez")
 				} else {
-			  		$("#form-edit input#name").val(data[0].nome);
-			  		$("#form-edit input#descricao").val(data[0].descricao);
-			  		$("#form-edit input#tipo").val(data[0].tipo);
-			  		$("#form-edit input#preco").val(data[0].preco);
+			  		$("#form_modal input#name").val(data[0].nome);
+			  		$("#form_modal input#descricao").val(data[0].descricao);
+			  		$("#form_modal input#tipo").val(data[0].tipo);
+			  		$("#form_modal input#preco").val(data[0].preco);
 				}
 	  			
 		  	 });

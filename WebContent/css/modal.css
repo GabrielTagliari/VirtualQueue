@@ -51,9 +51,16 @@
             box-shadow: 1px 1px 3px #000;
         }
         
-        a .close:hover {
+        .close:hover {
             background: #8ebebc;
         }
-         -webkit-transition: opacity 400ms ease-in;
-        -moz-transition: opacity 400ms ease-in;
-        transition: opacity 400ms ease-in;
+        
+        .formulario {display: block; border-radius: 3px 3px 3px 3px; 
+            border: 1px solid #999; box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+            font-weight: bold; width: 250px; padding: 5px; float: right;
+        }
+        .background {background-color: white;}
+        .text {color: black;}
+        #form-modal {background-color: white;}
+        #form-group-modal {background-color: white;}
+        #form-group-modal .text_lab {font-family: 'Source Sans Pro', inherit, sans-serif;}
