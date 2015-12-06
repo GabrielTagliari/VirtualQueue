@@ -2,73 +2,67 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="../../css/modal.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../../css/modal.css">
 </head>
 <body>
-<div class="container">
-<h2>Lista de Usuários</h2>
-<table id="example" class="display" cellspacing="0" width="100%"> 
-</table>
-<div class="form-group">
-<a href="#openModalCreate"><span class="icon fa-plus"></span></a>
-<a href="#openModalEdit"><span class="icon fa-pencil-square-o"></span></a>
-<a href="#"><span id="remover" class="icon fa-trash-o"></span></a>
-</div>
-</div>
-<div id="openModalCreate" class="modalDialog">
-        <div>
-            <a href="#close" title="Close" class="close">X</a>
-            <h2>Cadastrar Usuário</h2>
-            <form action="javascript:verifica();">
-                <p class="form-group">
-                    <label for="inputUser">Usuário: </label>
-                    <input type="text" id="nome" name="nome" placeholder="Nome de Usuário" required>
-                </p>
-                <p class="form-group">
-                    <label for="inputEmail">E-mail: </label>
-                    <input type="email" id="email" name="email" required>
-                </p>                
-                <p class="form-group">
-                    <label for="inputPassword">Senha: </label>
-                    <input type="password" id="password" name="password" required>
-                </p>
-                <p class="">
-                    <input type="checkbox"  id="admin" name="admin"  value="1">
-                    <label for="admin">Administrador</label>
-                </p>
-                <button id="submit">Cadastrar</button>  
-                </div>
-            </form>
-    </div>
+	<div class="container">
+		<h2>Lista de Usuários</h2>
+		<table id="example" class="display" cellspacing="0" width="100%">
+		</table>
+		<div class="form-group">
+			<a href="#openModalCreate"><span class="icon fa-plus"></span></a> <a
+				href="#openModalEdit"><span id="edit" class="icon fa-pencil-square-o"></span></a>
+			<a href="#"><span id="remover" class="icon fa-trash-o"></span></a>
+		</div>
+	</div>
+	<div id="openModalCreate" class="modalDialog">
+		<div class="background">
+			<a href="#close" title="Close" class="close">X</a>
+			<h2 class="text">Cadastrar Usuário</h2>
+			<form id="form_modal" action="javascript:verifica();">
+				<p id="form-group-modal">
+					<label class="text_lab" for="inputUser">Usuário: </label> 
+					<input class="formulario" type="text" id="nome" name="nome" placeholder="Nome de Usuário" required>
+				</p>
+				<p id="form-group-modal">
+					<label class="text_lab" for="inputEmail">E-mail: </label> 
+					<input class="formulario" type="email" id="email" name="email" required>
+				</p>
+				<p id="form-group-modal">
+					<label class="text_lab" for="inputPassword">Senha: </label> 
+					<input class="formulario" type="password" id="password" name="password" required>
+				</p>
+				<p id="form-group-modal">
+					<input type="checkbox" id="admin" name="admin" value="1"> 
+					<label	for="admin">Administrador</label>
+				</p>
+				<button id="submit">Cadastrar</button>
+			</form>
+		</div>
 	</div>
 	<div id="openModalEdit" class="modalDialog">
-        <div>
-            <a href="#close" title="Close" class="close">X</a>
-            <h2>Editar Usuário</h2>
-            <form action="javascript:verifica();">
-                <p class="form-group">
-                    <label for="inputUser">Usuário: </label>
-                    <input type="text" id="nome" name="nome" placeholder="Nome de Usuário" required>
-                </p>
-                <p class="form-group">
-                    <label for="inputEmail">E-mail: </label>
-                    <input type="email" id="email" name="email" required>
-                </p>                
-                <p class="form-group">
-                    <label for="inputPassword">Senha: </label>
-                    <input type="password" id="password" name="password" required>
-                </p>
-                <p class="">
-                    <input type="checkbox"  id="admin" name="admin"  value="1">
-                    <label for="admin">Administrador</label>
-                </p>
-                <button id="submit">Cadastrar</button>  
-                </div>
-            </form>
-    </div>
+		<div class="background">
+			<a href="#close" title="Close" class="close">X</a>
+			<h2 class="text">Editar Usuário</h2>
+			<form id="form_modal" action="javascript:verifica();">
+				<p id="form-group-modal">
+					<label class="text_lab" for="inputUser">Usuário: </label> 
+					<input class="formulario" type="text" id="nome" name="nome" required>
+				</p>
+				<p id="form-group-modal">
+					<label class="text_lab" for="inputEmail">E-mail: </label> 
+					<input class="formulario" type="email" id="email" name="email" required>
+				</p>
+				<p id="form-group-modal">
+					<input type="checkbox" id="admin" name="admin" value="1"> 
+					<label	for="admin">Administrador</label>
+				</p>
+				<button id="submit">Editar</button>
+			</form>
+		</div>
 	</div>
-<script>
+	<script>
 $(document).ready(function(){
 	$.getJSON( "http://localhost:8080/VirtualQueue/VQ/user/list", function( data ) {
 		  var userlist = data;
@@ -89,13 +83,14 @@ $(document).ready(function(){
 		    $('#example tbody').on( 'click', 'tr', function () {
 		        $(this).toggleClass('selected');
 		    } );
-		 
-		    $('#checar').click( function () {
-		    	var data = table.rows('.selected').data();
-		    	for (var int = 0; int < data.length; int++) {
-					console.log(data[int]);
-				}
-		    } );
+		    
+		    $('#edit').click(function(){
+	  			var data = table.rows('.selected').data();
+	  			console.log(data[0]);
+		  		$("#openModalEdit #form_modal input#nome").val(data[0].nome);
+		  		$("#openModalEdit #form_modal input#email").val(data[0].email);
+		  		$("#openModalEdit #form_modal input#admin").val();
+		  	});
 		    
 		    $('#remover').click( function () {
   		    	var data = table.rows('.selected').data();
@@ -123,7 +118,7 @@ $(document).ready(function(){
   										     dataType: "json",
   										     processData: true,
   										     success: function (vdata, status, jqXHR) {
-  										    	 $("#conteudo").load("users2.html");
+  										    	 $("#conteudo").load("users.html");
   										     },
   										     error: function (xhr) {
   										         alert("Erro" + xhr.responseText);
@@ -135,7 +130,6 @@ $(document).ready(function(){
   		    });	
 	});
 }); 
-
 function verifica(){
 	user = new Object();
 	user.nome = document.getElementById("nome").value;
@@ -156,19 +150,7 @@ function verifica(){
 			     processData: true,
 			     success: function (vdata, status, jqXHR) {
 			    	 if (vdata == true) {
-			    		 swal({   
-			    	    		title: "Usuário Cadastrado!",   
-			    	    		text: "",   
-			    	    		type: "",   
-			    	    		showCancelButton: false,   
-			    	    		confirmButtonColor: "#8ebebc",   
-			    	    		confirmButtonText: "Sim",   
-			    	    		cancelButtonText: "No",   
-			    	    		closeOnConfirm: true,   
-			    	    		closeOnCancel: false }, 
-			    	    		function(isConfirm){   
-			    	    			$("#conteudo").load("newuser2.html");
-			    	    		});
+			    		 $("#conteudo").load("users2.html");
 					 }else {
 						swal("","Este email já está sendo usado")
 					 }

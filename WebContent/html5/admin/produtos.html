@@ -16,7 +16,6 @@
         <div class="background">
             <a href="#close" title="Close" class="close">X</a>
             <h2 class="text">Cadastrar Produto</h2>
-
             <form id="form_modal" action="../../VQ/produto/createform" method="GET">
                 <p id="form-group-modal">
                     <label class="text_lab" for="inputName">Nome: </label>
@@ -133,10 +132,10 @@
 	  			if (data.length > 1) {
 					swal("","Só é possivel editar um produto por vez")
 				} else {
-			  		$("#form_modal input#name").val(data[0].nome);
-			  		$("#form_modal input#descricao").val(data[0].descricao);
-			  		$("#form_modal input#tipo").val(data[0].tipo);
-			  		$("#form_modal input#preco").val(data[0].preco);
+			  		$("#openModalEdit #form_modal input#name").val(data[0].nome);
+			  		$("#openModalEdit #form_modal input#descricao").val(data[0].descricao);
+			  		$("#openModalEdit #form_modal input#tipo").val(data[0].tipo);
+			  		$("#openModalEdit #form_modal input#preco").val(data[0].preco);
 				}
 	  			
 		  	 });
