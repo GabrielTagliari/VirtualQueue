@@ -20,7 +20,7 @@
 		<div class="background">
 			<a href="#close" title="Close" class="close">X</a>
 			<h2 class="text">Cadastrar Usuário</h2>
-			<form id="form_modal" action="javascript:verifica();">
+			<form id="form_modal">
 				<p id="form-group-modal">
 					<label class="text_lab" for="inputUser">Usuário: </label> 
 					<input class="formulario" type="text" id="nome" name="nome" placeholder="Nome de Usuário" required>
@@ -45,7 +45,7 @@
 		<div class="background">
 			<a href="#close" title="Close" class="close">X</a>
 			<h2 class="text">Editar Usuário</h2>
-			<form id="form_modal" action="javascript:verifica();">
+			<form id="form_modal">
 				<p id="form-group-modal">
 					<label class="text_lab" for="inputUser">Usuário: </label> 
 					<input class="formulario" type="text" id="nome" name="nome" required>
@@ -89,11 +89,15 @@ $(document).ready(function(){
 	  			console.log(data[0]);
 		  		$("#openModalEdit #form_modal input#nome").val(data[0].nome);
 		  		$("#openModalEdit #form_modal input#email").val(data[0].email);
-		  		$("#openModalEdit #form_modal input#admin").val();
+		  		if (data[0].privilegio == "Administrador") {
+		  			$( "#openModalEdit #form_modal input#admin" ).prop( "checked", true );
+				}else{
+					$( "#openModalEdit #form_modal input#admin" ).prop( "checked", false );
+				}
 		  	});
 		    
 		    $('#remover').click( function () {
-  		    	var data = table.rows('.selected').data();
+		    	var data = table.rows('.selected').data();
   				if (data.length == 0) {
   					swal("","Selecione ao menos um usuário...")
   				} else {
@@ -128,38 +132,65 @@ $(document).ready(function(){
   					}});
   				}
   		    });	
+		    
+		    $('#openModalEdit #form_modal').submit(function(){
+	  			var data = table.rows('.selected').data();
+	  			data[0].nome = $("#openModalEdit #form_modal input#nome").val();
+	  			data[0].email = $("#openModalEdit #form_modal input#email").val();
+	  			var checked = $("input#admin:checked").length;
+	  			if (checked == 0) {
+	  				data[0].privilegio = "Usuario";
+	  			  } else {
+	  				data[0].privilegio = "Administrador";
+	  			}
+		    	$.ajax({
+					     type: "POST",
+					     url: "http://localhost:8080/VirtualQueue/VQ/user/update",
+					     data: JSON.stringify(data[0]),
+					     contentType: "application/json; charset=utf-8",
+					     dataType: "json",
+					     processData: true,
+					     success: function (vdata, status, jqXHR) {
+					    	 location.reload();
+					     },
+					     error: function (xhr) {
+					         alert("Erro" + xhr.responseText);
+					     }
+					});
+	  		});
+		    
+		    $('#openModalCreate #form_modal').submit(function(){
+		    	user = new Object();
+		    	user.nome = document.getElementById("nome").value;
+		        user.email = document.getElementById("email").value;
+		        user.password = document.getElementById("password").value;
+		        var admin = document.getElementById("admin").checked;
+		            if (admin == true) {
+		    			user.privilegio = "Administrador";
+		    		} else {
+		    			user.privilegio = "Usuario";
+		    		}
+		        		$.ajax({
+		    			     type: "POST",
+		    			     url: "http://localhost:8080/VirtualQueue/VQ/user/createform",
+		    			     data: JSON.stringify(user),
+		    			     contentType: "application/json; charset=utf-8",
+		    			     dataType: "json",
+		    			     processData: true,
+		    			     success: function (vdata, status, jqXHR) {
+		    			    	 if (vdata == true) {
+		    			    		 $("#conteudo").load("users.html");
+		    					 }else {
+		    						swal("","Este email já está sendo usado")
+		    					 }
+		    			     },
+		    			     error: function (xhr) {
+		    			         alert("Erro" + xhr.responseText);
+		    			     }
+		    			});
+	  		});
 	});
 }); 
-function verifica(){
-	user = new Object();
-	user.nome = document.getElementById("nome").value;
-    user.email = document.getElementById("email").value;
-    user.password = document.getElementById("password").value;
-    var admin = document.getElementById("admin").checked;
-        if (admin == true) {
-			user.privilegio = "Administrador";
-		} else {
-			user.privilegio = "Usuario";
-		}
-    		$.ajax({
-			     type: "POST",
-			     url: "http://localhost:8080/VirtualQueue/VQ/user/createform",
-			     data: JSON.stringify(user),
-			     contentType: "application/json; charset=utf-8",
-			     dataType: "json",
-			     processData: true,
-			     success: function (vdata, status, jqXHR) {
-			    	 if (vdata == true) {
-			    		 $("#conteudo").load("users2.html");
-					 }else {
-						swal("","Este email já está sendo usado")
-					 }
-			     },
-			     error: function (xhr) {
-			         alert("Erro" + xhr.responseText);
-			     }
-			});
-    }
 </script>
 </body>
 </html>

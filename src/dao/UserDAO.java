@@ -27,6 +27,10 @@ public class UserDAO {
     public void updateDate(User user) throws Exception {
         entityManager.merge(user);
     }
+    
+    public void updateUser(User b) {
+		entityManager.merge(b);
+	}
 
     public List<User> getUsers() throws Exception {
     	Query query = entityManager.createNamedQuery("User.findAll");

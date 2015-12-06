@@ -16,6 +16,7 @@ import javax.ws.rs.Produces;
 import com.google.gson.Gson;
 
 import dao.UserDAO;
+import entity.Produto;
 import entity.User;
 
 @Path("/user")
@@ -98,6 +99,15 @@ public class UserWebService {
 		m.update(b.getPassword().getBytes(),0,b.getPassword().length());
 		b.setPassword(new BigInteger(1,m.digest()).toString(16));
 		return b;
+	}
+	
+	@Path("/update")
+	@POST
+	@Consumes("application/json")
+	public void updateProduto(String json) throws Exception {
+		Gson gson = new Gson();
+		User b =  gson.fromJson(json, User.class);
+		userDAO.updateUser(b);
 	}
 }
 
