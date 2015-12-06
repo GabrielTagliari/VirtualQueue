@@ -150,12 +150,16 @@
 					     dataType: "json",
 					     processData: true,
 					     success: function (vdata, status, jqXHR) {
-					    	 $("#conteudo").load("produtos.html");
+					    	 window.location.href = '#close';
 					     },
 					     error: function (xhr) {
 					         alert("Erro" + xhr.responseText);
 					     }
 					});
+	  		});
+	  		$('#openModalCreate #form_modal').submit(function(){
+	  			window.location.href = '#close';
+	  			$("#conteudo").load("produtos.html");
 	  		});
 	  	});
 	    });
