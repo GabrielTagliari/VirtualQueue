@@ -1,4 +1,4 @@
-package dao;
+package virtualqueue.dao;
 
 import java.util.List;
 import javax.ejb.Stateless;
@@ -9,32 +9,32 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import entity.Produto;
+import virtualqueue.entity.Product;
 
 @Stateless
-public class ProdutoDAO {
+public class ProductDAO {
 
 	 @PersistenceContext(unitName = "livraria")
 	    private EntityManager entityManager;
 
-	    public void addProduto(Produto produto) throws Exception {
+	    public void addProduto(Product produto) throws Exception {
 	    	entityManager.merge(produto);
 	    }
 
-	    public void updateDate(Produto produto) throws Exception {
+	    public void updateDate(Product produto) throws Exception {
 	    	entityManager.merge(produto);
 	    }
 	    
-	    public void updateProduto(Produto produto) throws Exception {
+	    public void updateProduto(Product produto) throws Exception {
 	    	entityManager.merge(produto);
 	    }
 
-	    public List<Produto> getProdutos() throws Exception {
+	    public List<Product> getProdutos() throws Exception {
 	    	Query query = entityManager.createNamedQuery("Produto.findAll");
 	    	return query.getResultList();
 	    }
 	    
-	    public Produto getProdutoById(long id) throws Exception{
-	    	return entityManager.find(Produto.class, id);
+	    public Product getProdutoById(long id) throws Exception{
+	    	return entityManager.find(Product.class, id);
 	    }
 }

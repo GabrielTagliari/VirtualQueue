@@ -1,4 +1,4 @@
-package webservice;
+package virtualqueue.webservice;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -13,10 +13,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-import dao.PedidoDAO;
-import dao.ProdutoDAO;
-import entity.Pedido;
-import entity.Produto;
+
+import virtualqueue.dao.PedidoDAO;
+import virtualqueue.dao.ProductDAO;
+import virtualqueue.entity.Pedido;
+import virtualqueue.entity.Product;
 
 @Path("/pedido")
 @Produces("application/json")

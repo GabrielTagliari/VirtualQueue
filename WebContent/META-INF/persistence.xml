@@ -4,10 +4,10 @@
         <persistence-unit name="livraria">
           <jta-data-source>livrariaDatabase</jta-data-source>
           <non-jta-data-source>livrariaDatabaseUnmanaged</non-jta-data-source>
-          <class>entity.ItemPedido</class>
-          <class>entity.Pedido</class>
-          <class>entity.Produto</class>
-          <class>entity.User</class>
+          <class>virtualqueue.entity.ItemPedido</class>
+          <class>virtualqueue.entity.Pedido</class>
+          <class>virtualqueue.entity.Product</class>
+          <class>virtualqueue.entity.User</class>
           <properties>
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
           </properties>

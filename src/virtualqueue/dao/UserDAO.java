@@ -1,4 +1,4 @@
-package dao;
+package virtualqueue.dao;
 
 import java.util.List;
 import javax.persistence.PersistenceContextType;
@@ -11,8 +11,8 @@ import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
 
-import entity.Produto;
-import entity.User;
+import virtualqueue.entity.Product;
+import virtualqueue.entity.User;
 
 @Stateless
 public class UserDAO {

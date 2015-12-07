@@ -1,4 +1,4 @@
-package entity;
+package virtualqueue.entity;
 
 import java.io.Serializable;
 
@@ -23,8 +23,8 @@ public class ItemPedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE, generator="ITEM_GENERATOR")
 	private long id;
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)
-	private Produto produto;
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
+	private Product produto;
 	private long quantidade;
 	
 	public long getId() {
@@ -35,11 +35,11 @@ public class ItemPedido implements Serializable {
 		this.id = id;
 	}
 
-	public Produto getProduto() {
+	public Product getProduto() {
 		return produto;
 	}
 	
-	public void setProduto(Produto produto) {
+	public void setProduto(Product produto) {
 		this.produto = produto;
 	}
 	
@@ -51,7 +51,7 @@ public class ItemPedido implements Serializable {
 		this.quantidade = quantidade;
 	}
 	
-	public ItemPedido(Produto produto, long quantidade) {
+	public ItemPedido(Product produto, long quantidade) {
 		super();
 		this.produto = produto;
 		this.quantidade = quantidade;

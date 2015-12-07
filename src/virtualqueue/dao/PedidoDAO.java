@@ -1,4 +1,4 @@
-package dao;
+package virtualqueue.dao;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import entity.Pedido;
+import virtualqueue.entity.Pedido;
 
 @Stateless
 public class PedidoDAO {

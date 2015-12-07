@@ -1,4 +1,4 @@
-package entity;
+package virtualqueue.entity;
 
 import java.io.Serializable;
 import java.util.Date;

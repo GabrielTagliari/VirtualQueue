@@ -1,4 +1,4 @@
-package webservice;
+package virtualqueue.webservice;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -15,9 +15,9 @@ import javax.ws.rs.Produces;
 
 import com.google.gson.Gson;
 
-import dao.UserDAO;
-import entity.Produto;
-import entity.User;
+import virtualqueue.dao.UserDAO;
+import virtualqueue.entity.Product;
+import virtualqueue.entity.User;
 
 @Path("/user")
 @Produces("application/json")

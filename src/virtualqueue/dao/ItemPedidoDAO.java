@@ -1,4 +1,4 @@
-package dao;
+package virtualqueue.dao;
 
 import java.util.List;
 import javax.ejb.Stateless;
@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
-import entity.ItemPedido;
+import virtualqueue.entity.ItemPedido;
 
 @Stateless
 public class ItemPedidoDAO {

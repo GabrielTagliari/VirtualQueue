@@ -1,4 +1,4 @@
-package webservice;
+package virtualqueue.webservice;
 
 import java.util.List;
 import javax.ejb.EJB;
@@ -8,8 +8,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import com.google.gson.Gson;
-import dao.ItemPedidoDAO;
-import entity.ItemPedido;
+
+import virtualqueue.dao.ItemPedidoDAO;
+import virtualqueue.entity.ItemPedido;
 
 @Path("/itempedido")
 @Produces("application/json")

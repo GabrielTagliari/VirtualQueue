@@ -1,4 +1,4 @@
-package entity;
+package virtualqueue.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,8 +10,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.TableGenerator;
 
 @Entity
-@NamedQuery(name="Produto.findAll", query="SELECT p FROM Produto p WHERE p.data_exclusao IS NULL")
-public class Produto implements Serializable {
+@NamedQuery(name="Produto.findAll", query="SELECT p FROM Product p WHERE p.data_exclusao IS NULL")
+public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -77,7 +77,7 @@ public class Produto implements Serializable {
 		this.preco = preco;
 	}
 
-	public Produto(String nome, String descricao, String tipo, float preco, Date data_exclusao) {
+	public Product(String nome, String descricao, String tipo, float preco, Date data_exclusao) {
 		super();
 		this.nome = nome;
 		this.descricao = descricao;
@@ -86,7 +86,7 @@ public class Produto implements Serializable {
 		this.data_exclusao = data_exclusao;
 	}
 
-	public Produto() {
+	public Product() {
 		super();
 	}		
 }
