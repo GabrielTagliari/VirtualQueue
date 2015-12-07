@@ -7,61 +7,61 @@
 		<h2>Lista de Produtos</h2>
 		<table id="example" class="display compact" cellspacing="0" width="100%"></table>
 		<div class="form-group">
-		<a href="#openModalCreate"><span class="icon fa-plus"></span></a>
-		<a href="#openModalEdit"><span class="icon fa-pencil-square-o"></span></a>
-		<span id="remover" class="icon fa-trash-o"></span>
+		<a href="#openModalCreate"><span id="add" class="icon fa-plus"></span></a>
+		<span id="edit" class="icon fa-pencil-square-o"></span>
+		<a href="#"><span id="remover" class="icon fa-trash-o"></span></a>
 		</div>
-		
     </div>
     <div id="openModalCreate" class="modalDialog">
-        <div>
+        <div class="background">
             <a href="#close" title="Close" class="close">X</a>
-            <h2>Cadastrar Produto</h2>
-            <form id="form" action="../../VQ/produto/createform" method="GET">
-                <p class="form-group">
-                    <label for="inputName">Nome: </label>
-                    <input type="text" id="name" name="nome" autofocus="autofocus" required>
+            <h2 class="text">Cadastrar Produto</h2>
+            <form id="form_modal" action="../../VQ/produto/createform" method="GET">
+                <p id="form-group-modal">
+                    <label class="text_lab" for="inputName">Nome: </label>
+                    <input class="formulario" type="text" id="name" name="nome" autofocus="autofocus" required>
                 </p>
-                <p class="form-group">
-                    <label for="inputDescription">Descrição: </label>
-                    <input type="text" id="descricao" name="descricao">
+                <p id="form-group-modal">
+                    <label class="text_lab" for="inputDescription">Descrição: </label>
+                    <input class="formulario" type="text" id="descricao" name="descricao">
                 </p>
-                <p class="form-group">
-                    <label for="inputCategory">Categoria: </label>
-                    <input type="text" id="tipo" name="tipo" required>
+                <p id="form-group-modal">
+                    <label class="text_lab" for="inputCategory">Categoria: </label>
+                    <input class="formulario" type="text" id="tipo" name="tipo" required>
                 </p>
-                <p class="form-group">
-                    <label for="inputPrice">Valor: </label>
-                    <input for="number" id="preco" name="preco" required>
-                </p>  
+                <p id="form-group-modal">
+                    <label class="text_lab" for="inputPrice">Valor: </label>
+                    <input class="formulario" for="number" id="preco" name="preco" required>
+                </p>
                 <button>Cadastrar</button>
             </form>
+        </div>
     </div>
-	</div><div id="openModalEdit" class="modalDialog">
-        <div>
+	<div id="openModalEdit" class="modalDialog">
+        <div class="background">
             <a href="#close" title="Close" class="close">X</a>
-            <h2>Editar Produto</h2>
-            <form id="form" action="../../VQ/produto/createform" method="GET">
-                <p class="form-group">
-                    <label for="inputName">Nome: </label>
-                    <input type="text" id="name" name="nome" autofocus="autofocus" required>
+            <h2 class="text">Editar Produto</h2>
+            <form id="form_modal">
+                <p id="form-group-modal">
+                    <label class="text_lab" for="inputName">Nome: </label>
+                    <input class="formulario" type="text" id="name" name="nome" autofocus="autofocus" required>
                 </p>
-                <p class="form-group">
-                    <label for="inputDescription">Descrição: </label>
-                    <input type="text" id="descricao" name="descricao">
+                <p id="form-group-modal">
+                    <label class="text_lab" for="inputDescription">Descrição: </label>
+                    <input class="formulario" type="text" id="descricao" name="descricao">
                 </p>
-                <p class="form-group">
-                    <label for="inputCategory">Categoria: </label>
-                    <input type="text" id="tipo" name="tipo" required>
+                <p id="form-group-modal">
+                    <label class="text_lab" for="inputCategory">Categoria: </label>
+                    <input class="formulario" type="text" id="tipo" name="tipo" required>
                 </p>
-                <p class="form-group">	
-                    <label for="inputPrice">Valor: </label>
-                    <input for="number" id="preco" name="preco" required>
-                </p>  
-                <button>Cadastrar</button>
+                <p id="form-group-modal">
+                    <label class="text_lab" for="inputPrice">Valor: </label>
+                    <input class="formulario" for="number" id="preco" name="preco" required>
+                </p>
+                <button>Editar</button>
             </form>
+        </div>
     </div>
-	</div>
     <script>
 	    $(document).ready(function(){
 	    	$.getJSON( "http://localhost:8080/VirtualQueue/VQ/produto/list", function( data ) {
@@ -120,8 +120,48 @@
 	  									}
 	  					}});
 	  				}
-	  		    });	    
+	  		    });
+	  		 
+	  		 $('#edit').click(function(){
+	  			var data = table.rows('.selected').data();
+				if (data.length == 0) {
+					swal("","Selecione um produto para editá-lo")
+				} else if (data.length > 1){
+					swal("","Selecione apenas um produto")
+				}else{
+					window.location.href = '#openModalEdit';
+					$("#openModalEdit #form_modal input#name").val(data[0].nome);
+			  		$("#openModalEdit #form_modal input#descricao").val(data[0].descricao);
+			  		$("#openModalEdit #form_modal input#tipo").val(data[0].tipo);
+			  		$("#openModalEdit #form_modal input#preco").val(data[0].preco);
+				}
+		  	 });
+	  		$('#openModalEdit #form_modal').submit(function(){
+	  			var data = table.rows('.selected').data();
+	  			data[0].nome = $("#openModalEdit #form_modal input#name").val();
+	  			data[0].descricao = $("#openModalEdit #form_modal input#descricao").val();
+	  			data[0].tipo = $("#openModalEdit #form_modal input#tipo").val();
+	  			data[0].preco = $("#openModalEdit #form_modal input#preco").val();
+		    	$.ajax({
+					     type: "POST",
+					     url: "http://localhost:8080/VirtualQueue/VQ/produto/update",
+					     data: JSON.stringify(data[0]),
+					     contentType: "application/json; charset=utf-8",
+					     dataType: "json",
+					     processData: true,
+					     success: function (vdata, status, jqXHR) {
+					    	 window.location.href = '#close';
+					     },
+					     error: function (xhr) {
+					         alert("Erro" + xhr.responseText);
+					     }
+					});
+	  		});
+	  		$('#openModalCreate #form_modal').submit(function(){
+	  			window.location.href = '#close';
+	  			$("#conteudo").load("produtos.html");
+	  		});
 	  	});
-	    });    
+	    });
     </script>
 </body>
