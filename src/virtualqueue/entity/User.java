@@ -21,8 +21,8 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@TableGenerator(name="USER_GENERATOR", table="ID_TABLE", pkColumnName="ID_TABLE_NAME", pkColumnValue="USER_ID", valueColumnName="ID_TABLE_VALUE")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator="USER_GENERATOR")
+	@Column(name="USER_ID")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String nome;
 	private String email;

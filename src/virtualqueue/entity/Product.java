@@ -2,12 +2,13 @@ package virtualqueue.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.persistence.TableGenerator;
 
 @Entity
 @NamedQuery(name="Produto.findAll", query="SELECT p FROM Product p WHERE p.data_exclusao IS NULL")
@@ -15,8 +16,8 @@ public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@TableGenerator(name="PRODUTO_GENERATOR", table="ID_TABLE", pkColumnName="ID_TABLE_NAME", pkColumnValue="PRODUTO_ID", valueColumnName="ID_TABLE_VALUE")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator="PRODUTO_GENERATOR")
+	@Column(name="PRODUCT_ID")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String nome;
 	private String descricao;

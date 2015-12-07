@@ -19,8 +19,8 @@ public class ItemPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-    @TableGenerator(name="ITEM_GENERATOR", table="ID_TABLE", pkColumnName="ID_TABLE_NAME", pkColumnValue="ITEM_ID", valueColumnName="ID_TABLE_VALUE")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator="ITEM_GENERATOR")
+	@Column(name="ITEMPEDIDO_ID")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
 	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)

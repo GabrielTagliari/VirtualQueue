@@ -24,8 +24,7 @@ public class Pedido implements Serializable {
 	
 	@Id
 	@Column(name="PEDIDO_ID")
-    @TableGenerator(name="PEDIDO_GENERATOR", table="ID_TABLE", pkColumnName="ID_TABLE_NAME", pkColumnValue="PEDIDO_ID", valueColumnName="ID_TABLE_VALUE")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator="PEDIDO_GENERATOR")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private float valor;
 	
