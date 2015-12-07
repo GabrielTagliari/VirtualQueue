@@ -17,7 +17,7 @@ import virtualqueue.entity.User;
 @Stateless
 public class UserDAO {
 	
-	@PersistenceContext(unitName = "livraria")
+	@PersistenceContext(unitName = "virtualqueue")
     private EntityManager entityManager;
 
     public void addUser(User user) throws Exception {

@@ -1,9 +1,9 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-        <persistence-unit name="livraria">
-          <jta-data-source>livrariaDatabase</jta-data-source>
-          <non-jta-data-source>livrariaDatabaseUnmanaged</non-jta-data-source>
+        <persistence-unit name="virtualqueue">
+          <jta-data-source>virtualqueueDatabase</jta-data-source>
+          <non-jta-data-source>virtualqueueDatabaseUnmanaged</non-jta-data-source>
           <class>virtualqueue.entity.ItemPedido</class>
           <class>virtualqueue.entity.Pedido</class>
           <class>virtualqueue.entity.Product</class>

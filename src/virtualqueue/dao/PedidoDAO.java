@@ -13,7 +13,7 @@ import virtualqueue.entity.Pedido;
 @Stateless
 public class PedidoDAO {
 	
-	 @PersistenceContext(unitName = "livraria")
+	 @PersistenceContext(unitName = "virtualqueue")
 	    private EntityManager entityManager;
 
 	    public void addPedido(Pedido pedido) throws Exception {

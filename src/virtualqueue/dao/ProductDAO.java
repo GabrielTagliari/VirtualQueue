@@ -14,7 +14,7 @@ import virtualqueue.entity.Product;
 @Stateless
 public class ProductDAO {
 
-	 @PersistenceContext(unitName = "livraria")
+	 @PersistenceContext(unitName = "virtualqueue")
 	    private EntityManager entityManager;
 
 	    public void addProduto(Product produto) throws Exception {

@@ -2,7 +2,8 @@
 <Resource id="TestDS" type="DataSource">
     JdbcDriver  com.mysql.jdbc.Driver
     JdbcUrl jdbc:mysql://localhost/banco
-    UserName    root
+    UserName	root
+    PassWord	root
     JtaManaged  true
 </Resource>
 </resources>
