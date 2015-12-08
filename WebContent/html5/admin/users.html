@@ -64,7 +64,7 @@
 	</div>
 	<script>
 $(document).ready(function(){
-	$.getJSON( "http://localhost:8080/VirtualQueue/VQ/user/list", function( data ) {
+	$.getJSON( "/VirtualQueue/VQ/user/list", function( data ) {
 		  var userlist = data;
 		  var table = $('#example').DataTable( {
 			    scrollY:        '50vh',

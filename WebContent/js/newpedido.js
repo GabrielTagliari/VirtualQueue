@@ -24,7 +24,7 @@ $(document).ready(function(){
 });
 
 function lista() {
-	var list = "http://localhost:8080/VirtualQueue/VQ/produto/list";
+	var list = "/VirtualQueue/VQ/produto/list";
 	$.ajax({
 		type : 'GET',
 		url : list,
@@ -41,7 +41,7 @@ function lista() {
 function populaCombo() { //Popula a combobox com produtolist do banco de dados
 		$.ajax({
 			dataType : 'json',
-			url : "http://localhost:8080/VirtualQueue/VQ/produto/list",
+			url : "/VirtualQueue/VQ/produto/list",
 			data : produtolist, //array produtolist
 			success : function(data) {
 				var q = '<select name="idCombox2" id="idCombox2" class="form-control"><option value="-1"><-- Selecione um Produto --></option>';
@@ -128,7 +128,7 @@ function carregaProduto(data) {
 		} else {
 			$.ajax({
 			     type: "POST",
-			     url: "http://localhost:8080/VirtualQueue/VQ/pedido/pedidocreate",
+			     url: "/VirtualQueue/VQ/pedido/pedidocreate",
 			     data: JSON.stringify(p),
 			     contentType: "application/json; charset=utf-8",
 			     dataType: "json",

@@ -3,6 +3,7 @@
     JdbcDriver  com.mysql.jdbc.Driver
     JdbcUrl jdbc:mysql://localhost/banco
     UserName	root
+    PassWord	root
     JtaManaged  true
 </Resource>
 </resources>
