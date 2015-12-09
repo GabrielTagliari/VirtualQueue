@@ -105,7 +105,7 @@
 	  									for (var int = 0; int < data.length; int++) {
 	  										$.ajax({
 	  										     type: "POST",
-	  										     url: "http://localhost:8080/VirtualQueue/VQ/produto/deleta",
+	  										     url: "/VirtualQueue/VQ/produto/deleta",
 	  										     data: JSON.stringify(data[int].id),
 	  										     contentType: "application/json; charset=utf-8",
 	  										     dataType: "json",
@@ -145,7 +145,7 @@
 	  			data[0].preco = $("#openModalEdit #form_modal input#preco").val();
 		    	$.ajax({
 					     type: "POST",
-					     url: "http://localhost:8080/VirtualQueue/VQ/produto/update",
+					     url: "/VirtualQueue/VQ/produto/update",
 					     data: JSON.stringify(data[0]),
 					     contentType: "application/json; charset=utf-8",
 					     dataType: "json",

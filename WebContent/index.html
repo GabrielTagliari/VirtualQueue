@@ -37,7 +37,7 @@
 	    	        user.password = document.getElementById("password").value;
 	    	        	$.ajax({
 	    					     type: "POST",
-	    					     url: "http://localhost:8080/VirtualQueue/VQ/user/login",
+	    					     url: "/VirtualQueue/VQ/user/login",
 	    					     data: JSON.stringify(user),
 	    					     contentType: "application/json; charset=utf-8",
 	    					     dataType: "text",
